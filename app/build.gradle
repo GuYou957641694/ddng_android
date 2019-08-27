@@ -1,0 +1,93 @@
+apply plugin: 'com.android.application'
+//短信
+apply plugin: 'com.mob.sdk'
+
+android {
+    signingConfigs {
+        debug {
+            storeFile file("qj_test.keystore")
+            storePassword "123123"
+            keyAlias "qj_test"
+            keyPassword "123123"
+        }
+    }
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.bigpumpkin.app.ddng_android"
+        minSdkVersion 17
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        debug {
+            debug {
+                signingConfig signingConfigs.debug
+                proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            }
+        }
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+// 在MobSDK的扩展中注册SMSSDK的相关信息
+MobSDK {
+    appKey "2aca6d1bb813d"
+    appSecret "c8f013ad8766dc1a38c5a2a6c2b6a92c"
+    SMSSDK {
+        //默认使用GUI，若不使用GUI，通过以下开关关闭
+        gui false
+        //若使用GUI的自动填充验证码功能，需打开此设置
+        //autoSMS true
+    }
+}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    //防止崩溃
+    implementation 'com.tonystark.android:defense_crash:2.0.0'
+    //butterknife
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    //头像
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    implementation 'com.squareup.okhttp3:okhttp:3.8.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
+    implementation 'io.reactivex:rxjava:1.1.0'
+    implementation 'io.reactivex:rxandroid:1.1.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.5.0'
+    //支付WX
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+    implementation 'com.github.bumptech.glide:glide:4.7.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
+    implementation 'com.githang:group-recycler-adapter:0.1'
+    //日期选择
+    implementation 'com.contrarywind:Android-PickerView:4.1.6'
+    //权限管理
+    implementation 'pub.devrel:easypermissions:2.0.1'
+    //轮播图 变色
+    implementation 'com.youth.banner:banner:1.4.10'
+    implementation 'com.android.support:palette-v7:28.0.0'
+    //分类加指示器
+    implementation 'com.yhy:gvp:1.1.0'
+    implementation 'com.github.hackware1993:MagicIndicator:1.5.0'
+
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    //侧滑删除
+    implementation 'com.ditclear:swipedraglayout:1.1.0'
+}

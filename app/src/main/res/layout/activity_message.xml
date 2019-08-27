@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.MessageActivity">
+
+
+    <include layout="@layout/title_xml"></include>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_margin="@dimen/dp_10"
+        android:background="@drawable/message"
+        android:padding="@dimen/dp_15">
+
+        <EditText
+            android:id="@+id/leave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="请输入您的留言" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_login_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_below="@+id/protocol"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_100"
+        android:layout_marginRight="@dimen/dp_15"
+        android:background="@drawable/log_bg"
+        android:stateListAnimator="@null"
+        android:text="提交"
+        android:textColor="#fff"
+        android:textSize="16sp" />
+</LinearLayout>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ditclear.swipelayout.SwipeDragLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swip_layout"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    app:ios="true"
+    app:swipe_direction="left"
+    app:swipe_enable="true">
+
+    <RelativeLayout
+        android:id="@+id/content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#ffffff"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:tag="content">
+
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/img"
+            android:text="asdasdsa" />
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/img"
+            android:layout_toRightOf="@+id/img"
+            android:text="asdasdsa" />
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="@dimen/dp_100" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/menu_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:tag="menu">
+
+        <ImageView
+            android:id="@+id/trash"
+            android:layout_width="70dp"
+            android:layout_height="60dp"
+            android:background="#FF6347"
+            android:onClick="@{(v)->presenter.onItemClick(v,item)}"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp" />
+
+        <ImageView
+            android:id="@+id/star"
+            android:layout_width="70dp"
+            android:layout_height="60dp"
+            android:background="#4cd964"
+            android:onClick="@{(v)->presenter.onItemClick(v,item)}"
+            android:paddingLeft="22dp"
+            android:paddingRight="22dp" />
+    </LinearLayout>
+</com.ditclear.swipelayout.SwipeDragLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item_bottom_nv_index"
+        android:enabled="true"
+        android:icon="@drawable/chat_selector"
+        android:title="@string/home_farm" />
+    <item
+        android:id="@+id/item_bottom_nv_read"
+        android:enabled="true"
+        android:icon="@drawable/contacts_selector"
+        android:title="@string/home_goods" />
+    <item
+        android:id="@+id/item_bottom_nv_circle"
+        android:enabled="true"
+        android:icon="@drawable/discovery_selector"
+        android:title="@string/home_message" />
+    <item
+        android:id="@+id/shopp"
+        android:enabled="true"
+        android:icon="@drawable/shopp"
+        android:title="@string/home_shopping" />
+    <item
+        android:id="@+id/item_bottom_nv_my"
+        android:enabled="true"
+        android:icon="@drawable/me_selector"
+        android:title="@string/home_my" />
+
+</menu>

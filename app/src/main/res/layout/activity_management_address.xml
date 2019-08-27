@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical"
+    tools:context=".activity.Management_addressActivity">
+
+
+    <include
+        android:id="@+id/tile"
+        layout="@layout/title_xml"></include>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tile"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/no_address"
+        layout="@layout/no_address_activity_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tile"
+        android:visibility="gone"></include>
+
+    <Button
+        android:id="@+id/add"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginRight="@dimen/dp_30"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:background="@drawable/log_bg"
+        android:stateListAnimator="@null"
+        android:text="添加地址"
+        android:textColor="#fff"
+        android:textSize="16sp" />
+</RelativeLayout>

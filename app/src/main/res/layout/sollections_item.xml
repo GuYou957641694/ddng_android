@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp_10">
+
+    <ImageView
+        android:id="@+id/pic"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="@dimen/dp_100" />
+
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_toRightOf="@+id/pic"
+        android:text="pingg" />
+
+    <TextView
+        android:id="@+id/type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_5"
+        android:layout_toRightOf="@+id/pic"
+        android:text="asdasd" />
+
+
+    <TextView
+        android:id="@+id/weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/type"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_toRightOf="@+id/type"
+        android:text="asdasdsad" />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/pic"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_toRightOf="@+id/pic"
+        android:text="123123" />
+
+    <TextView
+        android:id="@+id/collection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/pic"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/collection_bg"
+        android:layout_marginRight="@dimen/dp_5"
+        android:padding="@dimen/dp_8"
+        android:text="取消收藏"
+        android:textColor="#F4A44A" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_below="@+id/price"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="#F0F0F0"></View>
+</RelativeLayout>

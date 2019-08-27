@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp_10"
+    android:background="#ffffff">
+
+    <RelativeLayout
+        android:id="@+id/rela"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/pic"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="@dimen/dp_100"
+            android:scaleType="fitXY" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_100"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:layout_toRightOf="@+id/pic"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="大南瓜" />
+
+            <TextView
+                android:id="@+id/varieties"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_toRightOf="@+id/pic"
+                android:layout_weight="1"
+                android:text="大南瓜" />
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="大南瓜" />
+
+            <TextView
+                android:id="@+id/ctime"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="大南瓜" />
+
+            <TextView
+                android:id="@+id/etime"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="大南瓜" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_7"
+            android:background="@drawable/grow_type_shape"
+            android:padding="@dimen/dp_4"
+            android:text="品"
+            android:textColor="#FCA6A6" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/details"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_25"
+        android:layout_below="@+id/rela"
+        android:layout_marginTop="@dimen/dp_2"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_toLeftOf="@+id/information"
+        android:background="@drawable/spell_shape"
+        android:text="订单详情" />
+
+    <Button
+        android:id="@+id/information"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_25"
+        android:layout_below="@+id/rela"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/dp_2"
+        android:background="@drawable/spell_shape"
+        android:text="查看信息" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/information"
+        android:layout_marginTop="@dimen/dp_5"
+        android:background="#F0F0F0"></View>
+</RelativeLayout>

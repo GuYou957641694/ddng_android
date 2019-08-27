@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/sfl_my_collections"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="-930dp"
+        tools:layout_editor_absoluteY="310dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_my_collections"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <include
+        android:id="@+id/collection_course"
+        layout="@layout/no_collection_course_layout"
+        android:visibility="gone" />
+
+
+    <include
+        android:id="@+id/collection_activity"
+        layout="@layout/no_collection_activity_layout"
+        android:visibility="gone" />
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.Bind_phoneActivity">
+
+    <include layout="@layout/title_xml"></include>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/sp_14">
+
+
+        <EditText
+            android:id="@+id/et_password_mobile"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:background="@null"
+            android:cursorVisible="false"
+            android:gravity="start|center_vertical"
+            android:hint="@string/login_hint_phone_number"
+            android:inputType="number"
+            android:maxLength="11"
+            android:maxLines="1"
+            android:textColorHint="@color/gray_h"
+            android:textSize="16sp" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:layout_below="@+id/et_password_mobile"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginRight="@dimen/dp_30"
+            android:background="?android:attr/listDivider"></View>
+
+        <EditText
+            android:id="@+id/et_change_password_code"
+            android:layout_width="@dimen/dp_208"
+            android:layout_height="@dimen/dp_40"
+            android:layout_below="@+id/view"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_3"
+            android:background="@null"
+            android:cursorVisible="false"
+            android:gravity="start|center_vertical"
+            android:hint="@string/login_hint_code"
+            android:inputType="number"
+            android:maxLength="6"
+            android:maxLines="1"
+            android:textColorHint="@color/gray_h"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/btn_change_password_get_code"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_40"
+            android:layout_below="@+id/view"
+            android:layout_marginTop="@dimen/dp_3"
+            android:layout_toRightOf="@+id/et_change_password_code"
+            android:gravity="center"
+            android:text="@string/login_verification_code"
+            android:textColor="@color/theme_orange"
+            android:textSize="@dimen/sp_16" />
+
+        <TextView
+            android:id="@+id/down"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_40"
+            android:layout_below="@+id/view"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/dp_3"
+            android:layout_toRightOf="@+id/et_change_password_code"
+            android:gravity="center"
+            android:textColor="@color/theme_orange"
+            android:textSize="@dimen/sp_16"
+            android:visibility="gone" />
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:layout_below="@+id/btn_change_password_get_code"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginRight="@dimen/dp_30"
+            android:background="?android:attr/listDivider"></View>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_login_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_below="@+id/protocol"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_30"
+        android:layout_marginRight="@dimen/dp_30"
+        android:background="@drawable/log_bg"
+        android:stateListAnimator="@null"
+        android:text="@string/login_btn_login"
+        android:textColor="#fff"
+        android:textSize="16sp" />
+</LinearLayout>

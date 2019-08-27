@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.bigpumpkin.app.ddng_android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <application
+        android:name=".app.App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".activity.HomeSearchActivity"></activity>
+        <activity android:name=".activity.Buy_OrdersActivity" />
+        <activity android:name=".activity.Details_farmActivity" />
+        <activity android:name=".activity.BuyActivity" />
+        <activity android:name=".activity.Modify_PassActivity" />
+        <activity android:name=".activity.Modify_PhoneActivity" />
+        <activity android:name=".activity.VersionActivity" />
+        <activity
+            android:name=".activity.RemoveActivity"
+            android:label="@string/title_activity_remove"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.SecurityActivity" />
+        <activity android:name=".activity.AddressActivity" />
+        <activity android:name=".activity.Management_addressActivity" />
+        <activity android:name=".activity.SetActivity" />
+        <activity android:name=".activity.Order_Details_Activity" />
+        <activity android:name=".activity.RulesActivity" />
+        <activity android:name=".activity.Bind_phoneActivity" />
+        <activity android:name=".activity.IntegralsActivity" />
+        <activity android:name=".activity.PromotionsActivity" />
+        <activity android:name=".activity.FarmsActivity" />
+        <activity android:name=".activity.IntegralActivity" />
+        <activity android:name=".activity.CouponsActivity" />
+        <activity android:name=".activity.AnswerActivity" />
+        <activity android:name=".activity.CustomerActivity" />
+        <activity android:name=".activity.GrowActivity" />
+        <activity android:name=".activity.ReativeActivity" />
+        <activity android:name=".activity.Farm_inActivity" />
+        <activity android:name=".activity.FootprintActivity" />
+        <activity android:name=".activity.CollectionActivity" />
+        <activity android:name=".activity.FocusActivity" />
+        <activity android:name=".activity.MessageActivity" />
+        <activity android:name=".activity.AgreementActivity" />
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="wx0f147d4225f8491a" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.RechargeActivity" />
+        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.OrdersActivity" />
+        <activity android:name=".activity.NameActivity" />
+        <activity android:name=".activity.SettingActivity" />
+        <activity android:name=".activity.New_User_Activity" />
+        <activity android:name=".activity.Forget_pass_Activity" />
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name=".activity.AllActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

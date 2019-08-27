@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/pic"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="@dimen/dp_100" />
+
+    <TextView
+        android:id="@+id/farm_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/pic"
+        android:text="北京朝阳" />
+
+    <TextView
+        android:id="@+id/varieties"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/farm_name"
+        android:layout_toRightOf="@+id/pic"
+        android:text="杨桃" />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/pic"
+        android:layout_toRightOf="@+id/pic"
+        android:text="12312312" />
+
+    <TextView
+        android:id="@+id/single"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="订" />
+
+    <TextView
+        android:id="@+id/num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text="1212" />
+</RelativeLayout>
