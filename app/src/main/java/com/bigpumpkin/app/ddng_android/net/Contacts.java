@@ -80,6 +80,5 @@ public class Contacts {
     //幸运集市
     public static final String xingyun = "Fruitmall/Recommended_Productions.html";
     //幸运集市tab
-    public static final String jishi = "Fruitmall/Recommended_classs.html";
 
 }
