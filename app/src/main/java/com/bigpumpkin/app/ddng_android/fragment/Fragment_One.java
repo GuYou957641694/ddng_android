@@ -48,6 +48,10 @@ public class Fragment_One extends BaseFragment implements MyView {
             if (shop != null) {
                 Bazaar_Adapter bazaar_adapter = new Bazaar_Adapter(shop, getActivity());
                 recyclerView.setAdapter(bazaar_adapter);
+
+
+
+
             }
         }
 
