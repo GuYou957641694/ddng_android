@@ -143,7 +143,7 @@ public class ExPandableListViewAdapter extends BaseExpandableListAdapter {
         childrenView.trash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtil.showShort(context,data_list.get(groupPosition).getDetails().get(childPosition).getPrice());
+                ToastUtil.showShort(context, data_list.get(groupPosition).getDetails().get(childPosition).getPrice());
             }
         });
         childrenView.mSwipeLayout.addListener(new SwipeDragLayout.SwipeListener() {

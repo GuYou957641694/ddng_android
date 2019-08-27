@@ -13,6 +13,7 @@ import com.bigpumpkin.app.ddng_android.bean.Del_Address_Bean;
 import com.bigpumpkin.app.ddng_android.bean.Focus_Bean;
 import com.bigpumpkin.app.ddng_android.bean.Footprint_Bean;
 import com.bigpumpkin.app.ddng_android.bean.For_GoodsBean;
+import com.bigpumpkin.app.ddng_android.bean.Fragment_Bean;
 import com.bigpumpkin.app.ddng_android.bean.GoodsBean;
 import com.bigpumpkin.app.ddng_android.bean.Grow_Bean;
 import com.bigpumpkin.app.ddng_android.bean.Log_Bean;
@@ -379,6 +380,21 @@ public class MyModelImpl implements MyModel {
                 }
             });
         } else if (clas == Bazaar_Bean.class) {
+            //集市
+            Retrofits.getInstance().post(url, headmap, map).getonclcked(new Retrofits.onclick() {
+                @Override
+                public void success(String strjson) {
+                    Gson gson = new Gson();
+                    Object o = gson.fromJson(strjson, clas);
+                    callBack.success(o);
+                }
+
+                @Override
+                public void error(String error) {
+                    callBack.error(error);
+                }
+            });
+        } else if (clas == Fragment_Bean.class) {
             //集市
             Retrofits.getInstance().post(url, headmap, map).getonclcked(new Retrofits.onclick() {
                 @Override
