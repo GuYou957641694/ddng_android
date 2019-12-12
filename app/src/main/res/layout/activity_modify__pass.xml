@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".activity.Modify_PassActivity">
 
     <include
@@ -13,15 +14,15 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/title">
+        android:layout_below="@+id/title"
+        android:background="#fff">
 
         <EditText
             android:id="@+id/et_change_password_mobile"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50"
-            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_height="@dimen/dp_48"
+            android:layout_marginLeft="@dimen/dp_10"
             android:background="@null"
-            android:cursorVisible="false"
             android:gravity="start|center_vertical"
             android:hint="@string/login_hint_phone_number"
             android:inputType="number"
@@ -35,115 +36,80 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_1"
             android:layout_below="@+id/et_change_password_mobile"
-            android:layout_marginLeft="@dimen/dp_30"
-            android:layout_marginRight="@dimen/dp_30"
-            android:background="?android:attr/listDivider"></View>
+            android:background="#FFF6F6F6"></View>
 
         <EditText
             android:id="@+id/et_change_password_code"
             android:layout_width="@dimen/dp_208"
-            android:layout_height="@dimen/dp_50"
+            android:layout_height="@dimen/dp_48"
             android:layout_below="@+id/view"
-            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_3"
             android:background="@null"
-            android:cursorVisible="false"
             android:gravity="start|center_vertical"
             android:hint="@string/login_hint_code"
             android:inputType="number"
-            android:maxLength="11"
+            android:maxLength="6"
             android:maxLines="1"
             android:textColorHint="@color/gray_h"
             android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/btn_change_password_get_code"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp_50"
+        <RelativeLayout
+            android:id="@+id/rl"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/view"
-            android:layout_marginTop="@dimen/dp_3"
-            android:layout_toRightOf="@+id/et_change_password_code"
-            android:gravity="center"
-            android:text="@string/login_verification_code"
-            android:textColor="@color/theme_orange"
-            android:textSize="@dimen/sp_16" />
+            android:layout_alignParentRight="true">
 
-        <TextView
-            android:id="@+id/down"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp_40"
-            android:layout_below="@+id/view"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="@dimen/dp_3"
-            android:layout_toRightOf="@+id/et_change_password_code"
-            android:gravity="center"
-            android:textColor="@color/theme_orange"
-            android:textSize="@dimen/sp_16"
-            android:visibility="gone" />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="@dimen/dp_22"
+                android:layout_centerVertical="true"
+                android:background="#FF9F9F9F"></View>
 
-        <View
-            android:id="@+id/view1"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_1"
-            android:layout_below="@+id/btn_change_password_get_code"
-            android:layout_marginLeft="@dimen/dp_30"
-            android:layout_marginRight="@dimen/dp_30"
-            android:background="?android:attr/listDivider"></View>
+            <TextView
+                android:layout_marginRight="@dimen/dp_10"
+                android:id="@+id/btn_change_password_get_code"
+                android:layout_width="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_height="@dimen/dp_48"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/dp_3"
+                android:gravity="center"
+                android:text="@string/login_verification_code"
+                android:textColor="@color/theme_orange"
+                android:textSize="@dimen/sp_14" />
+            <TextView
+                android:id="@+id/down"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_40"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/dp_3"
+                android:gravity="center"
+                android:textColor="@color/theme_orange"
+                android:textSize="@dimen/sp_14"
+                />
+        </RelativeLayout>
 
-        <EditText
-            android:id="@+id/new_pass"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50"
-            android:layout_below="@+id/view1"
-            android:layout_marginLeft="@dimen/dp_30"
-            android:background="@null"
-            android:cursorVisible="false"
-            android:gravity="start|center_vertical"
-            android:hint="@string/forget_pass"
-            android:inputType="number"
-            android:maxLength="11"
-            android:maxLines="1"
-            android:textColorHint="@color/gray_h"
-            android:textSize="16sp" />
 
-        <View
-            android:id="@+id/view2"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_1"
-            android:layout_below="@+id/new_pass"
-            android:layout_marginLeft="@dimen/dp_30"
-            android:layout_marginRight="@dimen/dp_30"
-            android:background="?android:attr/listDivider"></View>
 
-        <EditText
-            android:id="@+id/news_pass"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50"
-            android:layout_below="@+id/view2"
-            android:layout_marginLeft="@dimen/dp_30"
-            android:background="@null"
-            android:cursorVisible="false"
-            android:gravity="start|center_vertical"
-            android:hint="@string/forget_pass"
-            android:inputType="number"
-            android:maxLength="11"
-            android:maxLines="1"
-            android:textColorHint="@color/gray_h"
-            android:textSize="16sp" />
 
-        <Button
-            android:id="@+id/btn_login_confirm"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_40"
-            android:layout_below="@+id/news_pass"
-            android:layout_marginLeft="@dimen/dp_30"
-            android:layout_marginTop="@dimen/dp_40"
-            android:layout_marginRight="@dimen/dp_30"
-            android:background="@drawable/log_bg"
-            android:stateListAnimator="@null"
-            android:text="确认"
-            android:textColor="#fff"
-            android:textSize="16sp" />
+
     </RelativeLayout>
-</RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_login_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:layout_below="@+id/news_pass"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:background="@drawable/button_shape"
+        android:stateListAnimator="@null"
+        android:text="下一步"
+        android:textColor="#fff"
+        android:textSize="16sp" />
+</LinearLayout>

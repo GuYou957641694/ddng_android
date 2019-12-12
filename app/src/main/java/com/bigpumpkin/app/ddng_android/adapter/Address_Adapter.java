@@ -6,8 +6,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bigpumpkin.app.ddng_android.R;
@@ -39,20 +40,15 @@ public class Address_Adapter extends RecyclerView.Adapter<Address_Adapter.MyView
         if (data1 != null) {
             myViewHolder.name.setText(data1.get(i).getName());
             myViewHolder.phone.setText(data1.get(i).getTel());
-            myViewHolder.address.setText("[默认]" + data1.get(i).getSheng() + data1.get(i).getShi() + data1.get(i).getAddress());
+            myViewHolder.address.setText(data1.get(i).getSheng() + data1.get(i).getShi() + data1.get(i).getQu() + data1.get(i).getAddress());
             myViewHolder.name.setText(data1.get(i).getName());
             int isindex = data1.get(i).getIsindex();
             if (isindex == 1) {
-                myViewHolder.defaultsss.setChecked(true);
-                myViewHolder.address.setText("[默认]" + data1.get(i).getSheng() + data1.get(i).getShi() + data1.get(i).getAddress());
+                myViewHolder.rv_default.setVisibility(View.VISIBLE);
             } else {
-                myViewHolder.address.setText(data1.get(i).getSheng() + data1.get(i).getShi() + data1.get(i).getAddress());
-
+                myViewHolder.rv_default.setVisibility(View.GONE);
             }
-
-
-            //删除收货地址
-            myViewHolder.dele.setOnClickListener(new View.OnClickListener() {
+            myViewHolder.tv_modify.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {
@@ -60,8 +56,7 @@ public class Address_Adapter extends RecyclerView.Adapter<Address_Adapter.MyView
                     }
                 }
             });
-            //设置默认
-            myViewHolder.defaultsss.setOnClickListener(new View.OnClickListener() {
+            myViewHolder.menu_layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (defaultlistener != null) {
@@ -69,7 +64,9 @@ public class Address_Adapter extends RecyclerView.Adapter<Address_Adapter.MyView
                     }
                 }
             });
-
+            if (i + 1 == data1.size()) {
+                myViewHolder.view.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -80,19 +77,21 @@ public class Address_Adapter extends RecyclerView.Adapter<Address_Adapter.MyView
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView name, phone, address, default_address;
-        private final CheckBox defaultsss;
-        private final ImageView dele, manuscripts;
+        private final TextView name, phone, address;
+        private RelativeLayout rv_default;
+        private ImageView tv_modify;
+        private LinearLayout menu_layout;
+        private View view;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.name);
             phone = itemView.findViewById(R.id.phone);
             address = itemView.findViewById(R.id.address);
-            defaultsss = itemView.findViewById(R.id.defaultsss);
-            default_address = itemView.findViewById(R.id.default_address);
-            dele = itemView.findViewById(R.id.dele);
-            manuscripts = itemView.findViewById(R.id.manuscripts);
+            rv_default = itemView.findViewById(R.id.rv_default);
+            tv_modify = itemView.findViewById(R.id.tv_modify);
+            menu_layout = itemView.findViewById(R.id.menu_layout);
+            view = itemView.findViewById(R.id.view);
         }
     }
 
@@ -107,7 +106,6 @@ public class Address_Adapter extends RecyclerView.Adapter<Address_Adapter.MyView
         this.listener = listener;
     }
 
-    //设置默认
     public interface OnItemdefaultClickListener {
         void ondefaultClick(int position);
     }

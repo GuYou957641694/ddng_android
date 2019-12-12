@@ -2,15 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/dp_15">
+    android:gravity="center">
 
     <ImageView
         android:id="@+id/home_newcourse_rv_img"
-        android:layout_width="@dimen/dp_150"
-        android:layout_height="@dimen/dp_70"
-        android:background="@android:color/transparent" />
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_100"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY" />
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/home_newcourse_rv_coursetype"
         android:layout_width="@dimen/dp_76"
         android:layout_height="@dimen/dp_36"

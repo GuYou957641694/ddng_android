@@ -36,6 +36,21 @@ public class DataUtils {
         return format;
     }
 
+    /**
+     * date转换String
+     *
+     * @param date
+     * @return
+     * @throws ParseException
+     */
+    public static String dataToStrings(Date date)
+            throws ParseException {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String format = null;
+        format = simpleDateFormat.format(date);
+        return format;
+    }
+
 
     /*
      * 将时间转换为时间戳

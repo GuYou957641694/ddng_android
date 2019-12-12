@@ -1,33 +1,31 @@
 package com.bigpumpkin.app.ddng_android.activity;
 
-import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.PopupWindow;
+import android.widget.Switch;
 import android.widget.TextView;
 
-import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
-import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
-import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigpumpkin.app.ddng_android.R;
 import com.bigpumpkin.app.ddng_android.base.BaseActivity;
 import com.bigpumpkin.app.ddng_android.bean.Address_Success_Bean;
-import com.bigpumpkin.app.ddng_android.bean.JsonBean;
 import com.bigpumpkin.app.ddng_android.net.Contacts;
 import com.bigpumpkin.app.ddng_android.persenter.MyPresenterImpl;
 import com.bigpumpkin.app.ddng_android.utils.EmptyUtils;
 import com.bigpumpkin.app.ddng_android.utils.EncryptUtils;
-import com.bigpumpkin.app.ddng_android.utils.GetJsonDataUtil;
 import com.bigpumpkin.app.ddng_android.utils.SpzUtils;
 import com.bigpumpkin.app.ddng_android.utils.ToastUtil;
 import com.bigpumpkin.app.ddng_android.view.MyView;
+import com.bigpumpkin.app.ddng_android.weight.AddressPickerView;
 import com.bigpumpkin.app.ddng_android.weight.TitleXML;
-import com.google.gson.Gson;
 
-import org.json.JSONArray;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import butterknife.BindView;
@@ -35,28 +33,28 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class AddressActivity extends BaseActivity implements MyView {
-    @BindView(R.id.personal_dress)
     TextView personalDress;
     @BindView(R.id.add)
     Button add;
-    @BindView(R.id.personal_name)
     EditText personalName;
-    @BindView(R.id.personal_phone)
     EditText personalPhone;
-    @BindView(R.id.personal_address)
     EditText personalAddress;
-    private String appid;
-    private String appsecret;
+    Switch switchs;
     private HashMap<String, Object> map;
     private HashMap<String, Object> headmap;
     private MyPresenterImpl presenter;
+    private String appid;
+    private String appsecret;
     private String sha1;
     private long time;
-    private ArrayList<JsonBean> options1Items = new ArrayList<>(); //省
-    private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();//市
-    private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();//区
-    private String shi;
-    private String pickerViewText;
+    private String addsheng;
+    private String addshi;
+    private String addqu;
+    private String shengcode;
+    private String shicode;
+    private String qucode;
+    int isindex = 1;
+
 
     @Override
     public int intiLayout() {
@@ -65,15 +63,31 @@ public class AddressActivity extends BaseActivity implements MyView {
 
     @Override
     public void initView() {
+        switchs = findViewById(R.id.switchs);
+        personalName = findViewById(R.id.personal_name);
+        personalPhone = findViewById(R.id.personal_phone);
+        personalAddress = findViewById(R.id.personal_address);
+        personalDress = findViewById(R.id.personal_dress);
         new TitleXML(this, "编辑地址", true, "").init().setListener(new TitleXML.TitleXMLClick() {
             @Override
             public void onImage() {
                 finish();
             }
         });
-        //解析json城市
-        initJsonData();
 
+        //判断是否选中默认
+        switchs.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    //Todo如果默认
+                    isindex = 1;
+                } else {
+                    //Todo
+                    isindex = 2;
+                }
+            }
+        });
     }
 
 
@@ -94,10 +108,10 @@ public class AddressActivity extends BaseActivity implements MyView {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.personal_dress:
-                showPickerView();
+                adddress();
                 break;
             case R.id.add:
-                if (EmptyUtils.isNotEmpty(personalName.getText().toString()) && EmptyUtils.isNotEmpty(personalPhone.getText().toString()) && EmptyUtils.isNotEmpty(personalAddress.getText().toString())) {
+                if (EmptyUtils.isNotEmpty(personalName.getText().toString()) && EmptyUtils.isNotEmpty(personalPhone.getText().toString()) && EmptyUtils.isNotEmpty(personalAddress.getText().toString()) && addsheng != null && addshi != null && addqu != null) {
                     presenter = new MyPresenterImpl(this);
                     time = System.currentTimeMillis();
                     appid = SpzUtils.getString("appid");
@@ -112,11 +126,14 @@ public class AddressActivity extends BaseActivity implements MyView {
                     map.put("sign", sha1);
                     map.put("tel", personalPhone.getText().toString());
                     map.put("name", personalName.getText().toString());
-                    map.put("sheng", shi);
-                    map.put("shi", shi);
-                    map.put("qu", pickerViewText);
+                    map.put("sheng", addsheng);
+                    map.put("shi", addshi);
+                    map.put("qu", addqu);
+                    map.put("sheng_code", shengcode);
+                    map.put("shi_code", shicode);
+                    map.put("qu_code", qucode);
                     map.put("address", personalAddress.getText().toString());
-                    map.put("youbian", "123");
+                    map.put("isindex", isindex);
                     presenter.getpost(Contacts.My_add_address, headmap, map, Address_Success_Bean.class);
                 } else {
                     ToastUtil.showShort(this, "请输入完整");
@@ -144,92 +161,48 @@ public class AddressActivity extends BaseActivity implements MyView {
 
     }
 
-    private void showPickerView() {
-        OptionsPickerView pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
-
-
+    private void adddress() {
+        View view = getLayoutInflater().inflate(R.layout.pop_addresss, null);
+        PopupWindow mPopupWindowtwo = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        AddressPickerView addressPickerView = view.findViewById(R.id.apvAddress);
+        addressPickerView.setOnAddressPickerSure(new AddressPickerView.OnAddressPickerSureListener() {
             @Override
-            public void onOptionsSelect(int options1, int options2, int options3, View v) {
-                //返回的分别是三个级别的选中位置
-                pickerViewText = options1Items.get(options1).getPickerViewText();
-                shi = options2Items.get(options1).get(options2);
-                personalDress.setText(options1Items.get(options1).getPickerViewText() + "  "
-                        + options2Items.get(options1).get(options2) + "  "
-                        + options3Items.get(options1).get(options2).get(options3));
+            public void onSureClick(String sheng, String shi, String qu, String provinceCode, String cityCode, String districtCode) {
+                addsheng = sheng;
+                addshi = shi;
+                addqu = qu;
+                shengcode = provinceCode;
+                shicode = cityCode;
+                qucode = districtCode;
+                personalDress.setText(sheng + "-" + shi + "-" + qu);
+                mPopupWindowtwo.dismiss();
             }
-        })
-                .setTitleText("城市选择")
-                .setDividerColor(Color.BLACK)
-                .setTextColorCenter(Color.BLACK) //设置选中项文字颜色
-                .setContentTextSize(18)
-                .build();
-        pvOptions.setPicker(options1Items, options2Items, options3Items);//三级选择器
+        });
+        //产生背景变暗效果
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.alpha = 0.4f;
+        getWindow().setAttributes(lp);
+        mPopupWindowtwo.setFocusable(true);// 取得焦点
+        //注意  要是点击外部空白处弹框消息  那么必须给弹框设置一个背景色  不然是不起作用的
+        mPopupWindowtwo.setBackgroundDrawable(new BitmapDrawable());
+        //点击外部消失
+        mPopupWindowtwo.setOutsideTouchable(true);
+        //设置可以点击
+        mPopupWindowtwo.setTouchable(true);
+        //mPopupWindow，指定刚才定义的style
+        mPopupWindowtwo.setAnimationStyle(R.style.mypopwindow_anim_style);
 
-
-        pvOptions.show();
+        //设置popupWindow消失时的监听
+        mPopupWindowtwo.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            //在dismiss中恢复透明度
+            public void onDismiss() {
+                WindowManager.LayoutParams lp = getWindow().getAttributes();
+                lp.alpha = 1f;
+                getWindow().setAttributes(lp);
+            }
+        });
+        mPopupWindowtwo.showAtLocation(view, Gravity.BOTTOM, 0, 0);
     }
 
-    private void initJsonData() {
-/**
- * 注意：assets 目录下的Json文件仅供参考，实际使用可自行替换文件
- * 关键逻辑在于循环体
- *
- * */
-        String JsonData = new GetJsonDataUtil().getJson(this, "province.json");//获取assets目录下的json
-        // 文件数据
 
-        ArrayList<JsonBean> jsonBean = parseData(JsonData);//用Gson 转成实体
-
-        /**
-         * 添加省份数据
-         *
-         * 注意：如果是添加的JavaBean实体，则实体类需要实现 IPickerViewData 接口，
-         * PickerView会通过getPickerViewText方法获取字符串显示出来。
-         */
-        options1Items = jsonBean;
-
-        for (int i = 0; i < jsonBean.size(); i++) {//遍历省份
-            ArrayList<String> CityList = new ArrayList<>();//该省的城市列表（第二级）
-            ArrayList<ArrayList<String>> Province_AreaList = new ArrayList<>();//该省的所有地区列表（第三级）
-
-            for (int c = 0; c < jsonBean.get(i).getCityList().size(); c++) {//遍历该省份的所有城市
-                String CityName = jsonBean.get(i).getCityList().get(c).getName();
-                CityList.add(CityName);//添加城市
-                ArrayList<String> City_AreaList = new ArrayList<>();//该城市的所有地区列表
-
-                //如果无地区数据，建议添加空字符串，防止数据为null 导致三个选项长度不匹配造成崩溃
-                if (jsonBean.get(i).getCityList().get(c).getArea() == null
-                        || jsonBean.get(i).getCityList().get(c).getArea().size() == 0) {
-                    City_AreaList.add("");
-                } else {
-                    City_AreaList.addAll(jsonBean.get(i).getCityList().get(c).getArea());
-                }
-                Province_AreaList.add(City_AreaList);//添加该省所有地区数据
-            }
-
-            /**
-             * 添加城市数据
-             */
-            options2Items.add(CityList);
-            /**
-             * 添加地区数据
-             */
-            options3Items.add(Province_AreaList);
-        }
-    }
-
-    public ArrayList<JsonBean> parseData(String result) {//Gson 解析
-        ArrayList<JsonBean> detail = new ArrayList<>();
-        try {
-            JSONArray data = new JSONArray(result);
-            Gson gson = new Gson();
-            for (int i = 0; i < data.length(); i++) {
-                JsonBean entity = gson.fromJson(data.optJSONObject(i).toString(), JsonBean.class);
-                detail.add(entity);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return detail;
-    }
 }

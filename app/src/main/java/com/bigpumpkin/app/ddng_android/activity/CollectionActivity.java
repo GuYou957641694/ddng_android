@@ -8,18 +8,16 @@ import android.widget.RelativeLayout;
 
 import com.bigpumpkin.app.ddng_android.R;
 import com.bigpumpkin.app.ddng_android.adapter.CollectionsAdapter;
-import com.bigpumpkin.app.ddng_android.adapter.FocusApapter;
 import com.bigpumpkin.app.ddng_android.base.BaseActivity;
-import com.bigpumpkin.app.ddng_android.bean.Cancel_Colledctions_Bean;
+import com.bigpumpkin.app.ddng_android.bean.Cancel_collectionsBean;
 import com.bigpumpkin.app.ddng_android.bean.Collections_Bean;
-import com.bigpumpkin.app.ddng_android.bean.Focus_Bean;
 import com.bigpumpkin.app.ddng_android.net.Contacts;
 import com.bigpumpkin.app.ddng_android.persenter.MyPresenterImpl;
-import com.bigpumpkin.app.ddng_android.utils.EmptyUtils;
 import com.bigpumpkin.app.ddng_android.utils.EncryptUtils;
 import com.bigpumpkin.app.ddng_android.utils.SpzUtils;
 import com.bigpumpkin.app.ddng_android.utils.ToastUtil;
 import com.bigpumpkin.app.ddng_android.view.MyView;
+import com.bigpumpkin.app.ddng_android.weight.LoadingDialog;
 import com.bigpumpkin.app.ddng_android.weight.TitleXML;
 
 import java.util.HashMap;
@@ -37,11 +35,12 @@ public class CollectionActivity extends BaseActivity implements MyView {
     private CollectionsAdapter collectionsAdapter;
     private String sha1;
     private long time;
-    private List<Collections_Bean.DataBean> datas;
-    private int i;
     private String appid;
     private String appsecret;
+    private List<Collections_Bean.DataBean> datas;
+    private int i;
     private RelativeLayout relativeLayout;
+    private LoadingDialog dialog;
 
     @Override
     public int intiLayout() {
@@ -69,17 +68,20 @@ public class CollectionActivity extends BaseActivity implements MyView {
         map.put("appsecret", appsecret);
         map.put("timestamp", time);
         map.put("sign", sha1);
-        presenter.getpost(Contacts.My_collections, headmap, map, Collections_Bean.class);
     }
 
     @Override
     public void initData() {
-
+        dialog = new LoadingDialog(this, "玩命加载中...");
+//显示Dialog
+        dialog.show();
+        presenter.getpost(Contacts.My_collections, headmap, map, Collections_Bean.class);
     }
 
     @Override
     public void success(final Object data) {
         if (data instanceof Collections_Bean) {
+            dialog.close();
             Collections_Bean collections_bean = (Collections_Bean) data;
             datas = collections_bean.getData();
             if (datas.size() > 0) {
@@ -95,31 +97,28 @@ public class CollectionActivity extends BaseActivity implements MyView {
                 recyclerview.setVisibility(View.GONE);
             }
             //点击取消 收藏
-            collectionsAdapter.setOnItemClickListener(new CollectionsAdapter.OnItemClickListener() {
+            collectionsAdapter.setOnItemdefaultClickListener(new CollectionsAdapter.OnItemdefaultClickListener() {
                 @Override
-                public void onClick(int position) {
-                    HashMap<String, Object> headmap = new HashMap<>();
-                    HashMap<String, Object> map = new HashMap<>();
-                    map.put("appid", appid);
-                    map.put("appsecret", appsecret);
-                    map.put("timestamp", time);
-                    map.put("sign", sha1);
-                    String id = datas.get(position).getId();
-                    map.put("vaid", id + "");
-                    presenter.getpost(Contacts.My_cancel_collections, headmap, map, Cancel_Colledctions_Bean.class);
+                public void ondefaultClick(int position) {
+                    map.put("vaid", datas.get(position).getId());
                     i = position;
+                    presenter.getpost(Contacts.My_cancel_collections, headmap, map, Cancel_collectionsBean.class);
                 }
             });
-        } else if (data instanceof Cancel_Colledctions_Bean) {
-            Cancel_Colledctions_Bean cancel_colledctions_bean = (Cancel_Colledctions_Bean) data;
+
+        } else if (data instanceof Cancel_collectionsBean) {
+            Cancel_collectionsBean cancel_colledctions_bean = (Cancel_collectionsBean) data;
             String code = cancel_colledctions_bean.getCode();
-            if (EmptyUtils.isNotEmpty(code)) {
-                if (code.equals("200")) {
-                    datas.remove(i);
-                    collectionsAdapter.notifyItemRemoved(i);
-                } else {
-                    ToastUtil.showShort(CollectionActivity.this, "取消失败");
+            if (code.equals("200")) {
+                datas.remove(i);
+                collectionsAdapter.notifyItemRemoved(i);
+                collectionsAdapter.notifyDataSetChanged();
+                if (datas.size() <= 0) {
+                    relativeLayout.setVisibility(View.VISIBLE);
+                    recyclerview.setVisibility(View.GONE);
                 }
+            } else {
+                ToastUtil.showShort(CollectionActivity.this, "取消失败");
             }
         }
     }

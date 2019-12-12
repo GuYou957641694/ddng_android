@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
+    android:background="#FFFFFFFF"
     android:orientation="vertical"
     tools:context=".activity.Management_addressActivity">
 
@@ -17,6 +17,7 @@
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:overScrollMode="never"
         android:layout_below="@+id/tile"
         android:visibility="gone" />
 
@@ -26,19 +27,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/tile"
-        android:visibility="gone"></include>
+     ></include>
 
     <Button
         android:id="@+id/add"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_40"
+        android:layout_height="@dimen/dp_36"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="@dimen/dp_30"
-        android:layout_marginRight="@dimen/dp_30"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:background="@drawable/address_shape"
+        android:layout_marginRight="@dimen/dp_10"
         android:layout_marginBottom="@dimen/dp_20"
-        android:background="@drawable/log_bg"
         android:stateListAnimator="@null"
-        android:text="添加地址"
-        android:textColor="#fff"
-        android:textSize="16sp" />
+        android:text="+ 添加地址"
+        android:textColor="#FFFFFFFF"
+        android:textSize="@dimen/sp_14" />
 </RelativeLayout>

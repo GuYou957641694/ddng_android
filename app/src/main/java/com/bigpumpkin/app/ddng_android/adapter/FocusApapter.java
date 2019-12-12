@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.bigpumpkin.app.ddng_android.R;
@@ -40,19 +39,12 @@ public class FocusApapter extends RecyclerView.Adapter<FocusApapter.MyViewHolder
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int i) {
         if (dataBean != null) {
-            Glide.with(context).load(Urls.BASEURL + dataBean.get(i).getPic()).into(myViewHolder.picture);
+            Glide.with(context).load(Urls.BASEURL + dataBean.get(i).getPic3()).into(myViewHolder.picture);
             myViewHolder.name.setText(dataBean.get(i).getTitle());
             myViewHolder.address.setText(dataBean.get(i).getDizhi());
-
-            myViewHolder.focus.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        listener.onClick(i);
-                    }
-                }
-            });
-
+            if (i + 1 == dataBean.size()) {
+                myViewHolder.view.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -65,14 +57,14 @@ public class FocusApapter extends RecyclerView.Adapter<FocusApapter.MyViewHolder
 
         private final TextView name, address;
         private final CircleImageView picture;
-        private final Button focus;
+        private View view;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.name);
             picture = itemView.findViewById(R.id.picture);
             address = itemView.findViewById(R.id.address);
-            focus = itemView.findViewById(R.id.focus);
+            view = itemView.findViewById(R.id.view);
         }
     }
 

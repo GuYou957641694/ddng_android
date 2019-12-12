@@ -1,18 +1,23 @@
 package com.bigpumpkin.app.ddng_android.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bigpumpkin.app.ddng_android.R;
+import com.bigpumpkin.app.ddng_android.activity.Spell_DetailsActivity;
 import com.bigpumpkin.app.ddng_android.bean.Collections_Bean;
 import com.bigpumpkin.app.ddng_android.config.Urls;
-import com.bumptech.glide.Glide;
+import com.bigpumpkin.app.ddng_android.utils.GlideUtils;
+import com.bigpumpkin.app.ddng_android.utils.IntentUtils;
+import com.bigpumpkin.app.ddng_android.utils.Tv_Price_Utils;
 
 import java.util.List;
 
@@ -38,19 +43,34 @@ public class CollectionsAdapter extends RecyclerView.Adapter<CollectionsAdapter.
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int i) {
         if (dataBean != null) {
-            Glide.with(context).load(Urls.BASEURL + dataBean.get(i).getPic()).into(myViewHolder.imageView);
+            GlideUtils.loadRoundCircleImagetwo(context, Urls.BASEURL + dataBean.get(i).getPic(), myViewHolder.imageView);
             myViewHolder.name.setText(dataBean.get(i).getTitle());
             myViewHolder.weight.setText(dataBean.get(i).getGg_title());
-            myViewHolder.type.setText(dataBean.get(i).getPz_title());
-            myViewHolder.price.setText(dataBean.get(i).getPrice());
-            myViewHolder.collection.setOnClickListener(new View.OnClickListener() {
+            Tv_Price_Utils.initPriceTv(context, dataBean.get(i).getPrice(), myViewHolder.price);
+            if (i + 1 == dataBean.size()) {
+                myViewHolder.view.setVisibility(View.GONE);
+            }
+
+            myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (listener != null) {
-                        listener.onClick(i);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id", dataBean.get(i).getId());
+                    IntentUtils.getIntents().Intent(context, Spell_DetailsActivity.class, bundle);
+                }
+            });
+
+            myViewHolder.menu_layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (defaultlistener != null) {
+                        defaultlistener.ondefaultClick(i);
                     }
                 }
             });
+
+
+
         }
     }
 
@@ -63,18 +83,18 @@ public class CollectionsAdapter extends RecyclerView.Adapter<CollectionsAdapter.
 
         private final ImageView imageView;
         private final TextView name, weight;
-        private final TextView type;
         private final TextView price;
-        private final TextView collection;
+        private final View view;
+        private LinearLayout menu_layout;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.pic);
             name = itemView.findViewById(R.id.name);
-            type = itemView.findViewById(R.id.type);
             price = itemView.findViewById(R.id.price);
             weight = itemView.findViewById(R.id.weight);
-            collection = itemView.findViewById(R.id.collection);
+            view = itemView.findViewById(R.id.view);
+            menu_layout = itemView.findViewById(R.id.menu_layout);
         }
     }
 
@@ -87,5 +107,15 @@ public class CollectionsAdapter extends RecyclerView.Adapter<CollectionsAdapter.
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
+    }
+
+    public interface OnItemdefaultClickListener {
+        void ondefaultClick(int position);
+    }
+
+    private OnItemdefaultClickListener defaultlistener;
+
+    public void setOnItemdefaultClickListener(OnItemdefaultClickListener defaultlistener) {
+        this.defaultlistener = defaultlistener;
     }
 }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+    android:clipChildren="false"
     android:orientation="vertical"
     tools:context=".activity.AllActivity">
 
@@ -12,27 +12,92 @@
         android:id="@+id/frame"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/view_all_activity_divider1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_weight="1" />
 
-    <View
-        android:id="@+id/view_all_activity_divider1"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toTopOf="@id/bnv_all_activity" />
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/bnv_all_activity"
+    <!--  <android.support.design.widget.BottomNavigationView
+          android:id="@+id/bnv_all_activity"
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/dp_50"
+          android:layout_marginTop="@dimen/dp_5"
+          app:itemBackground="@null"
+          app:itemHorizontalTranslationEnabled="false"
+          app:itemIconSize="@dimen/dp_20"
+          app:labelVisibilityMode="labeled"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:menu="@menu/bottom_nv_item" />-->
+    <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
-        android:layout_marginTop="@dimen/dp_5"
-        app:itemBackground="@null"
-        app:itemHorizontalTranslationEnabled="false"
-        app:itemIconSize="@dimen/dp_20"
-        app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_nv_item" />
-</android.support.constraint.ConstraintLayout>
+        android:layout_height="52dp"
+        android:background="#ffffff"
+        android:clipChildren="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_home"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:button="@null"
+            android:checked="true"
+            android:drawablePadding="@dimen/dp_5"
+            android:drawableTop="@drawable/chat_selector"
+            android:gravity="center"
+            android:text="商场" />
+
+        <RadioButton
+            android:id="@+id/rb_pond"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:button="@null"
+            android:drawablePadding="@dimen/dp_5"
+            android:drawableTop="@drawable/discovery_selector"
+            android:gravity="center"
+            android:text="消息" />
+
+        <!-- 这里直接给其设置高度 让其超过父亲布局的56dp-->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="90dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/rbAdd"
+                android:layout_width="55dp"
+                android:layout_height="50dp"
+                android:src="@mipmap/icon_wx" />
+
+        </LinearLayout>
+
+        <RadioButton
+            android:id="@+id/rb_message"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/dp_5"
+            android:layout_weight="1"
+            android:background="@null"
+            android:button="@null"
+            android:drawableTop="@drawable/shopp"
+            android:gravity="center"
+            android:text="购物车" />
+
+        <RadioButton
+            android:id="@+id/rb_me"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="@dimen/dp_5"
+            android:background="@null"
+            android:button="@null"
+            android:drawableTop="@drawable/me_selector"
+            android:gravity="center"
+            android:text="我的" />
+    </RadioGroup>
+</LinearLayout>

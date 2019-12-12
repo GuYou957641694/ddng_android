@@ -32,6 +32,7 @@ public class FlingNestedScrollView extends NestedScrollView {
         mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
     }
 
+
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         if (!mEnable) {
@@ -68,6 +69,9 @@ public class FlingNestedScrollView extends NestedScrollView {
     @Override
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         super.onScrollChanged(l, t, oldl, oldt);
+
+
+
         if (onScrollChangeListener != null) {
             onScrollChangeListener.onScrollChange(this, l, t, oldl, oldt);
         }
@@ -84,6 +88,8 @@ public class FlingNestedScrollView extends NestedScrollView {
     public interface ScrollBottomListener {
         void onScrollBottom();
     }
+
+
 
     public interface ScrollChangeListener {
         void onScrollChange(FlingNestedScrollView fnslv, int l, int t, int oldl, int oldt);

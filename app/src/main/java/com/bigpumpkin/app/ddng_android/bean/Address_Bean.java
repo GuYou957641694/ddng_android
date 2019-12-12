@@ -8,7 +8,7 @@ public class Address_Bean {
     /**
      * msg : success
      * code : 200
-     * data : [{"id":"1","uid":"1","tel":"13146463762","isindex":"1","sheng":"北京","shi":"北京市","qu":"朝阳区","address":"百子湾后现代城5A1006室","youbian":"10000","name":"董先生"},{"id":"3","uid":"1","tel":"13146463762","isindex":"2","sheng":"北京","shi":"北京市","qu":"朝阳区","address":"百子湾后现代城5A1006室","youbian":"10000","name":"董先生"}]
+     * data : [{"id":"3","uid":"2","tel":"15611036613","isindex":"1","sheng":"天津市","sheng_code":"120000","shi":"市辖区","shi_code":"120100","qu":"北辰区 ","qu_code":"120113","address":"哈哈","youbian":"0","name":"贾东升"}]
      */
 
     private String msg;
@@ -41,16 +41,19 @@ public class Address_Bean {
 
     public static class DataBean {
         /**
-         * id : 1
-         * uid : 1
-         * tel : 13146463762
+         * id : 3
+         * uid : 2
+         * tel : 15611036613
          * isindex : 1
-         * sheng : 北京
-         * shi : 北京市
-         * qu : 朝阳区
-         * address : 百子湾后现代城5A1006室
-         * youbian : 10000
-         * name : 董先生
+         * sheng : 天津市
+         * sheng_code : 120000
+         * shi : 市辖区
+         * shi_code : 120100
+         * qu : 北辰区
+         * qu_code : 120113
+         * address : 哈哈
+         * youbian : 0
+         * name : 贾东升
          */
 
         private String id;
@@ -58,8 +61,11 @@ public class Address_Bean {
         private String tel;
         private int isindex;
         private String sheng;
+        private String sheng_code;
         private String shi;
+        private String shi_code;
         private String qu;
+        private String qu_code;
         private String address;
         private String youbian;
         private String name;
@@ -104,6 +110,14 @@ public class Address_Bean {
             this.sheng = sheng;
         }
 
+        public String getSheng_code() {
+            return sheng_code;
+        }
+
+        public void setSheng_code(String sheng_code) {
+            this.sheng_code = sheng_code;
+        }
+
         public String getShi() {
             return shi;
         }
@@ -112,12 +126,28 @@ public class Address_Bean {
             this.shi = shi;
         }
 
+        public String getShi_code() {
+            return shi_code;
+        }
+
+        public void setShi_code(String shi_code) {
+            this.shi_code = shi_code;
+        }
+
         public String getQu() {
             return qu;
         }
 
         public void setQu(String qu) {
             this.qu = qu;
+        }
+
+        public String getQu_code() {
+            return qu_code;
+        }
+
+        public void setQu_code(String qu_code) {
+            this.qu_code = qu_code;
         }
 
         public String getAddress() {

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,12 +13,10 @@ import android.widget.TextView;
 import com.bigpumpkin.app.ddng_android.R;
 import com.bigpumpkin.app.ddng_android.base.BaseActivity;
 import com.bigpumpkin.app.ddng_android.bean.Change_Bean;
-import com.bigpumpkin.app.ddng_android.net.Contacts;
 import com.bigpumpkin.app.ddng_android.persenter.MyPresenterImpl;
 import com.bigpumpkin.app.ddng_android.utils.CountDownTextUtils;
 import com.bigpumpkin.app.ddng_android.utils.EmptyUtils;
-import com.bigpumpkin.app.ddng_android.utils.EncryptUtils;
-import com.bigpumpkin.app.ddng_android.utils.SpzUtils;
+import com.bigpumpkin.app.ddng_android.utils.IntentUtils;
 import com.bigpumpkin.app.ddng_android.utils.ToastUtil;
 import com.bigpumpkin.app.ddng_android.view.MyView;
 import com.bigpumpkin.app.ddng_android.weight.TitleXML;
@@ -42,10 +39,6 @@ public class Modify_PassActivity extends BaseActivity implements MyView, CountDo
     EditText etChangePasswordCode;
     @BindView(R.id.btn_change_password_get_code)
     TextView btnChangePasswordGetCode;
-    @BindView(R.id.new_pass)
-    EditText newPass;
-    @BindView(R.id.news_pass)
-    EditText newsPass;
     @BindView(R.id.btn_login_confirm)
     Button btnLoginConfirm;
     @BindView(R.id.down)
@@ -58,8 +51,6 @@ public class Modify_PassActivity extends BaseActivity implements MyView, CountDo
     private String appsecret;
     private String sha1;
     private CountDownTextUtils mCountDownTextUtils;
-    private String s1;
-    private String s2;
 
     @Override
     public int intiLayout() {
@@ -68,16 +59,12 @@ public class Modify_PassActivity extends BaseActivity implements MyView, CountDo
 
     @Override
     public void initView() {
-        new TitleXML(this, "修改密码", true, "").init().setListener(new TitleXML.TitleXMLClick() {
+        new TitleXML(this, "验证手机号", true, "").init().setListener(new TitleXML.TitleXMLClick() {
             @Override
             public void onImage() {
                 finish();
             }
         });
-        EditText newPass = findViewById(R.id.new_pass);
-        EditText newsPass = findViewById(R.id.news_pass);
-        newPass.setTransformationMethod(PasswordTransformationMethod.getInstance()); //设置为密码输入框
-        newsPass.setTransformationMethod(PasswordTransformationMethod.getInstance()); //设置为密码输入框
     }
 
     @Override
@@ -106,9 +93,6 @@ public class Modify_PassActivity extends BaseActivity implements MyView, CountDo
                 }
                 break;
             case R.id.btn_login_confirm:
-
-                s1 = newPass.getText().toString();
-                s2 = newsPass.getText().toString();
                 String s = etChangePasswordCode.getText().toString();
                 mobile = etChangePasswordMobile.getText().toString();
                 // 提交验证码，其中的code表示验证码，如“1357”
@@ -198,24 +182,9 @@ public class Modify_PassActivity extends BaseActivity implements MyView, CountDo
                         }
                     } else if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
                         if (result == SMSSDK.RESULT_COMPLETE) {
-                            // TODO 处理验证码验证通过的结果
-                            long time = System.currentTimeMillis();
-                            appid = SpzUtils.getString("appid");
-                            appsecret = SpzUtils.getString("appsecret");
-                            String sha = "appid=" + appid + "&" + "appsecret=" + appsecret + "&" + "timestamp=" + time;
-                            sha1 = EncryptUtils.getSHA(sha);
-                            if (s1.equals(s2)) {
-                                headmap = new HashMap<>();
-                                map = new HashMap<>();
-                                map.put("appid", appid);
-                                map.put("appsecret", appsecret);
-                                map.put("timestamp", time);
-                                map.put("sign", sha1);
-                                map.put("pass", s1);
-                                presenter.getpost(Contacts.My_change, headmap, map, Change_Bean.class);
-                            } else {
-                                ToastUtil.showShort(Modify_PassActivity.this, "密码不一致");
-                            }
+                            Bundle bundle = new Bundle();
+                            bundle.putString("tel",mobile);
+                            IntentUtils.getIntents().Intent(Modify_PassActivity.this,PasswordActivity.class,bundle);
                         } else {
                             // TODO 处理错误的结果
                             ToastUtil.showShort(Modify_PassActivity.this, "请重新输入验证码");

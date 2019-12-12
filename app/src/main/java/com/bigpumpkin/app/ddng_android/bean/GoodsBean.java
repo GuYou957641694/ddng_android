@@ -4,11 +4,10 @@ import java.util.List;
 
 public class GoodsBean {
 
-
     /**
      * msg : success
      * code : 200
-     * data : {"banner":[{"title":"banner图1","url":"#","pic":"/data/img/1908/5d5f85e803782.jpg","zt":"0"},{"title":"banner图1","url":"1","pic":"/data/img/1908/5d5f85f43cbf4.jpg","zt":"0"},{"title":"广告位2","url":"#","pic":"/data/img/1908/5d5f860b16b51.jpg","zt":"1"}],"pumpkin_headline":[{"id":"7","title":" 南瓜头条7","nc_id":"0"},{"id":"6","title":" 南瓜头条6","nc_id":"13"}],"modul":[{"title":"测试别动","pic":"/data/img/1908/5d5fb5b800110.gif","link":"测试"},{"title":"药食同源","pic":"/data/img/1908/5d5fb50284c17.gif","link":"模块地址"},{"title":"生产者说","pic":"/data/img/1908/5d5fb536a37e0.jpg","link":"模块地址 1"},{"title":"农场深加工","pic":"/data/img/1908/5d5fb0f39373e.png","link":"模块地址"},{"title":"公益放生","pic":"/data/img/1908/5d5fb0fc78caa.png","link":"模块地址"},{"title":"智慧农场","pic":"/data/img/1908/5d5fb10593898.png","link":"模块地址"},{"title":"当季水果","pic":"/data/img/1908/5d5fb11293991.png","link":"模块地址"},{"title":"家禽领养","pic":"/data/img/1908/5d5fb14c93deb.png","link":"模块地址"},{"title":"定制认养","pic":"/data/img/1908/5d5fb1426dace.png","link":"模块地址"},{"title":"30","pic":"/data/img/1908/5d5fb62fda10f.gif","link":"1"},{"title":"banner图1","pic":"/data/img/1908/5d5fb13902d1d.png","link":"测试"},{"title":"测试鸡28","pic":"/data/img/1908/5d5fb12eaa9e3.png","link":"模块地址"}],"classification":[{"title":"植物认养","pic":"/data/img/1901/5c32fff20ac76.png"},{"title":"当季水果","pic":"/data/img/1901/5c33001f46c0e.png"},{"title":"智慧农场","pic":"/data/img/1901/5c330029f2906.png"},{"title":"公益放生","pic":"/data/img/1901/5c3300409cc80.png"}],"addonspec":{"time":{"id":"9","stime":"1569859200","etime":"1569945600","now":1566806394},"type":"1","shop":[{"id":"946","pic":"/data/img/1901/5c3c00da33508.png","spike_price":"0.01","v_price":"301.00"},{"id":"538","pic":"/data/img/1811/5bfb9a1f70711.png","spike_price":"10.00","v_price":"257.00"},{"id":"538","pic":"/data/img/1811/5bfb9a1f70711.png","spike_price":"9.00","v_price":"253.00"}]},"brand_farm":[{"id":"15","title":"家禽测试","pic3":"/data/img/1901/5c331001dd58d.png","dizhi":"大兴区广顺路58号（大兴农场）","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"},{"id":"13","title":"北京海淀农场13","pic3":"/data/img/1901/5c331001dd58d.png","dizhi":"大兴区广顺路58号（大兴农场）","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"},{"id":"12","title":"北京海淀农场12","pic3":"/data/img/1901/5c330ff1c9804.png","dizhi":"大兴区广顺路58号（大兴农场）","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"},{"id":"11","title":"北京海淀农场11","pic3":"/data/img/1901/5c330ff1c9804.png","dizhi":"大兴区广顺路58号（大兴农场）","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"},{"id":"10","title":"北京海淀农场10","pic3":"/data/img/1901/5c33100d056a0.png","dizhi":"大兴区广顺路58号（大兴农场）","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"},{"id":"9","title":"北京海淀农场9","pic3":"/data/img/1901/5c331001dd58d.png","dizhi":"大兴区广顺路58号（大兴农场）","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"},{"id":"8","title":"北京海淀农场8","pic3":"/data/img/1901/5c330ff1c9804.png","dizhi":"大兴区广顺路58号（大兴农场）","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"},{"id":"7","title":"北京海淀农场7","pic3":"/data/img/1901/5c330ff1c9804.png","dizhi":"大兴区广顺路58号（大兴农场）","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"}],"ad_one":[{"title":"广告位1","url":"#","pic":"/data/img/1901/5c32bc2a83f80.jpg","zt":"0"},{"title":"广告位1","url":"#","pic":"/data/img/1901/5c32bc2a83f80.jpg","zt":"0"}],"recommended_adoption":[{"id":"537","title":"芒果果树","pic":"/data/img/1811/5bfb9a1f70711.png"},{"id":"535","title":"荔枝果树","pic":"/data/img/1811/5bfb9a1f70711.png"},{"id":"533","title":"香蕉果树","pic":"/data/img/1811/5bfb9a1f70711.png"},{"id":"502","title":"果树10","pic":"/data/img/1811/5bfb9a1f70711.png"},{"id":"500","title":"芒果果树","pic":"/data/img/1811/5bfb9a1f70711.png"},{"id":"498","title":"荔枝果树","pic":"/data/img/1811/5bfb9a1f70711.png"}],"farm_rescue":[{"id":"15","title":"家禽测试","pic":"/data/img/1810/5bbc61824d0e2.png","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介","sponsor":"农场协会"},{"id":"13","title":"北京海淀农场13","pic":"/data/img/1810/5bbc61824d0e2.png","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介","sponsor":"农场协会"},{"id":"12","title":"北京海淀农场12","pic":"/data/img/1810/5bbc61824d0e2.png","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介","sponsor":"农场协会"}],"therapy":[{"id":"2","title":"胖大海","pic":"/data/img/1908/5d6100b6cbe00.png","type":"1","rank":"1","enable":"1"},{"id":"3","title":"茶饮","pic":"/data/img/1908/5d6100af094a0.png","type":"1","rank":"1","enable":"1"},{"id":"4","title":"名医良方","pic":"/data/img/1908/5d6100a596638.png","type":"1","rank":"1","enable":"1"},{"id":"5","title":"111","pic":"/data/img/1908/5d61008f331a0.png","type":"1","rank":"0","enable":"1"}],"ad_two":[{"title":"广告位2","url":"#","pic":"/data/img/1901/5c32bb64c1164.jpg","zt":"0"}]}
+     * data : {"banner":[{"title":"banner图1","url":"#","pic":"/data/img/1908/5d5f85e803782.jpg","zt":"0"},{"title":"banner图1","url":"1","pic":"/data/img/1908/5d5f85f43cbf4.jpg","zt":"0"},{"title":"广告位2","url":"#","pic":"/data/img/1908/5d5f860b16b51.jpg","zt":"1"}],"pumpkin_headline":[{"id":"7","title":" 南瓜头条7","nc_id":"0"},{"id":"6","title":" 南瓜头条6","nc_id":"13"}],"modul":[{"title":"定制认养","pic":"/data/img/1908/5d5fb5b800110.gif","link":"1"},{"title":"家禽领养","pic":"/data/img/1908/5d5fb50284c17.gif","link":"2"},{"title":"生产者说","pic":"/data/img/1908/5d5fb536a37e0.jpg","link":"3"},{"title":"农场深加工","pic":"/data/img/1908/5d5fb0f39373e.png","link":"4"},{"title":"公益放生","pic":"/data/img/1908/5d5fb0fc78caa.png","link":"5"},{"title":"智慧农场","pic":"/data/img/1908/5d5fb10593898.png","link":"6"},{"title":"当季水果","pic":"/data/img/1908/5d5fb11293991.png","link":"7"},{"title":"药食同源","pic":"/data/img/1908/5d5fb14c93deb.png","link":"8"},{"title":"礼盒定制","pic":"/data/img/1908/5d5fb1426dace.png","link":"9"},{"title":"企业福利","pic":"/data/img/1908/5d5fb62fda10f.gif","link":"10"},{"title":"我来代言","pic":"/data/img/1908/5d5fb13902d1d.png","link":"11"},{"title":"积分商城","pic":"/data/img/1908/5d5fb12eaa9e3.png","link":"12"},{"title":"加入种子","pic":"/data/img/1908/5d6665ca8efe1.jpg","link":"13"},{"title":"农村入驻","pic":"/data/img/1908/5d6665b5e1c4b.jpg","link":"14"}],"classification":[{"title":"植物认养","pic":"/data/img/1901/5c32fff20ac76.png"},{"title":"当季水果","pic":"/data/img/1901/5c33001f46c0e.png"},{"title":"智慧农场","pic":"/data/img/1901/5c330029f2906.png"},{"title":"公益放生","pic":"/data/img/1901/5c3300409cc80.png"}],"addonspec":{"time":{"id":"9","stime":"1569859200","etime":"1569945600","now":1568003322},"type":"1","shop":[{"id":"946","pic":"/data/img/1901/5c3c00da33508.png","spike_price":"0.01","v_price":"301.00"},{"id":"538","pic":"/data/img/1811/5bfb9a1f70711.png","spike_price":"10.00","v_price":"257.00"},{"id":"538","pic":"/data/img/1811/5bfb9a1f70711.png","spike_price":"9.00","v_price":"253.00"}]},"brand_farm":[{"id":"15","title":"家禽测试","pic3":"/data/img/1901/5c331001dd58d.png","dizhi":"中国北京市大兴区瀛海镇德茂地铁站B1东北口东北100米","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"},{"id":"13","title":"北京海淀农场13","pic3":"/data/img/1901/5c331001dd58d.png","dizhi":"大兴区广顺路58号（大兴农场）","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"},{"id":"12","title":"北京海淀农场12","pic3":"/data/img/1901/5c330ff1c9804.png","dizhi":"大兴区广顺路58号（大兴农场）","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"},{"id":"11","title":"北京海淀农场11","pic3":"/data/img/1901/5c330ff1c9804.png","dizhi":"大兴区广顺路58号（大兴农场）","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"},{"id":"10","title":"北京海淀农场10","pic3":"/data/img/1901/5c33100d056a0.png","dizhi":"大兴区广顺路58号（大兴农场）","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"},{"id":"9","title":"北京海淀农场9","pic3":"/data/img/1901/5c331001dd58d.png","dizhi":"大兴区广顺路58号（大兴农场）","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"},{"id":"8","title":"北京海淀农场8","pic3":"/data/img/1901/5c330ff1c9804.png","dizhi":"大兴区广顺路58号（大兴农场）","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"},{"id":"7","title":"北京海淀农场7","pic3":"/data/img/1901/5c330ff1c9804.png","dizhi":"大兴区广顺路58号（大兴农场）","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"}],"ad_one":[{"title":"广告位1","url":"#","pic":"/data/img/1901/5c32bc2a83f80.jpg","zt":"0"},{"title":"广告位1","url":"#","pic":"/data/img/1901/5c32bc2a83f80.jpg","zt":"0"}],"recommended_adoption":[{"id":"948","title":"家禽 测试","pic":"/data/img/1909/5d731893e7dcc.gif","chanliang":"100-50","price":"200.00"},{"id":"562","title":"海外水果33","pic":"/data/img/1901/5c3414897ed4f.png","chanliang":"100","price":"444.00"},{"id":"561","title":"海外水果32","pic":"/data/img/1901/5c341411223c8.png","chanliang":"100","price":"471.00"},{"id":"560","title":"海外水果31","pic":"/data/img/1901/5c3414897ed4f.png","chanliang":"100","price":"471.00"},{"id":"559","title":"海外水果30","pic":"/data/img/1901/5c341411223c8.png","chanliang":"100","price":"485.00"},{"id":"558","title":"海外水果29","pic":"/data/img/1901/5c3414897ed4f.png","chanliang":"100","price":"485.00"},{"id":"557","title":"海外水果28","pic":"/data/img/1811/5bfb9a1f70711.png","chanliang":"100","price":"495.00"},{"id":"537","title":"芒果果树","pic":"/data/img/1811/5bfb9a1f70711.png","chanliang":"100","price":"495.00"},{"id":"535","title":"荔枝果树","pic":"/data/img/1811/5bfb9a1f70711.png","chanliang":"100","price":"495.00"}],"farm_rescue":[{"id":"15","title":"家禽测试","pic":"/data/img/1810/5bbc61824d0e2.png","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介","sponsor":"农场协会"},{"id":"13","title":"北京海淀农场13","pic":"/data/img/1810/5bbc61824d0e2.png","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介","sponsor":"农场协会"},{"id":"12","title":"北京海淀农场12","pic":"/data/img/1810/5bbc61824d0e2.png","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介","sponsor":"农场协会"}],"therapy":[{"id":"2","title":"胖大海","pic":"/data/img/1908/5d6100b6cbe00.png","type":"1","rank":"1","enable":"1"},{"id":"3","title":"茶饮","pic":"/data/img/1908/5d6100af094a0.png","type":"1","rank":"1","enable":"1"},{"id":"4","title":"名医良方","pic":"/data/img/1908/5d6100a596638.png","type":"1","rank":"1","enable":"1"},{"id":"5","title":"111","pic":"/data/img/1908/5d61008f331a0.png","type":"1","rank":"0","enable":"1"}],"ad_two":[{"title":"广告位2","url":"#","pic":"/data/img/1901/5c32bb64c1164.jpg","zt":"0"}]}
      */
 
     private String msg;
@@ -43,12 +42,12 @@ public class GoodsBean {
         /**
          * banner : [{"title":"banner图1","url":"#","pic":"/data/img/1908/5d5f85e803782.jpg","zt":"0"},{"title":"banner图1","url":"1","pic":"/data/img/1908/5d5f85f43cbf4.jpg","zt":"0"},{"title":"广告位2","url":"#","pic":"/data/img/1908/5d5f860b16b51.jpg","zt":"1"}]
          * pumpkin_headline : [{"id":"7","title":" 南瓜头条7","nc_id":"0"},{"id":"6","title":" 南瓜头条6","nc_id":"13"}]
-         * modul : [{"title":"测试别动","pic":"/data/img/1908/5d5fb5b800110.gif","link":"测试"},{"title":"药食同源","pic":"/data/img/1908/5d5fb50284c17.gif","link":"模块地址"},{"title":"生产者说","pic":"/data/img/1908/5d5fb536a37e0.jpg","link":"模块地址 1"},{"title":"农场深加工","pic":"/data/img/1908/5d5fb0f39373e.png","link":"模块地址"},{"title":"公益放生","pic":"/data/img/1908/5d5fb0fc78caa.png","link":"模块地址"},{"title":"智慧农场","pic":"/data/img/1908/5d5fb10593898.png","link":"模块地址"},{"title":"当季水果","pic":"/data/img/1908/5d5fb11293991.png","link":"模块地址"},{"title":"家禽领养","pic":"/data/img/1908/5d5fb14c93deb.png","link":"模块地址"},{"title":"定制认养","pic":"/data/img/1908/5d5fb1426dace.png","link":"模块地址"},{"title":"30","pic":"/data/img/1908/5d5fb62fda10f.gif","link":"1"},{"title":"banner图1","pic":"/data/img/1908/5d5fb13902d1d.png","link":"测试"},{"title":"测试鸡28","pic":"/data/img/1908/5d5fb12eaa9e3.png","link":"模块地址"}]
+         * modul : [{"title":"定制认养","pic":"/data/img/1908/5d5fb5b800110.gif","link":"1"},{"title":"家禽领养","pic":"/data/img/1908/5d5fb50284c17.gif","link":"2"},{"title":"生产者说","pic":"/data/img/1908/5d5fb536a37e0.jpg","link":"3"},{"title":"农场深加工","pic":"/data/img/1908/5d5fb0f39373e.png","link":"4"},{"title":"公益放生","pic":"/data/img/1908/5d5fb0fc78caa.png","link":"5"},{"title":"智慧农场","pic":"/data/img/1908/5d5fb10593898.png","link":"6"},{"title":"当季水果","pic":"/data/img/1908/5d5fb11293991.png","link":"7"},{"title":"药食同源","pic":"/data/img/1908/5d5fb14c93deb.png","link":"8"},{"title":"礼盒定制","pic":"/data/img/1908/5d5fb1426dace.png","link":"9"},{"title":"企业福利","pic":"/data/img/1908/5d5fb62fda10f.gif","link":"10"},{"title":"我来代言","pic":"/data/img/1908/5d5fb13902d1d.png","link":"11"},{"title":"积分商城","pic":"/data/img/1908/5d5fb12eaa9e3.png","link":"12"},{"title":"加入种子","pic":"/data/img/1908/5d6665ca8efe1.jpg","link":"13"},{"title":"农村入驻","pic":"/data/img/1908/5d6665b5e1c4b.jpg","link":"14"}]
          * classification : [{"title":"植物认养","pic":"/data/img/1901/5c32fff20ac76.png"},{"title":"当季水果","pic":"/data/img/1901/5c33001f46c0e.png"},{"title":"智慧农场","pic":"/data/img/1901/5c330029f2906.png"},{"title":"公益放生","pic":"/data/img/1901/5c3300409cc80.png"}]
-         * addonspec : {"time":{"id":"9","stime":"1569859200","etime":"1569945600","now":1566806394},"type":"1","shop":[{"id":"946","pic":"/data/img/1901/5c3c00da33508.png","spike_price":"0.01","v_price":"301.00"},{"id":"538","pic":"/data/img/1811/5bfb9a1f70711.png","spike_price":"10.00","v_price":"257.00"},{"id":"538","pic":"/data/img/1811/5bfb9a1f70711.png","spike_price":"9.00","v_price":"253.00"}]}
-         * brand_farm : [{"id":"15","title":"家禽测试","pic3":"/data/img/1901/5c331001dd58d.png","dizhi":"大兴区广顺路58号（大兴农场）","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"},{"id":"13","title":"北京海淀农场13","pic3":"/data/img/1901/5c331001dd58d.png","dizhi":"大兴区广顺路58号（大兴农场）","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"},{"id":"12","title":"北京海淀农场12","pic3":"/data/img/1901/5c330ff1c9804.png","dizhi":"大兴区广顺路58号（大兴农场）","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"},{"id":"11","title":"北京海淀农场11","pic3":"/data/img/1901/5c330ff1c9804.png","dizhi":"大兴区广顺路58号（大兴农场）","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"},{"id":"10","title":"北京海淀农场10","pic3":"/data/img/1901/5c33100d056a0.png","dizhi":"大兴区广顺路58号（大兴农场）","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"},{"id":"9","title":"北京海淀农场9","pic3":"/data/img/1901/5c331001dd58d.png","dizhi":"大兴区广顺路58号（大兴农场）","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"},{"id":"8","title":"北京海淀农场8","pic3":"/data/img/1901/5c330ff1c9804.png","dizhi":"大兴区广顺路58号（大兴农场）","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"},{"id":"7","title":"北京海淀农场7","pic3":"/data/img/1901/5c330ff1c9804.png","dizhi":"大兴区广顺路58号（大兴农场）","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"}]
+         * addonspec : {"time":{"id":"9","stime":"1569859200","etime":"1569945600","now":1568003322},"type":"1","shop":[{"id":"946","pic":"/data/img/1901/5c3c00da33508.png","spike_price":"0.01","v_price":"301.00"},{"id":"538","pic":"/data/img/1811/5bfb9a1f70711.png","spike_price":"10.00","v_price":"257.00"},{"id":"538","pic":"/data/img/1811/5bfb9a1f70711.png","spike_price":"9.00","v_price":"253.00"}]}
+         * brand_farm : [{"id":"15","title":"家禽测试","pic3":"/data/img/1901/5c331001dd58d.png","dizhi":"中国北京市大兴区瀛海镇德茂地铁站B1东北口东北100米","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"},{"id":"13","title":"北京海淀农场13","pic3":"/data/img/1901/5c331001dd58d.png","dizhi":"大兴区广顺路58号（大兴农场）","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"},{"id":"12","title":"北京海淀农场12","pic3":"/data/img/1901/5c330ff1c9804.png","dizhi":"大兴区广顺路58号（大兴农场）","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"},{"id":"11","title":"北京海淀农场11","pic3":"/data/img/1901/5c330ff1c9804.png","dizhi":"大兴区广顺路58号（大兴农场）","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"},{"id":"10","title":"北京海淀农场10","pic3":"/data/img/1901/5c33100d056a0.png","dizhi":"大兴区广顺路58号（大兴农场）","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"},{"id":"9","title":"北京海淀农场9","pic3":"/data/img/1901/5c331001dd58d.png","dizhi":"大兴区广顺路58号（大兴农场）","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"},{"id":"8","title":"北京海淀农场8","pic3":"/data/img/1901/5c330ff1c9804.png","dizhi":"大兴区广顺路58号（大兴农场）","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"},{"id":"7","title":"北京海淀农场7","pic3":"/data/img/1901/5c330ff1c9804.png","dizhi":"大兴区广顺路58号（大兴农场）","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介"}]
          * ad_one : [{"title":"广告位1","url":"#","pic":"/data/img/1901/5c32bc2a83f80.jpg","zt":"0"},{"title":"广告位1","url":"#","pic":"/data/img/1901/5c32bc2a83f80.jpg","zt":"0"}]
-         * recommended_adoption : [{"id":"537","title":"芒果果树","pic":"/data/img/1811/5bfb9a1f70711.png"},{"id":"535","title":"荔枝果树","pic":"/data/img/1811/5bfb9a1f70711.png"},{"id":"533","title":"香蕉果树","pic":"/data/img/1811/5bfb9a1f70711.png"},{"id":"502","title":"果树10","pic":"/data/img/1811/5bfb9a1f70711.png"},{"id":"500","title":"芒果果树","pic":"/data/img/1811/5bfb9a1f70711.png"},{"id":"498","title":"荔枝果树","pic":"/data/img/1811/5bfb9a1f70711.png"}]
+         * recommended_adoption : [{"id":"948","title":"家禽 测试","pic":"/data/img/1909/5d731893e7dcc.gif","chanliang":"100-50","price":"200.00"},{"id":"562","title":"海外水果33","pic":"/data/img/1901/5c3414897ed4f.png","chanliang":"100","price":"444.00"},{"id":"561","title":"海外水果32","pic":"/data/img/1901/5c341411223c8.png","chanliang":"100","price":"471.00"},{"id":"560","title":"海外水果31","pic":"/data/img/1901/5c3414897ed4f.png","chanliang":"100","price":"471.00"},{"id":"559","title":"海外水果30","pic":"/data/img/1901/5c341411223c8.png","chanliang":"100","price":"485.00"},{"id":"558","title":"海外水果29","pic":"/data/img/1901/5c3414897ed4f.png","chanliang":"100","price":"485.00"},{"id":"557","title":"海外水果28","pic":"/data/img/1811/5bfb9a1f70711.png","chanliang":"100","price":"495.00"},{"id":"537","title":"芒果果树","pic":"/data/img/1811/5bfb9a1f70711.png","chanliang":"100","price":"495.00"},{"id":"535","title":"荔枝果树","pic":"/data/img/1811/5bfb9a1f70711.png","chanliang":"100","price":"495.00"}]
          * farm_rescue : [{"id":"15","title":"家禽测试","pic":"/data/img/1810/5bbc61824d0e2.png","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介","sponsor":"农场协会"},{"id":"13","title":"北京海淀农场13","pic":"/data/img/1810/5bbc61824d0e2.png","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介","sponsor":"农场协会"},{"id":"12","title":"北京海淀农场12","pic":"/data/img/1810/5bbc61824d0e2.png","des":"农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介","sponsor":"农场协会"}]
          * therapy : [{"id":"2","title":"胖大海","pic":"/data/img/1908/5d6100b6cbe00.png","type":"1","rank":"1","enable":"1"},{"id":"3","title":"茶饮","pic":"/data/img/1908/5d6100af094a0.png","type":"1","rank":"1","enable":"1"},{"id":"4","title":"名医良方","pic":"/data/img/1908/5d6100a596638.png","type":"1","rank":"1","enable":"1"},{"id":"5","title":"111","pic":"/data/img/1908/5d61008f331a0.png","type":"1","rank":"0","enable":"1"}]
          * ad_two : [{"title":"广告位2","url":"#","pic":"/data/img/1901/5c32bb64c1164.jpg","zt":"0"}]
@@ -156,7 +155,7 @@ public class GoodsBean {
 
         public static class AddonspecBean {
             /**
-             * time : {"id":"9","stime":"1569859200","etime":"1569945600","now":1566806394}
+             * time : {"id":"9","stime":"1569859200","etime":"1569945600","now":1568003322}
              * type : 1
              * shop : [{"id":"946","pic":"/data/img/1901/5c3c00da33508.png","spike_price":"0.01","v_price":"301.00"},{"id":"538","pic":"/data/img/1811/5bfb9a1f70711.png","spike_price":"10.00","v_price":"257.00"},{"id":"538","pic":"/data/img/1811/5bfb9a1f70711.png","spike_price":"9.00","v_price":"253.00"}]
              */
@@ -194,13 +193,13 @@ public class GoodsBean {
                  * id : 9
                  * stime : 1569859200
                  * etime : 1569945600
-                 * now : 1566806394
+                 * now : 1568003322
                  */
 
                 private String id;
-                private String stime;
-                private String etime;
-                private int now;
+                private long stime;
+                private long etime;
+                private long now;
 
                 public String getId() {
                     return id;
@@ -210,27 +209,27 @@ public class GoodsBean {
                     this.id = id;
                 }
 
-                public String getStime() {
+                public long getStime() {
                     return stime;
                 }
 
-                public void setStime(String stime) {
+                public void setStime(long stime) {
                     this.stime = stime;
                 }
 
-                public String getEtime() {
+                public long getEtime() {
                     return etime;
                 }
 
-                public void setEtime(String etime) {
+                public void setEtime(long etime) {
                     this.etime = etime;
                 }
 
-                public int getNow() {
+                public long getNow() {
                     return now;
                 }
 
-                public void setNow(int now) {
+                public void setNow(long now) {
                     this.now = now;
                 }
             }
@@ -366,9 +365,9 @@ public class GoodsBean {
 
         public static class ModulBean {
             /**
-             * title : 测试别动
+             * title : 定制认养
              * pic : /data/img/1908/5d5fb5b800110.gif
-             * link : 测试
+             * link : 1
              */
 
             private String title;
@@ -431,15 +430,23 @@ public class GoodsBean {
              * id : 15
              * title : 家禽测试
              * pic3 : /data/img/1901/5c331001dd58d.png
-             * dizhi : 大兴区广顺路58号（大兴农场）
+             * dizhi : 中国北京市大兴区瀛海镇德茂地铁站B1东北口东北100米
              * des : 农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介农场简介
              */
 
             private String id;
             private String title;
-            private String pic3;
+            private String pic;
             private String dizhi;
             private String des;
+
+            public String getPic() {
+                return pic;
+            }
+
+            public void setPic(String pic) {
+                this.pic = pic;
+            }
 
             public String getId() {
                 return id;
@@ -457,13 +464,7 @@ public class GoodsBean {
                 this.title = title;
             }
 
-            public String getPic3() {
-                return pic3;
-            }
 
-            public void setPic3(String pic3) {
-                this.pic3 = pic3;
-            }
 
             public String getDizhi() {
                 return dizhi;
@@ -530,14 +531,18 @@ public class GoodsBean {
 
         public static class RecommendedAdoptionBean {
             /**
-             * id : 537
-             * title : 芒果果树
-             * pic : /data/img/1811/5bfb9a1f70711.png
+             * id : 948
+             * title : 家禽 测试
+             * pic : /data/img/1909/5d731893e7dcc.gif
+             * chanliang : 100-50
+             * price : 200.00
              */
 
             private String id;
             private String title;
             private String pic;
+            private String chanliang;
+            private String price;
 
             public String getId() {
                 return id;
@@ -561,6 +566,22 @@ public class GoodsBean {
 
             public void setPic(String pic) {
                 this.pic = pic;
+            }
+
+            public String getChanliang() {
+                return chanliang;
+            }
+
+            public void setChanliang(String chanliang) {
+                this.chanliang = chanliang;
+            }
+
+            public String getPrice() {
+                return price;
+            }
+
+            public void setPrice(String price) {
+                this.price = price;
             }
         }
 

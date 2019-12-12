@@ -5,8 +5,9 @@ import com.bigpumpkin.app.ddng_android.callback.MyCallBack;
 import com.bigpumpkin.app.ddng_android.model.MyModelImpl;
 import com.bigpumpkin.app.ddng_android.view.MyView;
 
-import java.util.List;
 import java.util.Map;
+
+import okhttp3.RequestBody;
 
 public class MyPresenterImpl implements MyPresenter {
     private MyView view;
@@ -55,8 +56,8 @@ public class MyPresenterImpl implements MyPresenter {
     }
 
     @Override
-    public void image(String url, Map<String, Object> headmap, Map<String, Object> map, List<Object> list, Class clas) {
-        model.img(url, headmap, map, list, clas, new MyCallBack() {
+    public void image(String url, Map<String, RequestBody> headmap, Class clas) {
+        model.img(url, headmap, clas, new MyCallBack() {
 
             @Override
             public void success(Object data) {

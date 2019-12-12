@@ -4,12 +4,44 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorff">#ffffff</color>
-    <color name="theme_orange">#85D253</color>
+    <color name="theme_orange">#FF20BF55</color>
     <color name="gray_h">#cccccc</color>
     <color name="gray_cc">#666666</color>
+    <color name="gray_zz">#f5f5f5</color>
     <color name="gray_c">#333333</color>
     <color name="gray_ccc">#999999</color>
-    <color name="white">#fff</color>
+    <color name="white">#FFFFFF</color>
+    <color name="FFF8F8F8">#FFF8F8F8</color>
+    <color name="home_bg">#FFF8F8F8</color>
     <color name="color_f5f5f5">#F5F5F5</color>
-
+    <color name="whits">#00000000</color>
+    <color name="c_222222">#000000</color>
+    <color name="colorGray">#7d7d7d</color>
+    <color name="main_transparent">#00000000</color>
+    <color name="whitecolor">#ffffff</color>
+    <color name="buttom_tv">#484747</color>
+    <color name="toubu">#f4692a</color>
+    <color name="gray">#d3d3d3</color>
+    <color name="color_f6">#f6f6f6</color>
+    <color name="color_323232">#323232</color>
+    <color name="poultry_bgs">#FFE39510</color>
+    <color name="poultry_sele_fales">#FF935E03</color>
+    <color name="wisdims_title">#00ffffff</color>
+    <color name="custos_title">#FF626262</color>
+    <color name="custos_selected_title">#FF2DBB06</color>
+    <color name="coupons_selected_title">#FFE72929</color>
+    <color name="FF20BF55">#FF20BF55</color>
+    <color name="farm_icon">#2BB3F6</color>
+    <color name="farm_text">#FF313131</color>
+    <color name="farm_sele">#FFE81A12</color>
+    <color name="textFF323232">#FF323232</color>
+    <color name="textFFE72929">#FFE72929</color>
+    <color name="adopt">#FFE39510</color>
+    <color name="fous">#FFF6F6F6</color>
+    <!-- 对话框确认按钮文本颜色 -->
+    <color name="colorConfirm">#007AFF</color>
+    <!-- 对话框取消按钮文本颜色 -->
+    <color name="colorCancel">#F44336</color>
+    <color name="bgUnSelectedColor">#FFF6F6F6</color>
+    <color name="FF222222">#FF222222</color>
 </resources>

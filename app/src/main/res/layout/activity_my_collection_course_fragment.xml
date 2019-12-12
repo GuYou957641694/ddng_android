@@ -21,11 +21,6 @@
     <include
         android:id="@+id/collection_course"
         layout="@layout/no_collection_course_layout"
-        android:visibility="gone" />
+       />
 
-
-    <include
-        android:id="@+id/collection_activity"
-        layout="@layout/no_collection_activity_layout"
-        android:visibility="gone" />
 </android.support.constraint.ConstraintLayout>

@@ -1,6 +1,5 @@
 package com.bigpumpkin.app.ddng_android.utils;
 
-import android.annotation.TargetApi;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +9,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.support.annotation.RequiresApi;
 
 public class ImageUtil {
     public static Intent getGalleryIntent(Intent intent) {
@@ -29,7 +29,7 @@ public class ImageUtil {
      * 专为Android4.4设计的从Uri获取文件绝对路径，以前的方法已不好使
      * 可以用在  解析 uri 数据的地方（相册回传数据）
      */
-    @TargetApi(Build.VERSION_CODES.KITKAT)
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static String getPath(final Context context, final Uri uri) {
 
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
@@ -47,9 +47,7 @@ public class ImageUtil {
 
                 }
 
-            }
-            // DownloadsProvider
-            else if (isDownloadsDocument(uri)) {
+            } else if (isDownloadsDocument(uri)) {
 
                 final String id = DocumentsContract.getDocumentId(uri);
                 final Uri contentUri = ContentUris.withAppendedId(
@@ -57,9 +55,7 @@ public class ImageUtil {
 
                 return getDataColumn(context, contentUri, null, null);
 
-            }
-            // MediaProvider
-            else if (isMediaDocument(uri)) {
+            } else if (isMediaDocument(uri)) {
                 final String docId = DocumentsContract.getDocumentId(uri);
                 final String[] split = docId.split(":");
                 final String type = split[0];
@@ -83,9 +79,7 @@ public class ImageUtil {
 
             }
 
-        }
-        // MediaStore (and general)
-        else if ("content".equalsIgnoreCase(uri.getScheme())) {
+        } else if ("content".equalsIgnoreCase(uri.getScheme())) {
             return getDataColumn(context, uri, null, null);
 
         }
@@ -163,4 +157,5 @@ public class ImageUtil {
         return "com.android.providers.media.documents".equals(uri.getAuthority());
 
     }
+
 }

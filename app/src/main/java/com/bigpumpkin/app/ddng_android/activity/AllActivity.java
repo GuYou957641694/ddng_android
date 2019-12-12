@@ -1,15 +1,17 @@
 package com.bigpumpkin.app.ddng_android.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.KeyEvent;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.bigpumpkin.app.ddng_android.R;
@@ -19,13 +21,14 @@ import com.bigpumpkin.app.ddng_android.fragment.Message_Fragment;
 import com.bigpumpkin.app.ddng_android.fragment.My_Farm_Fragment;
 import com.bigpumpkin.app.ddng_android.fragment.My_Fragment;
 import com.bigpumpkin.app.ddng_android.fragment.Shopping_Fragment;
+import com.bigpumpkin.app.ddng_android.utils.IntentUtils;
 import com.bigpumpkin.app.ddng_android.utils.NetWatchdog;
-import com.bigpumpkin.app.ddng_android.utils.ToastUtil;
+import com.hjq.toast.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllActivity extends BaseActivity {
+public class AllActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener {
     //定义一个变量，来标识是否退出
     private static boolean isExit = false;
     private static final String TAG = "AllActivity";
@@ -53,6 +56,7 @@ public class AllActivity extends BaseActivity {
     };
     //网络监听
     private NetWatchdog netWatchdog;
+    private RadioGroup radioGroup;
 
     @Override
     public int intiLayout() {
@@ -62,8 +66,8 @@ public class AllActivity extends BaseActivity {
     @Override
     public void initView() {
         //监听网络
-        netWatchdog = new NetWatchdog(this);
-        bnvAllActivity = findViewById(R.id.bnv_all_activity);
+        // netWatchdog = new NetWatchdog(this);
+        //  bnvAllActivity = findViewById(R.id.bnv_all_activity);
         my_farm_fragment = new My_Farm_Fragment();
         message_fragment = new Message_Fragment();
         my_fragment = new My_Fragment();
@@ -71,11 +75,13 @@ public class AllActivity extends BaseActivity {
         goods_fragment = new Goods_Fragment();
         mFragmentManager = getSupportFragmentManager();
         mFragmentTransaction = mFragmentManager.beginTransaction();
-        mFragmentTransaction.add(R.id.frame, my_farm_fragment);
+        mFragmentTransaction.add(R.id.frame, goods_fragment);
+        radioGroup = findViewById(R.id.radioGroup);
+        radioGroup.setOnCheckedChangeListener(this);//对radiogroup进行监听
         mFragmentTransaction.commit();
-        mCurrentFragment = my_farm_fragment;
-        initBottomNavView();
-        netWatchdog.setNetChangeListener(new NetWatchdog.NetChangeListener() {
+        mCurrentFragment = goods_fragment;
+        //initBottomNavView();
+       /* netWatchdog.setNetChangeListener(new NetWatchdog.NetChangeListener() {
             @Override
             public void onWifiTo4G() {
 
@@ -91,10 +97,17 @@ public class AllActivity extends BaseActivity {
                 ToastUtil.showShort(AllActivity.this, "网络错误");
             }
         });
-        netWatchdog.startWatch();
+        netWatchdog.startWatch();*/
+        ImageView imageView = findViewById(R.id.rbAdd);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentUtils.getIntents().Intent(AllActivity.this, My_FarmActivity.class, null);
+            }
+        });
     }
 
-    private void initBottomNavView() {
+  /*  private void initBottomNavView() {
         bnvAllActivity.setItemIconTintList(null);
         bnvAllActivity.setSelectedItemId(R.id.item_bottom_nv_index);
         bnvAllActivity.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -142,7 +155,7 @@ public class AllActivity extends BaseActivity {
                 return true;
             }
         });
-    }
+    }*/
 
 
     public FragmentTransaction switchFragment(String tag) {
@@ -150,9 +163,9 @@ public class AllActivity extends BaseActivity {
         Fragment targetFragment = mFragmentManager.findFragmentByTag(tag);
         if (targetFragment == null) {
             switch (tag) {
-                case FRAGMENT_ALL_HOME:
+             /*   case FRAGMENT_ALL_HOME:
                     targetFragment = my_farm_fragment;
-                    break;
+                    break;*/
                 case FRAGMENT_ALL_BOOK_READER:
                     targetFragment = goods_fragment;
                     break;
@@ -186,6 +199,15 @@ public class AllActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        Intent intent = getIntent();
+        if (intent != null) {
+            String action = intent.getAction();
+            if (Intent.ACTION_VIEW.equals(action)) {
+                Uri data = intent.getData();
+                String sharetype = data.getQueryParameter("sharetype");
+                ToastUtils.show(sharetype);
+            }
+        }
 
     }
 
@@ -214,5 +236,35 @@ public class AllActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         netWatchdog.stopWatch();
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        switch (checkedId) {
+            case R.id.rb_home:
+                try {
+                    switchFragment(FRAGMENT_ALL_BOOK_READER).commit();
+                } catch (Exception e) {
+                }
+                break;
+            case R.id.rb_pond:
+                try {
+                    switchFragment(FRAGMENT_ALL_ACTIVITY).commit();
+                } catch (Exception e) {
+                }
+                break;
+            case R.id.rb_message:
+                try {
+                    switchFragment(FRAGMENT_ALL_MY).commit();
+                } catch (Exception e) {
+                }
+                break;
+            case R.id.rb_me:
+                try {
+                    switchFragment(My_Fragment).commit();
+                } catch (Exception e) {
+                }
+                break;
+        }
     }
 }

@@ -1,7 +1,8 @@
 package com.bigpumpkin.app.ddng_android.persenter;
 
-import java.util.List;
 import java.util.Map;
+
+import okhttp3.RequestBody;
 
 public interface MyPresenter {
     //post
@@ -10,6 +11,6 @@ public interface MyPresenter {
     //get
     void get(String url, Map<String, Object> headmap, Map<String, Object> map, Class clas);
     //上传头像
-    void image(String url, Map<String, Object> headmap, Map<String, Object> map, List<Object> list, Class clas);
+    void image(String url, Map<String, RequestBody> headmap, Class clas);
 
 }

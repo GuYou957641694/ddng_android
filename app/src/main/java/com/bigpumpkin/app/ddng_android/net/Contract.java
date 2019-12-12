@@ -1,12 +1,12 @@
 package com.bigpumpkin.app.ddng_android.net;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public interface Contract {
 
     interface Model {
+
         void get(String url, Map<String, Object> headmap, Map<String, Object> map, Class aClass,
                  MyCallBack myCallBack);
 
@@ -19,7 +19,9 @@ public interface Contract {
 
         void img(String url, Map<String, Object> headmap, Map<String, Object> map,
                  List<Object> list, Class aClass, MyCallBack myCallBack);
+
     }
+
 
     interface View<T> {
         void success(T success);

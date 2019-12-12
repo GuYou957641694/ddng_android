@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="#FFEFEFEF"
+    android:layout_height="match_parent">
+
+    <ExpandableListView
+        android:id="@+id/ev_for_evalutefragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/rela"
+        android:layout_below="@+id/relativelayout"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:divider="@null"
+        android:groupIndicator="@null"
+        android:overScrollMode="never"
+        android:scrollbars="none" />
+    <include
+        android:id="@+id/no_orders"
+        layout="@layout/no_orders_activity_layout"></include>
+
+</LinearLayout>

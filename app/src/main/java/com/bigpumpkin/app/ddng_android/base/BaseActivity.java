@@ -1,6 +1,8 @@
 package com.bigpumpkin.app.ddng_android.base;
 
 import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -13,10 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.bigpumpkin.app.ddng_android.R;
-import com.bigpumpkin.app.ddng_android.utils.ActivityCollectorUtil;
-import com.bigpumpkin.app.ddng_android.utils.NetWatchdog;
 import com.bigpumpkin.app.ddng_android.utils.StatusBarUtils;
-import com.bigpumpkin.app.ddng_android.utils.ToastUtil;
 
 public abstract class BaseActivity extends AppCompatActivity {
     /***是否显示标题栏*/
@@ -46,7 +45,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         //设置数据
         initData();
         //储存activity
-        ActivityCollectorUtil.addActivity(this);
+       // ActivityCollectorUtil.addActivity(this);
 
     }
 
@@ -177,6 +176,15 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ActivityCollectorUtil.removeActivity(this);
+        //ActivityCollectorUtil.removeActivity(this);
     }
+    @Override
+    public Resources getResources() {
+        Resources res = super.getResources();
+        Configuration config=new Configuration();
+        config.setToDefaults();
+        res.updateConfiguration(config,res.getDisplayMetrics() );
+        return res;
+    }
+
 }

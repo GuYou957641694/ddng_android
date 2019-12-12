@@ -1,15 +1,33 @@
 package com.bigpumpkin.app.ddng_android.activity;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.webkit.WebView;
 
 import com.bigpumpkin.app.ddng_android.R;
+import com.bigpumpkin.app.ddng_android.base.BaseActivity;
+import com.bigpumpkin.app.ddng_android.weight.TitleXML;
 
-public class RulesActivity extends AppCompatActivity {
+public class RulesActivity extends BaseActivity {
+
+    private String uri = "http://weilailingdi.weilailingdi.com/Web/Mall_index/xyzz/th/rules.html";
+    @Override
+    public int intiLayout() {
+        return R.layout.activity_rules;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rules);
+    public void initView() {
+        new TitleXML(RulesActivity.this, "规则", true).init().setListener(new TitleXML.TitleXMLClick() {
+            @Override
+            public void onImage() {
+                finish();
+            }
+        });
+        WebView webView = findViewById(R.id.web);
+        webView.loadUrl(uri);
+    }
+
+    @Override
+    public void initData() {
+
     }
 }

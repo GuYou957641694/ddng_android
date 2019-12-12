@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center"
+        android:text="定制选项"
+        android:textColor="#323232"
+        android:textSize="@dimen/sp_16" />
+
+    <com.bigpumpkin.app.ddng_android.weight.EChangeScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:text="种植维护"
+                android:textColor="#FF323232"
+                android:textSize="@dimen/sp_14"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10">
+
+                <CheckBox
+                    android:id="@+id/ck_conventional"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/item_options_select"
+                    android:button="@null"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="@dimen/dp_3"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="@dimen/dp_2"
+                    android:text="常规维护"
+                    android:textColor="@drawable/flow_text_color"
+                    android:textSize="@dimen/sp_12" />
+
+                <CheckBox
+                    android:id="@+id/ck_custom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:background="@drawable/item_options_select"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="@dimen/dp_3"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="@dimen/dp_2"
+                    android:text="定制维护"
+                    android:textColor="@drawable/flow_text_color"
+                    android:textSize="@dimen/sp_12" />
+
+            </LinearLayout>
+
+            <com.bigpumpkin.app.ddng_android.weight.CustomHeightListView
+                android:id="@+id/listview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:cacheColorHint="@android:color/transparent"
+                android:divider="@null"
+                android:overScrollMode="never"
+                android:scrollbars="none" />
+
+        </LinearLayout>
+    </com.bigpumpkin.app.ddng_android.weight.EChangeScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_36"
+        android:layout_margin="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_confirm"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/confirm_shape"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="确定"
+            android:textColor="#fefefe"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+
+</LinearLayout>

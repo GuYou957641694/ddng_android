@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.bigpumpkin.app.ddng_android.R;
 import com.bigpumpkin.app.ddng_android.bean.GoodsBean;
 import com.bigpumpkin.app.ddng_android.config.Urls;
-import com.bumptech.glide.Glide;
+import com.bigpumpkin.app.ddng_android.utils.GlideUtils;
 
 import java.util.List;
 
@@ -32,14 +32,12 @@ public class Classification_Adapter extends RecyclerView.Adapter<Classification_
         //获取对应的布局
         view = LayoutInflater.from(context).inflate(R.layout.home_newcourse_rv, viewGroup, false);
         final MyViewHolder holder = new MyViewHolder(view);
-
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull Classification_Adapter.MyViewHolder myViewHolder, int i) {
-        Glide.with(context).load(Urls.BASEURL + classification.get(i).getPic()).into(myViewHolder.img);
-        myViewHolder.type.setText(classification.get(i).getTitle());
+        GlideUtils.loadRoundCircleImagetwo(context,Urls.BASEURL + classification.get(i).getPic(),myViewHolder.img);
     }
 
     @Override

@@ -1,39 +1,55 @@
 package com.bigpumpkin.app.ddng_android.activity;
 
-import android.os.Bundle;
-import android.widget.Button;
-import android.widget.EditText;
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bigpumpkin.app.ddng_android.R;
+import com.bigpumpkin.app.ddng_android.adapter.FullyGridLayoutManager;
+import com.bigpumpkin.app.ddng_android.adapter.GridImageAdapter;
 import com.bigpumpkin.app.ddng_android.base.BaseActivity;
-import com.bigpumpkin.app.ddng_android.bean.Message_Bean;
-import com.bigpumpkin.app.ddng_android.net.Contacts;
-import com.bigpumpkin.app.ddng_android.net.Contract;
 import com.bigpumpkin.app.ddng_android.persenter.MyPresenterImpl;
-import com.bigpumpkin.app.ddng_android.utils.EmptyUtils;
-import com.bigpumpkin.app.ddng_android.utils.EncryptUtils;
-import com.bigpumpkin.app.ddng_android.utils.SpzUtils;
-import com.bigpumpkin.app.ddng_android.utils.ToastUtil;
+import com.bigpumpkin.app.ddng_android.utils.NotificationUtil;
 import com.bigpumpkin.app.ddng_android.view.MyView;
-import com.bigpumpkin.app.ddng_android.weight.TitleXML;
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.config.PictureConfig;
+import com.luck.picture.lib.config.PictureMimeType;
+import com.luck.picture.lib.entity.LocalMedia;
+import com.luck.picture.lib.permissions.Permission;
+import com.luck.picture.lib.permissions.RxPermissions;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+import io.reactivex.functions.Consumer;
 
 
 public class MessageActivity extends BaseActivity implements MyView {
 
-
-    @BindView(R.id.leave)
-    EditText leave;
-    @BindView(R.id.btn_login_confirm)
-    Button btnLoginConfirm;
+    private List<LocalMedia> selectList = new ArrayList<>();
     private HashMap<String, Object> map;
     private HashMap<String, Object> headmap;
     private MyPresenterImpl presenter;
+    private RecyclerView recyclerView;
+    private int maxSelectNum = 3;
+    private GridImageAdapter adapter;
+    private PopupWindow pop;
+    private List<String> img = new ArrayList<>();
+    private ImageView iv_back;
 
     @Override
     public int intiLayout() {
@@ -42,65 +58,184 @@ public class MessageActivity extends BaseActivity implements MyView {
 
     @Override
     public void initView() {
-        new TitleXML(this, "留言", true, "").init().setListener(new TitleXML.TitleXMLClick() {
+        NotificationUtil.setStatusBarTransparent(this);
+        recyclerView = findViewById(R.id.rv_picture);
+        iv_back = findViewById(R.id.iv_back);
+        iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onImage() {
+            public void onClick(View v) {
                 finish();
             }
         });
-        presenter = new MyPresenterImpl(this);
+        initWidget();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getColor(R.color.FFF8F8F8));
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
     }
 
     @Override
     public void initData() {
-
-    }
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
-
-    @OnClick(R.id.btn_login_confirm)
-    public void onViewClicked() {
-        String str = leave.getText().toString();
-        long time = System.currentTimeMillis();
-        String appid = SpzUtils.getString("appid");
-        String appsecret = SpzUtils.getString("appsecret");
-        String sha = "appid=" + appid + "&" + "appsecret=" + appsecret + "&" + "timestamp=" + time;
-        String sha1 = EncryptUtils.getSHA(sha);
-        headmap = new HashMap<>();
-        map = new HashMap<>();
-        map.put("appid", appid);
-        map.put("appsecret", appsecret);
-        map.put("timestamp", time);
-        map.put("sign", sha1);
-        map.put("des", str);
-        if (EmptyUtils.isNotEmpty(str)) {
-            presenter.getpost(Contacts.My_message, headmap, map, Message_Bean.class);
-        } else {
-            ToastUtil.showShort(this, "请输入留言");
-        }
+        //  presenter.getpost(Contacts.My_message, headmap, map, Message_Bean.class);
     }
 
     @Override
     public void success(Object data) {
-        if (data instanceof Message_Bean) {
-            Message_Bean message_bean = (Message_Bean) data;
-            if (message_bean.getCode().equals("200")) {
-                ToastUtil.showShort(this, "留言成功");
-                finish();
-            } else {
-                ToastUtil.showShort(this, "留言失败");
-            }
-        }
+
     }
 
     @Override
     public void error(String error) {
 
+    }
+
+    private void initWidget() {
+        FullyGridLayoutManager manager = new FullyGridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(manager);
+        adapter = new GridImageAdapter(this, onAddPicClickListener);
+        adapter.setList(selectList);
+        adapter.setSelectMax(maxSelectNum);
+        recyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(new GridImageAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+                if (selectList.size() > 0) {
+                    LocalMedia media = selectList.get(position);
+                    String pictureType = media.getPictureType();
+                    int mediaType = PictureMimeType.pictureToVideo(pictureType);
+                    switch (mediaType) {
+                        case 1:
+                            // 预览图片 可自定长按保存路径
+                            //PictureSelector.create(MainActivity.this).externalPicturePreview(position, "/custom_file", selectList);
+                            PictureSelector.create(MessageActivity.this).externalPicturePreview(position, selectList);
+                            break;
+                        case 2:
+                            // 预览视频
+                            PictureSelector.create(MessageActivity.this).externalPictureVideo(media.getPath());
+                            break;
+                        case 3:
+                            // 预览音频
+                            PictureSelector.create(MessageActivity.this).externalPictureAudio(media.getPath());
+                            break;
+                    }
+                }
+            }
+        });
+    }
+
+    private GridImageAdapter.onAddPicClickListener onAddPicClickListener = new GridImageAdapter.onAddPicClickListener() {
+
+        @SuppressLint("CheckResult")
+        @Override
+        public void onAddPicClick() {
+            //获取写的权限
+            RxPermissions rxPermission = new RxPermissions(MessageActivity.this);
+            rxPermission.requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    .subscribe(new Consumer<Permission>() {
+                        @Override
+                        public void accept(Permission permission) {
+                            if (permission.granted) {// 用户已经同意该权限
+                                //第一种方式，弹出选择和拍照的dialog
+                                showPop();
+                                //第二种方式，直接进入相册，但是 是有拍照得按钮的
+//                                showAlbum();
+                            } else {
+                                Toast.makeText(MessageActivity.this, "拒绝", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }
+    };
+
+    private void showPop() {
+        View bottomView = View.inflate(MessageActivity.this, R.layout.personal_photo, null);
+        TextView mAlbum = bottomView.findViewById(R.id.personal_phone_phone);
+        TextView mCamera = bottomView.findViewById(R.id.personal_phone_camera);
+        TextView mCancel = bottomView.findViewById(R.id.personal_phone_finish);
+
+        pop = new PopupWindow(bottomView, -1, -2);
+        pop.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        pop.setOutsideTouchable(true);
+        pop.setFocusable(true);
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.alpha = 0.5f;
+        getWindow().setAttributes(lp);
+        pop.setOnDismissListener(new PopupWindow.OnDismissListener() {
+
+            @Override
+            public void onDismiss() {
+                WindowManager.LayoutParams lp = getWindow().getAttributes();
+                lp.alpha = 1f;
+                getWindow().setAttributes(lp);
+            }
+        });
+        pop.setAnimationStyle(R.style.main_menu_photo_anim);
+        pop.showAtLocation(getWindow().getDecorView(), Gravity.BOTTOM, 0, 0);
+
+        View.OnClickListener clickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (view.getId()) {
+                    case R.id.personal_phone_camera:
+                        //相册
+                        PictureSelector.create(MessageActivity.this)
+                                .openGallery(PictureMimeType.ofImage())
+                                .maxSelectNum(maxSelectNum)
+                                .minSelectNum(1)
+                                .imageSpanCount(4)
+                                .selectionMode(PictureConfig.MULTIPLE)
+                                .forResult(PictureConfig.CHOOSE_REQUEST);
+                        break;
+                    case R.id.personal_phone_phone:
+                        //拍照
+                        PictureSelector.create(MessageActivity.this)
+                                .openCamera(PictureMimeType.ofImage())
+                                .forResult(PictureConfig.CHOOSE_REQUEST);
+                        break;
+                    case R.id.personal_phone_finish:
+                        //取消
+                        //closePopupWindow();
+                        break;
+                }
+                closePopupWindow();
+            }
+        };
+
+        mAlbum.setOnClickListener(clickListener);
+        mCamera.setOnClickListener(clickListener);
+        mCancel.setOnClickListener(clickListener);
+    }
+
+    public void closePopupWindow() {
+        if (pop != null && pop.isShowing()) {
+            pop.dismiss();
+            pop = null;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        List<LocalMedia> images;
+        if (resultCode == RESULT_OK) {
+            if (requestCode == PictureConfig.CHOOSE_REQUEST) {// 图片选择结果回调
+                images = PictureSelector.obtainMultipleResult(data);
+                selectList.addAll(images);
+                //selectList = PictureSelector.obtainMultipleResult(data);
+
+                // 例如 LocalMedia 里面返回三种path
+                // 1.media.getPath(); 为原图path
+                // 2.media.getCutPath();为裁剪后path，需判断media.isCut();是否为true
+                // 3.media.getCompressPath();为压缩后path，需判断media.isCompressed();是否为true
+                // 如果裁剪并压缩了，以取压缩路径为准，因为是先裁剪后压缩的
+                adapter.setList(selectList);
+                adapter.notifyDataSetChanged();
+                for (int i = 0; i < images.size(); i++) {
+                    img.add(images.get(i).getPath());
+                }
+            }
+        }
     }
 }

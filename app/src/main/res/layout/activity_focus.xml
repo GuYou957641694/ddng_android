@@ -4,21 +4,93 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFEFEFEF"
     android:orientation="vertical"
     tools:context=".activity.FocusActivity">
 
-
-    <include layout="@layout/title_xml"></include>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview"
-        android:visibility="gone"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="@dimen/dp_44"
+        android:background="@color/white">
 
+        <ImageView
+            android:id="@+id/return_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/dp_10"
+            android:src="@mipmap/icon_general_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="我的关注"
+            android:textColor="#FF000000"
+            android:textSize="@dimen/sp_16" />
+
+        <TextView
+            android:id="@+id/tv_management"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_10"
+            android:text="管理"
+            android:textColor="#FF000000"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/tv_complete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_10"
+            android:visibility="gone"
+            android:text="完成"
+            android:textColor="#FF000000"
+            android:textSize="@dimen/sp_14" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="#FFF6F6F6"></View>
+    
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+       >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            android:visibility="gone" />
+
+        <com.wkp.editlistview_library.view.EditListView
+            android:id="@+id/lv"
+            android:layout_width="match_parent"
+            android:dividerHeight="1px"
+            android:divider="@drawable/list_item_divider"
+            android:layout_height="wrap_content"
+            app:wkp_checkedImg="@mipmap/fouse_true"
+            app:wkp_measureHeight="true"
+            app:wkp_uncheckedImg="@mipmap/focus_fales" />
+
+    </RelativeLayout>
+    </ScrollView>
     <include
         android:id="@+id/no_focus"
-        layout="@layout/no_focus_activity_layout">
+        layout="@layout/no_focus_activity_layout"
+        android:visibility="gone">
 
     </include>
 </LinearLayout>

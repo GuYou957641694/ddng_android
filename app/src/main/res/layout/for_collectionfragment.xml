@@ -2,13 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFEFEFEF"
     android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
+    <ExpandableListView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone" />
+        android:layout_above="@+id/rela"
+        android:layout_below="@+id/relativelayout"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:divider="@null"
+        android:groupIndicator="@null"
+        android:overScrollMode="never"
+        android:scrollbars="none" />
 
     <include
         android:id="@+id/no_orders"

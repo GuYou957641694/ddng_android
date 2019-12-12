@@ -5,29 +5,32 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.alipay.sdk.app.AuthTask;
 import com.bigpumpkin.app.ddng_android.activity.AllActivity;
 import com.bigpumpkin.app.ddng_android.activity.Bind_phoneActivity;
-import com.bigpumpkin.app.ddng_android.adapter.UnicornCourseMainPagerAdapter;
+import com.bigpumpkin.app.ddng_android.activity.ForgotPasswordctivity;
+import com.bigpumpkin.app.ddng_android.activity.New_User_Activity;
 import com.bigpumpkin.app.ddng_android.app.App;
 import com.bigpumpkin.app.ddng_android.base.BaseActivity;
 import com.bigpumpkin.app.ddng_android.bean.Log_Bean;
 import com.bigpumpkin.app.ddng_android.bean.User_Bean;
 import com.bigpumpkin.app.ddng_android.bean.Zfb_Bean;
-import com.bigpumpkin.app.ddng_android.fragment.Faster_Fragment;
-import com.bigpumpkin.app.ddng_android.fragment.Log_Fragment;
 import com.bigpumpkin.app.ddng_android.net.Contacts;
 import com.bigpumpkin.app.ddng_android.persenter.MyPresenterImpl;
+import com.bigpumpkin.app.ddng_android.utils.CountDownTextUtils;
 import com.bigpumpkin.app.ddng_android.utils.EmptyUtils;
 import com.bigpumpkin.app.ddng_android.utils.EncryptUtils;
 import com.bigpumpkin.app.ddng_android.utils.IntentUtils;
@@ -39,28 +42,20 @@ import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+import cn.smssdk.EventHandler;
+import cn.smssdk.SMSSDK;
 
-public class MainActivity extends BaseActivity implements MyView {
+public class MainActivity extends BaseActivity implements MyView, View.OnClickListener, CountDownTextUtils.CountDownListener {
 
     private int SDK_AUTH_FLAG = 1;
-    @BindView(R.id.tl_unicorn_course_main)
-    TabLayout tlUnicornCourseMain;
-    @BindView(R.id.unicorn_lv)
-    ViewPager unicornLv;
-    @BindView(R.id.log_qq)
     ImageView logQq;
-    @BindView(R.id.log_wx)
     ImageView logWx;
-    private List<Fragment> listFragment;
-    private UnicornCourseMainPagerAdapter unicornCourseMainPagerAdapter;
     private HashMap<String, Object> maps;
     private HashMap<String, Object> headmap;
     private HashMap<String, Object> user;
@@ -69,7 +64,18 @@ public class MainActivity extends BaseActivity implements MyView {
     private String auth;
     private String appid;
     private String appsecret;
-    private String str = "apiname=com.alipay.account.auth&app_id=2019080966113968&app_name=WEILAILINGDI&auth_type=AUTHACCOUNT&biz_type=openservice&method=alipay.open.auth.sdk.code.get&pid=2088431983598828&product_id=APP_FAST_LOGIN&scope=kuaijie&sign_type=RSA2&target_id=c246f9ad32c42bbcb2a02d0c7c62e108&sign=apiname%3Dcom.alipay.account.auth%26app_id%3D2019080966113968%26app_name%3DWEILAILINGDI%26auth_type%3DAUTHACCOUNT%26biz_type%3Dopenservice%26method%3Dalipay.open.auth.sdk.code.get%26pid%3D2088431983598828%26product_id%3DAPP_FAST_LOGIN%26scope%3Dkuaijie%26sign_type%3DRSA2%26target_id%3Dc246f9ad32c42bbcb2a02d0c7c62e108";
+    private String sex;
+    private String headimgurl;
+    private String openid;
+    private String nickname;
+    private TextView log_new_user, log_sms_user, tv_forgot_password, btn_change_password_get_code, down, tv_user_registration;
+    private EditText et_password_code, et_code, et_change_password_mobile;
+    private RelativeLayout rl_id;
+    private Button btn_login_confirm;
+    private int type = 2;
+    private MyPresenterImpl presenters;
+    private CountDownTextUtils mCountDownTextUtils;
+
 
     @Override
     public int intiLayout() {
@@ -78,15 +84,44 @@ public class MainActivity extends BaseActivity implements MyView {
 
     @Override
     public void initView() {
-        ButterKnife.bind(this);
-        listFragment = new ArrayList<>();
-        listFragment.add(new Faster_Fragment());
+       /* listFragment.add(new Faster_Fragment());
         listFragment.add(new Log_Fragment());
         unicornCourseMainPagerAdapter = new UnicornCourseMainPagerAdapter(getSupportFragmentManager(), listFragment);
         unicornLv.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tlUnicornCourseMain));
         tlUnicornCourseMain.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(unicornLv));
-        unicornLv.setAdapter(unicornCourseMainPagerAdapter);
+        unicornLv.setAdapter(unicornCourseMainPagerAdapter);*/
         presenter = new MyPresenterImpl(this);
+        headmap = new HashMap<>();
+        maps = new HashMap<>();
+        //获得用户的信息
+        user = new HashMap<>();
+        users = new HashMap<>();
+        presenters = new MyPresenterImpl(this);
+        logQq = findViewById(R.id.log_qq);
+        logWx = findViewById(R.id.log_wx);
+        log_new_user = findViewById(R.id.log_new_user);
+        log_sms_user = findViewById(R.id.log_sms_user);
+        et_password_code = findViewById(R.id.et_password_code);
+        et_code = findViewById(R.id.et_code);
+        tv_forgot_password = findViewById(R.id.tv_forgot_password);
+        rl_id = findViewById(R.id.rl_id);
+        tv_user_registration = findViewById(R.id.tv_user_registration);
+        //验证码
+        btn_change_password_get_code = findViewById(R.id.btn_change_password_get_code);
+        down = findViewById(R.id.down);
+        btn_login_confirm = findViewById(R.id.btn_login_confirm);
+        et_change_password_mobile = findViewById(R.id.et_change_password_mobile);
+        rl_id.setOnClickListener(this);
+        btn_login_confirm.setOnClickListener(this);
+        btn_change_password_get_code.setOnClickListener(this);
+        logQq.setOnClickListener(this);
+        logWx.setOnClickListener(this);
+        tv_user_registration.setOnClickListener(this);
+        log_new_user.setOnClickListener(this);
+        log_sms_user.setOnClickListener(this);
+        tv_forgot_password.setOnClickListener(this);
+        et_password_code.setTransformationMethod(PasswordTransformationMethod.getInstance()); //设置为密码输入框
+
     }
 
     @Override
@@ -95,20 +130,8 @@ public class MainActivity extends BaseActivity implements MyView {
     }
 
     @Override
-    public void setState(boolean ishow) {
-        super.setState(ishow);
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
-
-    @OnClick({R.id.log_qq, R.id.log_wx})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.log_qq:
                 //支付宝登录
                 MyPresenterImpl presenters = new MyPresenterImpl(this);
@@ -119,20 +142,19 @@ public class MainActivity extends BaseActivity implements MyView {
             case R.id.log_wx:
                 //微信登录
                 UMShareAPI.get(MainActivity.this).getPlatformInfo((Activity) MainActivity.this, SHARE_MEDIA.WEIXIN, new UMAuthListener() {
+
                     @Override
                     public void onStart(SHARE_MEDIA share_media) {
                     }
 
                     @Override
                     public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
-                        String nickname = map.get("name");
-                        String openid = map.get("openid");
-                        String headimgurl = map.get("profile_image_url");
-                        headmap = new HashMap<>();
-                        maps = new HashMap<>();
-                        maps.put("openid", openid);
-                        maps.put("name", nickname);
-                        maps.put("pic", headimgurl);
+                        nickname = map.get("name");
+                        openid = map.get("openid");
+                        headimgurl = map.get("profile_image_url");
+                        sex = map.get("sex");
+                        maps.clear();
+                        maps.put("id", openid);
                         presenter.getpost(Contacts.WX_Log, headmap, maps, Log_Bean.class);
                     }
 
@@ -147,9 +169,88 @@ public class MainActivity extends BaseActivity implements MyView {
                     }
                 });
                 break;
+            case R.id.log_new_user:
+                //密码登录
+                type = 1;
+                log_new_user.setVisibility(View.GONE);
+                log_sms_user.setVisibility(View.VISIBLE);
+                et_code.setVisibility(View.GONE);
+                et_password_code.setVisibility(View.VISIBLE);
+                tv_forgot_password.setVisibility(View.VISIBLE);
+                rl_id.setVisibility(View.GONE);
+                et_code.setText("");
+                break;
+            case R.id.log_sms_user:
+                //验证码登录
+                type = 2;
+                log_new_user.setVisibility(View.VISIBLE);
+                log_sms_user.setVisibility(View.GONE);
+                et_code.setVisibility(View.VISIBLE);
+                et_password_code.setVisibility(View.GONE);
+                tv_forgot_password.setVisibility(View.GONE);
+                rl_id.setVisibility(View.VISIBLE);
+                et_password_code.setText("");
+                break;
+            case R.id.btn_login_confirm:
+                String phone = et_change_password_mobile.getText().toString();
+                if (phone != null) {
+                    //验证码
+                    if (type == 1) {
+                        //密码登录
+                        String password = et_password_code.getText().toString();
+                        if (password != null) {
+                            maps.clear();
+                            maps.put("tel", phone);
+                            maps.put("password", password);
+                            presenter.getpost(Contacts.Log, headmap, maps, Log_Bean.class);
+                        } else {
+                            ToastUtil.showShort(this, "请输入密码");
+                        }
+                    } else if (type == 2) {
+                        //验证码登录
+                        String smscode = et_code.getText().toString();
+                        if (EmptyUtils.isNotEmpty(smscode) && smscode.length() == 6) {
+                            SMSSDK.submitVerificationCode("86", phone, smscode);
+                        } else {
+                            ToastUtil.showShort(this, "请输入验证码");
+                        }
+                    }
+                } else {
+                    ToastUtil.showShort(this, "请输入手机号");
+                }
+                break;
+            case R.id.rl_id:
+
+                break;
+            case R.id.tv_forgot_password:
+                //忘记密码
+                IntentUtils.getIntents().Intent(this, ForgotPasswordctivity.class, null);
+                break;
+            case R.id.btn_change_password_get_code:
+                String me = et_change_password_mobile.getText().toString();
+                ToastUtil.showShort(this, me);
+                SMSSDK.registerEventHandler(eventHandler);
+                if (isChinaPhoneLegal(me)) {
+                    SMSSDK.getVerificationCode("86", me);
+                    down.setTextColor(getResources().getColor(R.color.theme_orange));
+                    down.setVisibility(View.VISIBLE);
+                    rl_id.setVisibility(View.INVISIBLE);
+                    mCountDownTextUtils = new CountDownTextUtils(60000, 1000, this);
+                    mCountDownTextUtils.start();
+                } else {
+                    ToastUtil.showShort(this, "请重新输入手机号");
+                }
+                break;
+            case R.id.tv_user_registration:
+                IntentUtils.getIntents().Intent(this, New_User_Activity.class, null);
+                break;
         }
     }
 
+    @Override
+    public void setState(boolean ishow) {
+        super.setState(ishow);
+    }
 
     @Override
     protected void onPause() {
@@ -174,7 +275,6 @@ public class MainActivity extends BaseActivity implements MyView {
             Log_Bean log_bean = (Log_Bean) data;
             Log_Bean.DataBean data1 = log_bean.getData();
             String code = log_bean.getCode();
-            Log.d(TAG, "success: " + code);
             if (log_bean.getData() != null) {
                 if (code.equals("200")) {
                     appid = data1.getAppid();
@@ -186,13 +286,11 @@ public class MainActivity extends BaseActivity implements MyView {
                     String sha = "appid=" + appid + "&" + "appsecret=" + appsecret + "&" + "timestamp=" + time;
                     String sha1 = EncryptUtils.getSHA(sha);
                     //获得用户的信息
-                    user = new HashMap<>();
-                    users = new HashMap<>();
+                    user.clear();
                     user.put("appid", appid);
                     user.put("appsecret", appsecret);
                     user.put("timestamp", time);
                     user.put("sign", sha1);
-                    MyPresenterImpl presenters = new MyPresenterImpl(this);
                     presenters.getpost(Contacts.User, users, user, User_Bean.class);
                 } else if (code.equals("005")) {
                     //005是没有绑定手机
@@ -204,11 +302,19 @@ public class MainActivity extends BaseActivity implements MyView {
                     String name = data1.getName();
                     String sex = data1.getSex();
                     String type = data1.getType();
-                    bundle.putString("id", id);
-                    bundle.putString("pic", pic);
-                    bundle.putString("name", name);
-                    bundle.putString("sex", sex);
                     bundle.putString("type", type);
+                    //判断是不是微信，如果是需要拿微信返的传值
+                    if (type.equals("WeChat")) {
+                        bundle.putString("id", openid);
+                        bundle.putString("pic", headimgurl);
+                        bundle.putString("name", nickname);
+                        bundle.putString("sex", "未知");
+                    } else {
+                        bundle.putString("id", id);
+                        bundle.putString("pic", pic);
+                        bundle.putString("name", name);
+                        bundle.putString("sex", sex);
+                    }
                     IntentUtils.getIntents().Intent(this, Bind_phoneActivity.class, bundle);
                 }
             }
@@ -248,6 +354,32 @@ public class MainActivity extends BaseActivity implements MyView {
             } else {
                 ToastUtil.showShort(this, "请重新登录");
             }
+        } else if (data instanceof Log_Bean) {
+            Log_Bean log_bean = (Log_Bean) data;
+            Log_Bean.DataBean data1 = log_bean.getData();
+            String code = log_bean.getCode();
+            if (code != null) {
+                if (code.equals("200")) {
+                    String appid = data1.getAppid();
+                    String appsecret = data1.getAppsecret();
+                    if (EmptyUtils.isNotEmpty(appid) && EmptyUtils.isNotEmpty(appsecret)) {
+                        SpzUtils.putString("appid", appid);
+                        SpzUtils.putString("appsecret", appsecret);
+                        //获得当前时间戳
+                        long time = System.currentTimeMillis();
+                        String sha = "appid=" + appid + "&" + "appsecret=" + appsecret + "&" + "timestamp=" + time;
+                        String sha1 = EncryptUtils.getSHA(sha);
+                        user.clear();
+                        user.put("appid", appid);
+                        user.put("appsecret", appsecret);
+                        user.put("timestamp", time);
+                        user.put("sign", sha1);
+                        presenters.getpost(Contacts.User, users, user, User_Bean.class);
+                    }
+                } else {
+                    ToastUtil.showShort(this, "请重新登录");
+                }
+            }
         }
     }
 
@@ -255,6 +387,31 @@ public class MainActivity extends BaseActivity implements MyView {
     public void error(String error) {
 
     }
+
+
+    @Override
+    public void onCountDown(long currentMill) {
+        try {
+            long tmpMills = currentMill / 1000;
+            String strTmp = String.format("%ss", String.valueOf(tmpMills));
+            down.setText(strTmp);
+        } catch (Exception e) {
+            Log.e(TAG, "onCountDown: ", e.getCause());
+        }
+    }
+
+    @Override
+    public void onCountDownFinish() {
+        try {
+            down.setTextColor(getResources().getColor(R.color.gray_c));
+            down.setText(R.string.login_verification_code);
+            rl_id.setVisibility(View.VISIBLE);
+            down.setVisibility(View.GONE);
+        } catch (Exception e) {
+            Log.e(TAG, "onCountDownFinish: ", e.getCause());
+        }
+    }
+
 
     //调用支付宝SDK获取authcode;
     @SuppressLint("HandlerLeak")
@@ -274,7 +431,6 @@ public class MainActivity extends BaseActivity implements MyView {
                         // 获取alipay_open_id，调支付时作为参数extern_token 的value， 传入，则支付账户为该授权账户
                         //开发者自己的方法，把code传给后台同事，他们拿code换token,这里是后台自己去获取用户信息
                         String authCode = authResult.getAuthCode();
-                        Log.d(TAG, "handleMessage: " + authCode);
                         HashMap<String, Object> zfb = new HashMap<>();
                         HashMap<String, Object> zfbs = new HashMap<>();
                         zfbs.put("code", authCode);
@@ -405,5 +561,53 @@ public class MainActivity extends BaseActivity implements MyView {
         }
     }
 
+    /**
+     * 短信验证码
+     */
+    EventHandler eventHandler = new EventHandler() {
+        public void afterEvent(int event, int result, Object data) {
+            // afterEvent会在子线程被调用，因此如果后续有UI相关操作，需要将数据发送到UI线程
+            Message msg = new Message();
+            msg.arg1 = event;
+            msg.arg2 = result;
+            msg.obj = data;
+            new Handler(Looper.getMainLooper(), new Handler.Callback() {
+                @Override
+                public boolean handleMessage(Message msg) {
+                    int event = msg.arg1;
+                    int result = msg.arg2;
+                    Object data = msg.obj;
+                    if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
+                        if (result == SMSSDK.RESULT_COMPLETE) {
+                            // TODO 处理成功得到验证码的结果
+                            // 请注意，此时只是完成了发送验证码的请求，验证码短信还需要几秒钟之后才送达
+                        } else {
+                            // TODO 处理错误的结果
+                            ((Throwable) data).printStackTrace();
+                        }
+                    } else if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
+                        if (result == SMSSDK.RESULT_COMPLETE) {
+                            // TODO 处理验证码验证通过的结果
+
+                            IntentUtils.getIntents().Intent(MainActivity.this, AllActivity.class, null);
+                        } else {
+                            // TODO 处理错误的结果
+                            ToastUtil.showShort(MainActivity.this, "请重新输入验证码");
+                        }
+                    }
+                    // TODO 其他接口的返回结果也类似，根据event判断当前数据属于哪个接口
+                    return false;
+                }
+            }).sendMessage(msg);
+        }
+    };
+
+    public static boolean isChinaPhoneLegal(String str)
+            throws PatternSyntaxException {
+        String regExp = "^((13[0-9])|(15[^4])|(18[0-9])|(17[0-8])|(147,145))\\d{8}$";
+        Pattern p = Pattern.compile(regExp);
+        Matcher m = p.matcher(str);
+        return m.matches();
+    }
 
 }

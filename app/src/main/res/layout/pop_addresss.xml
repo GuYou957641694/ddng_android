@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:focusable="true"
+    android:layout_height="300dp">
+
+    <com.bigpumpkin.app.ddng_android.weight.AddressPickerView
+        android:id="@+id/apvAddress"
+        android:layout_width="match_parent"
+        android:background="#fff"
+        android:layout_height="300dp"/>
+
+</LinearLayout>

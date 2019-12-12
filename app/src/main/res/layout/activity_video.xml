@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.VideoActivity">
+
+    <cn.jzvd.JZVideoPlayerStandard
+        android:id="@+id/mJC"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_44">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:src="@mipmap/icon_video_back" />
+
+        <LinearLayout
+            android:id="@+id/rl_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_14"
+            android:layout_toLeftOf="@+id/rl_focus">
+
+            <ImageView
+                android:id="@+id/iv_give"
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_4"
+                android:src="@mipmap/icon_give" />
+
+            <ImageView
+                android:id="@+id/iv_give_true"
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_4"
+                android:src="@mipmap/icon_give_true" />
+
+            <TextView
+                android:id="@+id/tv_give_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="281"
+                android:textColor="#FFFFFFFF"
+                android:textSize="@dimen/sp_12" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/rl_focus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_15"
+            android:layout_toLeftOf="@+id/rl_shape">
+
+            <ImageView
+                android:id="@+id/iv_like_no"
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_18"
+                android:layout_marginRight="@dimen/dp_4"
+                android:src="@mipmap/icon_like_false" />
+
+            <ImageView
+                android:id="@+id/iv_like"
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_18"
+                android:layout_marginRight="@dimen/dp_4"
+                android:src="@mipmap/icon_like_true"
+                android:visibility="gone" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="关注"
+                android:textColor="#FFFFFFFF"
+                android:textSize="@dimen/sp_12" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/rl_shape"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_10">
+
+            <ImageView
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_4"
+                android:src="@mipmap/icon_video_share" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="分享"
+                android:textColor="#FFFFFFFF"
+                android:textSize="@dimen/sp_12" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_title"
+        android:layout_margin="@dimen/dp_10"
+        android:background="@drawable/video_rl_shape">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/cv_head"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            android:src="@mipmap/personal_heading" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_toRightOf="@+id/cv_head"
+            android:text="张三四"
+            android:textColor="#FFFFFFFF"
+            android:textSize="@dimen/sp_14" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bt_enter"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:text="古代医学家将中药的“四性”、“五味”理论运用到食物之中，认为每种食物也具有“四性”、“五味”。夫妇双方是否合法"
+        android:textColor="#FFFFFFFF"
+        android:textSize="@dimen/sp_14" />
+
+    <Button
+        android:id="@+id/bt_enter"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/dp_10"
+        android:background="@drawable/video_bt_shape"
+        android:text="进入店铺"
+        android:textColor="#FFFFFFFF"
+        android:textSize="@dimen/sp_16" />
+</RelativeLayout>

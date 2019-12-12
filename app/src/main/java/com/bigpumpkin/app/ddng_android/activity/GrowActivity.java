@@ -36,6 +36,8 @@ public class GrowActivity extends BaseActivity implements MyView {
     private GrowApadter growApadter;
     private List<Grow_Bean.DataBean> data1;
     private RelativeLayout relativeLayout;
+    private String sha1;
+    private long time;
 
     @Override
     public int intiLayout() {
@@ -52,13 +54,18 @@ public class GrowActivity extends BaseActivity implements MyView {
         });
         relativeLayout = findViewById(R.id.no_grow);
         presenter = new MyPresenterImpl(this);
-        long time = System.currentTimeMillis();
+        time = System.currentTimeMillis();
         appid = SpzUtils.getString("appid");
         appsecret = SpzUtils.getString("appsecret");
         String sha = "appid=" + appid + "&" + "appsecret=" + appsecret + "&" + "timestamp=" + time;
-        String sha1 = EncryptUtils.getSHA(sha);
+        sha1 = EncryptUtils.getSHA(sha);
         headmap = new HashMap<>();
         map = new HashMap<>();
+
+    }
+
+    @Override
+    public void initData() {
         map.put("appid", appid);
         map.put("appsecret", appsecret);
         map.put("timestamp", time);
@@ -66,19 +73,13 @@ public class GrowActivity extends BaseActivity implements MyView {
         presenter.getpost(Contacts.My_growing, headmap, map, Grow_Bean.class);
     }
 
-    @Override
-    public void initData() {
-
-    }
-
 
     @Override
     public void success(Object data) {
         if (data instanceof Grow_Bean) {
             Grow_Bean grow_bean = (Grow_Bean) data;
-            int size = grow_bean.getData().size();
-            if (size > 0) {
-                if (grow_bean.getCode().equals("200")) {
+            if (grow_bean.getCode().equals("200")) {
+                if (grow_bean.getData().size() > 0 && grow_bean.getData() != null) {
                     data1 = grow_bean.getData();
                     growApadter = new GrowApadter(data1, GrowActivity.this);
                     //添加布局管理器
@@ -97,16 +98,11 @@ public class GrowActivity extends BaseActivity implements MyView {
                 @Override
                 public void onClick(int position) {
                     Bundle bundle = new Bundle();
+                    String id = data1.get(position).getId();
                     String type_v = data1.get(position).getType_v();
-                    //判断拼单还是订单
-                    if (type_v.equals("single_tree")) {
-                        //拼单
-                        bundle.putString("type_v", type_v);
-                        IntentUtils.getIntents().Intent(GrowActivity.this, Order_Details_Activity.class, bundle);
-                    } else if (type_v.equals("purchase_tree")) {
-                        //订单
-                        bundle.putString("type_v", type_v);
-                    }
+                    bundle.putString("id", id);
+                    bundle.putString("type_v", type_v);
+                    IntentUtils.getIntents().Intent(GrowActivity.this, Order_Details_Activity.class, bundle);
                 }
             });
 
@@ -114,7 +110,10 @@ public class GrowActivity extends BaseActivity implements MyView {
                 @Override
                 public void onClick(int position) {
                     //查看信息
-
+                    Bundle bundle = new Bundle();
+                    String id = data1.get(position).getId();
+                    bundle.putString("id", id);
+                    IntentUtils.getIntents().Intent(GrowActivity.this, GrowthInformationActivity.class, bundle);
                 }
             });
 

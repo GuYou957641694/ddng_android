@@ -6,6 +6,7 @@ import android.text.TextUtils;
 
 import com.bigpumpkin.app.ddng_android.MainActivity;
 import com.bigpumpkin.app.ddng_android.bean.User_Bean;
+import com.hjq.toast.ToastUtils;
 
 public class LoginUtil {
 
@@ -38,25 +39,36 @@ public class LoginUtil {
                 Context.MODE_PRIVATE);
         String id = sharedPreferences.getString("zt", "");
         if (TextUtils.isEmpty(id.trim())) {
-            ToastUtil.showShort(context, "请先登录");
+            ToastUtils.show("请先登录");
             IntentUtils.getIntents().Intent(context, MainActivity.class, null);
             return false;
         } else {
             return true;
         }
     }
+
     public boolean checkLoginStatuss(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("user",
                 Context.MODE_PRIVATE);
         String id = sharedPreferences.getString("zt", "");
         if (TextUtils.isEmpty(id.trim())) {
-            ToastUtil.showShort(context, "请先登录");
+
             return false;
         } else {
             return true;
         }
     }
-
+    public boolean checkLoginStatu(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("user",
+                Context.MODE_PRIVATE);
+        String id = sharedPreferences.getString("zt", "");
+        if (TextUtils.isEmpty(id.trim())) {
+            ToastUtils.show("请先登录");
+            return false;
+        } else {
+            return true;
+        }
+    }
     /**
      * 保存用户数据
      *
@@ -71,6 +83,7 @@ public class LoginUtil {
         editor.putString("name", data.getName());
         editor.putString("integral", data.getIntegral());
         editor.putString("birth", data.getDate_birth());
+        editor.putString("sex", data.getSex());
         editor.apply();
     }
 

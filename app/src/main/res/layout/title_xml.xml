@@ -7,23 +7,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cl_title_container"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_50"
-    android:minHeight="@dimen/dp_50"
-    android:background="@color/theme_orange"
-    android:fitsSystemWindows="true">
+    android:layout_height="@dimen/dp_44"
+    android:background="#FFFFFFFF"
+    android:fitsSystemWindows="true"
+    android:minHeight="@dimen/dp_50">
     <!--颜色请勿改动-->
 
     <ImageView
         android:id="@+id/return_iv"
-        android:layout_width="@dimen/dp_16"
-        android:layout_height="@dimen/dp_16"
-        android:layout_marginStart="@dimen/dp_15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10"
         android:adjustViewBounds="true"
-        android:src="@mipmap/ic_back"
+        android:src="@mipmap/icon_general_back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="@dimen/dp_30" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_title"
@@ -32,8 +31,8 @@
         android:ellipsize="end"
         android:gravity="center"
         android:singleLine="true"
-        android:textColor="#666666"
-        android:textSize="18sp"
+        android:textColor="#FF000000"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintStart_toEndOf="parent"
@@ -45,14 +44,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/dp_15"
         android:textColor="#666666"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="标签"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/dp_15" />
-
+        tools:text="标签" />
 
 </android.support.constraint.ConstraintLayout>

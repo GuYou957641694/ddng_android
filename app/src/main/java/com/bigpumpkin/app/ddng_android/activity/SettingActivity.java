@@ -45,6 +45,7 @@ import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -79,7 +80,9 @@ public class SettingActivity extends BaseActivity implements MyView {
     private String appid;
     private String appsecret;
     private HashMap<String, Object> map;
+    private HashMap<String, Object> maps;
     private HashMap<String, Object> headmap;
+    private HashMap<String, Object> headmaps;
     private MyPresenterImpl presenter;
     private String sexs;
     private String birth;
@@ -87,6 +90,10 @@ public class SettingActivity extends BaseActivity implements MyView {
     private Uri uri;
     private TextView birtha;
     private TextView sex1;
+    List<Object> list;
+    private Bitmap image;
+
+    private String sha1;
 
     @Override
     public int intiLayout() {
@@ -129,11 +136,11 @@ public class SettingActivity extends BaseActivity implements MyView {
         }, new TitleXML.OnRightTagClickListener() {
             @Override
             public void onClick() {
-                long time = System.currentTimeMillis();
+                String time = String.valueOf(System.currentTimeMillis());
                 appid = SpzUtils.getString("appid");
                 appsecret = SpzUtils.getString("appsecret");
                 String sha = "appid=" + appid + "&" + "appsecret=" + appsecret + "&" + "timestamp=" + time;
-                String sha1 = EncryptUtils.getSHA(sha);
+                sha1 = EncryptUtils.getSHA(sha);
                 birth = birtha.getText().toString();
                 sexs = sex1.getText().toString();
                 headmap = new HashMap<>();
@@ -155,6 +162,8 @@ public class SettingActivity extends BaseActivity implements MyView {
                     map.put("pic", uri);
                 }
                 presenter.getpost(Contacts.My_change, headmap, map, Change_Bean.class);
+                headmaps = new HashMap<>();
+                maps = new HashMap<>();
             }
         });
         if (!EasyPermissions.hasPermissions(SettingActivity.this, permissions)) {
@@ -176,72 +185,6 @@ public class SettingActivity extends BaseActivity implements MyView {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.head, R.id.name, R.id.sex, R.id.birthday})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.head:
-                //头像
-                popupView =
-                        LayoutInflater.from(SettingActivity.this).inflate(R.layout.personal_photo, null);
-                pw = new PopupWindow(popupView, RelativeLayout.LayoutParams.MATCH_PARENT,
-                        RelativeLayout.LayoutParams.WRAP_CONTENT);
-                pw.setAnimationStyle(R.style.popwin_anim_style);
-                WindowManager.LayoutParams lp = getWindow().getAttributes();
-                lp.alpha = 0.7f;
-                getWindow().setAttributes(lp);
-                pw.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3C000000")));
-                //支持点击Back虚拟键退出
-                pw.setFocusable(true);
-                pw.showAtLocation(birthday, Gravity.BOTTOM, 0, 0);
-                pw.setOnDismissListener(new PopupWindow.OnDismissListener() {
-                    @Override
-                    public void onDismiss() {
-                        pw.dismiss();
-                        infig();
-                    }
-                });
-                popupView.findViewById(R.id.personal_phone_phone).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (!EasyPermissions.hasPermissions(SettingActivity.this, permissions)) {
-                            PermissionsUtils.SettingPermissions(SettingActivity.this,
-                                    Arrays.asList(permissions));
-                            ToastUtil.showShort(SettingActivity.this, "权限获取失败");
-                            return;
-                        }
-                        getPicFromCamera();
-                        infig();
-                    }
-                });
-                popupView.findViewById(R.id.personal_phone_camera).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        getPhoto();
-                        infig();
-                    }
-                });
-                popupView.findViewById(R.id.personal_phone_finish).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        pw.dismiss();
-                        infig();
-                    }
-                });
-                break;
-            case R.id.name:
-                //昵称
-                //IntentUtils.getIntents().Intent(this, NameActivity.class, null);
-                break;
-            case R.id.sex:
-                //性别
-                gender();
-                break;
-            case R.id.birthday:
-                //生日
-                birthday();
-                break;
-        }
-    }
 
     private void birthday() {
 
@@ -261,60 +204,6 @@ public class SettingActivity extends BaseActivity implements MyView {
                     }
                 }).build();
         pvTime.show();
-    }
-
-    //性别
-    private void gender() {
-        popup =
-                LayoutInflater.from(SettingActivity.this).inflate(R.layout.personal_gender, null);
-        pw = new PopupWindow(popup, RelativeLayout.LayoutParams.MATCH_PARENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT);
-        WindowManager.LayoutParams lp = getWindow().getAttributes();
-        lp.alpha = 0.7f;
-        getWindow().setAttributes(lp);
-        pw.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3C000000")));
-        //支持点击Back虚拟键退出
-        pw.setFocusable(true);
-        pw.showAtLocation(birthday, Gravity.BOTTOM, 0, 0);
-        pw.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                pw.dismiss();
-                WindowManager.LayoutParams lp = getWindow().getAttributes();
-                lp.alpha = 1f;
-                getWindow().setAttributes(lp);
-            }
-        });
-        popup.findViewById(R.id.personal_male).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sex1.setText("男");
-                pw.dismiss();
-                WindowManager.LayoutParams lp = getWindow().getAttributes();
-                lp.alpha = 1f;
-                getWindow().setAttributes(lp);
-            }
-        });
-        popup.findViewById(R.id.personal_female).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sex1.setText("女");
-                pw.dismiss();
-                WindowManager.LayoutParams lp = getWindow().getAttributes();
-                lp.alpha = 1f;
-                getWindow().setAttributes(lp);
-            }
-        });
-
-        popup.findViewById(R.id.personal_phone_finish).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pw.dismiss();
-                WindowManager.LayoutParams lp = getWindow().getAttributes();
-                lp.alpha = 1f;
-                getWindow().setAttributes(lp);
-            }
-        });
     }
 
     /**
@@ -347,63 +236,11 @@ public class SettingActivity extends BaseActivity implements MyView {
         startActivityForResult(intent, CAMERA_REQUEST_CODE);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        switch (requestCode) {
-            case CAMERA_REQUEST_CODE:   //调用相机后返回
-                if (resultCode == RESULT_OK) {
-                    //用相机返回的照片去调用剪裁也需要对Uri进行处理
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        Uri contentUri = FileProvider.getUriForFile(SettingActivity.this, "com.hansion.chosehead", tempFile);
-                        cropPhoto(contentUri);
-                    } else {
-                        cropPhoto(Uri.fromFile(tempFile));
-                    }
-                }
-                break;
-            case ALBUM_REQUEST_CODE:    //调用相册后返回
-                if (resultCode == RESULT_OK) {
-                    uri = intent.getData();
-                    cropPhoto(uri);
-                }
-                break;
-            case CROP_REQUEST_CODE:     //调用剪裁后返回
-                Bundle bundle = intent.getExtras();
-                if (bundle != null) {
-                    //在这里获得了剪裁后的Bitmap对象，可以用于上传
-                    Bitmap image = bundle.getParcelable("data");
-                    //设置到ImageView上
-                    my_course_rn_img.setImageBitmap(image);
-                }
-                break;
-        }
-    }
-
-    /**
-     * 裁剪图片
-     */
-    private void cropPhoto(Uri uri) {
-        Intent intent = new Intent("com.android.camera.action.CROP");
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-        intent.setDataAndType(uri, "image/*");
-        intent.putExtra("crop", "true");
-        intent.putExtra("aspectX", 1);
-        intent.putExtra("aspectY", 1);
-
-        intent.putExtra("outputX", 300);
-        intent.putExtra("outputY", 300);
-        intent.putExtra("return-data", true);
-
-        startActivityForResult(intent, CROP_REQUEST_CODE);
-    }
 
 
-    private void infig() {
-        WindowManager.LayoutParams lp = getWindow().getAttributes();
-        lp.alpha = 1f;
-        getWindow().setAttributes(lp);
-    }
+
+
+
 
     @Override
     public void success(Object data) {
@@ -415,7 +252,7 @@ public class SettingActivity extends BaseActivity implements MyView {
                 SpzUtilUser.putString("name", name.getText().toString());
                 SpzUtilUser.putString("birth", birth);
                 SpzUtilUser.putString("sex", sexs);
-                SpzUtilUser.putString("pic", String.valueOf(uri));
+                SpzUtilUser.putString("pic", String.valueOf(image));
                 finish();
             } else {
                 ToastUtil.showShort(this, "修改失败");

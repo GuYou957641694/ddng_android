@@ -8,7 +8,7 @@ public class Settlement_Bean {
     /**
      * msg : 成功
      * code : 200
-     * data : {"address":{"id":"4","uid":"1","tel":"8555","isindex":"1","sheng":"沈阳市","shi":"沈阳市","qu":"辽宁省","address":"输了","youbian":"123","name":"后天"},"list":[{"title":"北京朝阳农场1","id":"7","nc_id":"1","details":[{"id":"10","fid":"7","cp_id":"461","gg_id":"9878","pic":"/data/img/1811/5bfb9a1f70711.png","gg_title":"70-80公斤","pz_title":"黄心猕猴桃","title":"荔枝果树","num":"3","price":"421.00","maintain":["有机肥","要颜值","常规三分之一","需要","需要","果脯",""],"lanmu":"1","ms_etime":null,"spike_price":null,"postage":"0.00","js_lx":"2","insurance":"0.00","welfare":"0.30"}],"total_price":1263,"jian":{"id":"1","uid":"1","j_id":"1","zt":"1","man":"500","jian":"5","ctime":"1550937600","etime":"1572019200","nc_id":null,"title":"首页全场优惠卷","attr":"1"}},{"title":"北京海淀农场9","id":"8","nc_id":"9","details":[{"id":"12","fid":"8","cp_id":"763","gg_id":"7353","pic":"/data/img/1901/5c3c00da33508.png","gg_title":"60-70公斤","pz_title":"云莓","title":"水果套餐36","num":"4","price":"81.00","maintain":null,"lanmu":"7","ms_etime":null,"spike_price":null,"postage":"0.00","js_lx":"2","welfare":"0.40"}],"total_price":324,"jian":{"id":"3","uid":"1","j_id":"3","zt":"1","man":"5","jian":"5","ctime":"1550937600","etime":"1700086399","nc_id":null,"title":"5元优惠","attr":"1"}}],"shopping_all_price":"1,577.70"}
+     * data : {"address":{"id":"21","uid":"46","tel":"12345678911","isindex":"1","sheng":"太原市","shi":"太原市","qu":"山西省","address":"现代教育","youbian":"123","name":"贾东升"},"list":[{"title":"北京海淀农场2","id":"31","nc_id":"2","details":[{"id":"76","fid":"31","cp_id":"23","gg_id":"4731","pic":"/data/img/1901/5c3414897ed4f.png","gg_title":"20-30公斤","pz_title":"白里叶莓","title":"生产者说23","num":"4","price":"168.00","maintain":null,"lanmu":"4","ms_etime":null,"spike_price":null,"postage":"0.00","js_lx":"2","welfare":"0.40"}],"total_price":672,"jian":false},{"title":"北京朝阳农场1","id":"30","nc_id":"1","details":[{"id":"77","fid":"30","cp_id":"13","gg_id":"11","pic":"/data/img/1901/5c3414897ed4f.png","gg_title":"20-30公斤","pz_title":"乌饭果","title":"农场深加工13","num":"6","price":"36.00","maintain":null,"lanmu":"5","ms_etime":null,"spike_price":null,"postage":"0.00","js_lx":"2","welfare":"0.60"}],"total_price":216,"jian":false}],"shopping_all_price":"889.00"}
      */
 
     private String msg;
@@ -41,9 +41,9 @@ public class Settlement_Bean {
 
     public static class DataBean {
         /**
-         * address : {"id":"4","uid":"1","tel":"8555","isindex":"1","sheng":"沈阳市","shi":"沈阳市","qu":"辽宁省","address":"输了","youbian":"123","name":"后天"}
-         * list : [{"title":"北京朝阳农场1","id":"7","nc_id":"1","details":[{"id":"10","fid":"7","cp_id":"461","gg_id":"9878","pic":"/data/img/1811/5bfb9a1f70711.png","gg_title":"70-80公斤","pz_title":"黄心猕猴桃","title":"荔枝果树","num":"3","price":"421.00","maintain":["有机肥","要颜值","常规三分之一","需要","需要","果脯",""],"lanmu":"1","ms_etime":null,"spike_price":null,"postage":"0.00","js_lx":"2","insurance":"0.00","welfare":"0.30"}],"total_price":1263,"jian":{"id":"1","uid":"1","j_id":"1","zt":"1","man":"500","jian":"5","ctime":"1550937600","etime":"1572019200","nc_id":null,"title":"首页全场优惠卷","attr":"1"}},{"title":"北京海淀农场9","id":"8","nc_id":"9","details":[{"id":"12","fid":"8","cp_id":"763","gg_id":"7353","pic":"/data/img/1901/5c3c00da33508.png","gg_title":"60-70公斤","pz_title":"云莓","title":"水果套餐36","num":"4","price":"81.00","maintain":null,"lanmu":"7","ms_etime":null,"spike_price":null,"postage":"0.00","js_lx":"2","welfare":"0.40"}],"total_price":324,"jian":{"id":"3","uid":"1","j_id":"3","zt":"1","man":"5","jian":"5","ctime":"1550937600","etime":"1700086399","nc_id":null,"title":"5元优惠","attr":"1"}}]
-         * shopping_all_price : 1,577.70
+         * address : {"id":"21","uid":"46","tel":"12345678911","isindex":"1","sheng":"太原市","shi":"太原市","qu":"山西省","address":"现代教育","youbian":"123","name":"贾东升"}
+         * list : [{"title":"北京海淀农场2","id":"31","nc_id":"2","details":[{"id":"76","fid":"31","cp_id":"23","gg_id":"4731","pic":"/data/img/1901/5c3414897ed4f.png","gg_title":"20-30公斤","pz_title":"白里叶莓","title":"生产者说23","num":"4","price":"168.00","maintain":null,"lanmu":"4","ms_etime":null,"spike_price":null,"postage":"0.00","js_lx":"2","welfare":"0.40"}],"total_price":672,"jian":false},{"title":"北京朝阳农场1","id":"30","nc_id":"1","details":[{"id":"77","fid":"30","cp_id":"13","gg_id":"11","pic":"/data/img/1901/5c3414897ed4f.png","gg_title":"20-30公斤","pz_title":"乌饭果","title":"农场深加工13","num":"6","price":"36.00","maintain":null,"lanmu":"5","ms_etime":null,"spike_price":null,"postage":"0.00","js_lx":"2","welfare":"0.60"}],"total_price":216,"jian":false}]
+         * shopping_all_price : 889.00
          */
 
         private AddressBean address;
@@ -76,16 +76,16 @@ public class Settlement_Bean {
 
         public static class AddressBean {
             /**
-             * id : 4
-             * uid : 1
-             * tel : 8555
+             * id : 21
+             * uid : 46
+             * tel : 12345678911
              * isindex : 1
-             * sheng : 沈阳市
-             * shi : 沈阳市
-             * qu : 辽宁省
-             * address : 输了
+             * sheng : 太原市
+             * shi : 太原市
+             * qu : 山西省
+             * address : 现代教育
              * youbian : 123
-             * name : 后天
+             * name : 贾东升
              */
 
             private String id;
@@ -182,20 +182,24 @@ public class Settlement_Bean {
 
         public static class ListBean {
             /**
-             * title : 北京朝阳农场1
-             * id : 7
-             * nc_id : 1
-             * details : [{"id":"10","fid":"7","cp_id":"461","gg_id":"9878","pic":"/data/img/1811/5bfb9a1f70711.png","gg_title":"70-80公斤","pz_title":"黄心猕猴桃","title":"荔枝果树","num":"3","price":"421.00","maintain":["有机肥","要颜值","常规三分之一","需要","需要","果脯",""],"lanmu":"1","ms_etime":null,"spike_price":null,"postage":"0.00","js_lx":"2","insurance":"0.00","welfare":"0.30"}]
-             * total_price : 1263
-             * jian : {"id":"1","uid":"1","j_id":"1","zt":"1","man":"500","jian":"5","ctime":"1550937600","etime":"1572019200","nc_id":null,"title":"首页全场优惠卷","attr":"1"}
+             * title : 北京海淀农场2
+             * id : 31
+             * nc_id : 2
+             * details : [{"id":"76","fid":"31","cp_id":"23","gg_id":"4731","pic":"/data/img/1901/5c3414897ed4f.png","gg_title":"20-30公斤","pz_title":"白里叶莓","title":"生产者说23","num":"4","price":"168.00","maintain":null,"lanmu":"4","ms_etime":null,"spike_price":null,"postage":"0.00","js_lx":"2","welfare":"0.40"}]
+             * total_price : 672
+             * jian : false
              */
 
             private String title;
             private String id;
             private String nc_id;
-            private int total_price;
-            private JianBean jian;
+            private String total_price;
+            private String jian;
             private List<DetailsBean> details;
+
+            public String getJian() {
+                return jian;
+            }
 
             public String getTitle() {
                 return title;
@@ -221,19 +225,19 @@ public class Settlement_Bean {
                 this.nc_id = nc_id;
             }
 
-            public int getTotal_price() {
+            public String getTotal_price() {
                 return total_price;
             }
 
-            public void setTotal_price(int total_price) {
+            public void setTotal_price(String total_price) {
                 this.total_price = total_price;
             }
 
-            public JianBean getJian() {
+            public String isJian() {
                 return jian;
             }
 
-            public void setJian(JianBean jian) {
+            public void setJian(String jian) {
                 this.jian = jian;
             }
 
@@ -245,142 +249,25 @@ public class Settlement_Bean {
                 this.details = details;
             }
 
-            public static class JianBean {
-                /**
-                 * id : 1
-                 * uid : 1
-                 * j_id : 1
-                 * zt : 1
-                 * man : 500
-                 * jian : 5
-                 * ctime : 1550937600
-                 * etime : 1572019200
-                 * nc_id : null
-                 * title : 首页全场优惠卷
-                 * attr : 1
-                 */
-
-                private String id;
-                private String uid;
-                private String j_id;
-                private String zt;
-                private String man;
-                private String jian;
-                private String ctime;
-                private String etime;
-                private String nc_id;
-                private String title;
-                private String attr;
-
-                public String getId() {
-                    return id;
-                }
-
-                public void setId(String id) {
-                    this.id = id;
-                }
-
-                public String getUid() {
-                    return uid;
-                }
-
-                public void setUid(String uid) {
-                    this.uid = uid;
-                }
-
-                public String getJ_id() {
-                    return j_id;
-                }
-
-                public void setJ_id(String j_id) {
-                    this.j_id = j_id;
-                }
-
-                public String getZt() {
-                    return zt;
-                }
-
-                public void setZt(String zt) {
-                    this.zt = zt;
-                }
-
-                public String getMan() {
-                    return man;
-                }
-
-                public void setMan(String man) {
-                    this.man = man;
-                }
-
-                public String getJian() {
-                    return jian;
-                }
-
-                public void setJian(String jian) {
-                    this.jian = jian;
-                }
-
-                public String getCtime() {
-                    return ctime;
-                }
-
-                public void setCtime(String ctime) {
-                    this.ctime = ctime;
-                }
-
-                public String getEtime() {
-                    return etime;
-                }
-
-                public void setEtime(String etime) {
-                    this.etime = etime;
-                }
-
-                public String getNc_id() {
-                    return nc_id;
-                }
-
-                public void setNc_id(String nc_id) {
-                    this.nc_id = nc_id;
-                }
-
-                public String getTitle() {
-                    return title;
-                }
-
-                public void setTitle(String title) {
-                    this.title = title;
-                }
-
-                public String getAttr() {
-                    return attr;
-                }
-
-                public void setAttr(String attr) {
-                    this.attr = attr;
-                }
-            }
-
             public static class DetailsBean {
                 /**
-                 * id : 10
-                 * fid : 7
-                 * cp_id : 461
-                 * gg_id : 9878
-                 * pic : /data/img/1811/5bfb9a1f70711.png
-                 * gg_title : 70-80公斤
-                 * pz_title : 黄心猕猴桃
-                 * title : 荔枝果树
-                 * num : 3
-                 * price : 421.00
-                 * maintain : ["有机肥","要颜值","常规三分之一","需要","需要","果脯",""]
-                 * lanmu : 1
+                 * id : 76
+                 * fid : 31
+                 * cp_id : 23
+                 * gg_id : 4731
+                 * pic : /data/img/1901/5c3414897ed4f.png
+                 * gg_title : 20-30公斤
+                 * pz_title : 白里叶莓
+                 * title : 生产者说23
+                 * num : 4
+                 * price : 168.00
+                 * maintain : null
+                 * lanmu : 4
                  * ms_etime : null
                  * spike_price : null
                  * postage : 0.00
                  * js_lx : 2
-                 * insurance : 0.00
-                 * welfare : 0.30
+                 * welfare : 0.40
                  */
 
                 private String id;
@@ -393,14 +280,13 @@ public class Settlement_Bean {
                 private String title;
                 private String num;
                 private String price;
+                private Object maintain;
                 private String lanmu;
-                private Long ms_etime;
-                private String spike_price;
+                private Object ms_etime;
+                private Object spike_price;
                 private String postage;
                 private String js_lx;
-                private String insurance;
                 private String welfare;
-                private List<String> maintain;
 
                 public String getId() {
                     return id;
@@ -482,6 +368,14 @@ public class Settlement_Bean {
                     this.price = price;
                 }
 
+                public Object getMaintain() {
+                    return maintain;
+                }
+
+                public void setMaintain(Object maintain) {
+                    this.maintain = maintain;
+                }
+
                 public String getLanmu() {
                     return lanmu;
                 }
@@ -490,19 +384,19 @@ public class Settlement_Bean {
                     this.lanmu = lanmu;
                 }
 
-                public Long getMs_etime() {
+                public Object getMs_etime() {
                     return ms_etime;
                 }
 
-                public void setMs_etime(Long ms_etime) {
+                public void setMs_etime(Object ms_etime) {
                     this.ms_etime = ms_etime;
                 }
 
-                public String getSpike_price() {
+                public Object getSpike_price() {
                     return spike_price;
                 }
 
-                public void setSpike_price(String spike_price) {
+                public void setSpike_price(Object spike_price) {
                     this.spike_price = spike_price;
                 }
 
@@ -522,28 +416,12 @@ public class Settlement_Bean {
                     this.js_lx = js_lx;
                 }
 
-                public String getInsurance() {
-                    return insurance;
-                }
-
-                public void setInsurance(String insurance) {
-                    this.insurance = insurance;
-                }
-
                 public String getWelfare() {
                     return welfare;
                 }
 
                 public void setWelfare(String welfare) {
                     this.welfare = welfare;
-                }
-
-                public List<String> getMaintain() {
-                    return maintain;
-                }
-
-                public void setMaintain(List<String> maintain) {
-                    this.maintain = maintain;
                 }
             }
         }

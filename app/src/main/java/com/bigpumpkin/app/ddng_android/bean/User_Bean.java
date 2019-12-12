@@ -50,10 +50,19 @@ public class User_Bean {
 
         private String ctime;
         private String zt;
+        private String sex;
         private String pic;
         private String name;
         private String integral;
         private String date_birth;
+
+        public String getSex() {
+            return sex;
+        }
+
+        public void setSex(String sex) {
+            this.sex = sex;
+        }
 
         public String getCtime() {
             return ctime;

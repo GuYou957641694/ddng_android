@@ -1,15 +1,20 @@
 package com.bigpumpkin.app.ddng_android.fragment;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.widget.NestedScrollView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bigpumpkin.app.ddng_android.MainActivity;
 import com.bigpumpkin.app.ddng_android.R;
 import com.bigpumpkin.app.ddng_android.activity.AnswerActivity;
 import com.bigpumpkin.app.ddng_android.activity.CollectionActivity;
@@ -20,15 +25,15 @@ import com.bigpumpkin.app.ddng_android.activity.FocusActivity;
 import com.bigpumpkin.app.ddng_android.activity.FootprintActivity;
 import com.bigpumpkin.app.ddng_android.activity.GrowActivity;
 import com.bigpumpkin.app.ddng_android.activity.IntegralActivity;
-import com.bigpumpkin.app.ddng_android.activity.IntegralsActivity;
+import com.bigpumpkin.app.ddng_android.activity.JoinUsActivity;
+import com.bigpumpkin.app.ddng_android.activity.Management_addressActivity;
 import com.bigpumpkin.app.ddng_android.activity.MessageActivity;
 import com.bigpumpkin.app.ddng_android.activity.OrdersActivity;
+import com.bigpumpkin.app.ddng_android.activity.PromotionsActivity;
 import com.bigpumpkin.app.ddng_android.activity.ReativeActivity;
 import com.bigpumpkin.app.ddng_android.activity.RechargeActivity;
 import com.bigpumpkin.app.ddng_android.activity.SetActivity;
-import com.bigpumpkin.app.ddng_android.activity.SettingActivity;
 import com.bigpumpkin.app.ddng_android.base.BaseFragment;
-import com.bigpumpkin.app.ddng_android.config.Urls;
 import com.bigpumpkin.app.ddng_android.utils.EmptyUtils;
 import com.bigpumpkin.app.ddng_android.utils.IntentUtils;
 import com.bigpumpkin.app.ddng_android.utils.LoginUtil;
@@ -43,12 +48,13 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class My_Fragment extends BaseFragment {
+public class
+My_Fragment extends BaseFragment {
     private static final String TAG = "My_Fragment";
     @BindView(R.id.setting)
     ImageView setting;
     @BindView(R.id.all_orders)
-    LinearLayout allOrders;
+    TextView allOrders;
     @BindView(R.id.obligation)
     LinearLayout obligation;
     Unbinder unbinder;
@@ -63,17 +69,17 @@ public class My_Fragment extends BaseFragment {
     @BindView(R.id.recharge)
     LinearLayout recharge;
     @BindView(R.id.message)
-    RelativeLayout message;
+    LinearLayout message;
     @BindView(R.id.focus)
-    RelativeLayout focus;
+    LinearLayout focus;
     @BindView(R.id.collection)
-    RelativeLayout collection;
+    LinearLayout collection;
     @BindView(R.id.footprint)
-    RelativeLayout footprint;
+    LinearLayout footprint;
     @BindView(R.id.farm_in)
     RelativeLayout farmIn;
-    @BindView(R.id.integrals)
-    LinearLayout integrals;
+    /*@BindView(R.id.integrals)
+    LinearLayout integrals;*/
     @BindView(R.id.promotions)
     LinearLayout promotions;
     @BindView(R.id.integral)
@@ -100,7 +106,21 @@ public class My_Fragment extends BaseFragment {
     CircleImageView head;
     @BindView(R.id.name)
     TextView names;
+    @BindView(R.id.myscrollviews)
+    NestedScrollView myscrollviews;
+    @BindView(R.id.relativelayout)
+    RelativeLayout relativelayout;
+    @BindView(R.id.rv_hind)
+    RelativeLayout rvHind;
+    @BindView(R.id.tv_hind_name)
+    TextView tvHindName;
+    @BindView(R.id.lin_address)
+    LinearLayout linAddress;
+    @BindView(R.id.rl_join)
+    RelativeLayout rlJoin;
     private String name;
+    private int height;
+
 
     @Override
     protected int getLayoutId() {
@@ -109,6 +129,7 @@ public class My_Fragment extends BaseFragment {
 
     @Override
     protected void init(View view) {
+        setStatusBarTransparent();
         if (!LoginUtil.getInstance().checkLoginStatuss(getActivity())) {
             notLog.setVisibility(View.VISIBLE);
         } else {
@@ -119,9 +140,23 @@ public class My_Fragment extends BaseFragment {
             String pic = SpzUtilUser.getString("pic");
             if (EmptyUtils.isNotEmpty(name) && EmptyUtils.isNotEmpty(zt) && EmptyUtils.isNotEmpty(pic)) {
                 names.setText(name);
-                Glide.with(this).load(Urls.BASEURL + pic).into(head);
+                //tvHindName.setText(name);
+                Glide.with(this).load(pic).into(head);
             }
         }
+
+        ViewTreeObserver vto = rvHind.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+            @Override
+            public void onGlobalLayout() {
+                rvHind.getViewTreeObserver().removeGlobalOnLayoutListener(
+                        this);
+                height = rvHind.getHeight();
+
+            }
+        });
+
     }
 
     @Override
@@ -143,17 +178,15 @@ public class My_Fragment extends BaseFragment {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.setting, R.id.all_orders, R.id.obligation, R.id.receiving, R.id.evaluated, R.id.after, R.id.linera, R.id.recharge, R.id.message, R.id.focus, R.id.collection, R.id.footprint, R.id.farm_in, R.id.integrals, R.id.promotions, R.id.integral, R.id.coupons, R.id.answer, R.id.customer, R.id.grow, R.id.reative, R.id.set, R.id.farm})
+    @OnClick({R.id.setting, R.id.lin_address, R.id.all_orders, R.id.obligation, R.id.rl_join, R.id.receiving, R.id.evaluated, R.id.after, R.id.linera, R.id.recharge, R.id.message, R.id.focus, R.id.collection, R.id.footprint, R.id.farm_in, R.id.promotions, R.id.integral, R.id.coupons, R.id.answer, R.id.customer, R.id.grow, R.id.reative, R.id.set, R.id.farm})
     public void onViewClicked(View view) {
         if (!LoginUtil.getInstance().checkLoginStatus(getActivity())) {
             return;
         }
         switch (view.getId()) {
-            case R.id.set:
-                //设置
-                IntentUtils.getIntents().Intent(getActivity(), SettingActivity.class, null);
-                break;
             case R.id.setting:
+                //设置
+                //IntentUtils.getIntents().Intent(getActivity(), SettingActivity.class, null);
                 IntentUtils.getIntents().Intent(getActivity(), SetActivity.class, null);
                 break;
             case R.id.all_orders:
@@ -191,11 +224,11 @@ public class My_Fragment extends BaseFragment {
                 IntentUtils.getIntents().Intent(getActivity(), OrdersActivity.class, null);
                 break;
             case R.id.recharge:
-                //南瓜籽
+                //充值中心
                 IntentUtils.getIntents().Intent(getActivity(), RechargeActivity.class, null);
                 break;
             case R.id.message:
-                //留言
+                //意见反馈
                 IntentUtils.getIntents().Intent(getActivity(), MessageActivity.class, null);
                 break;
             case R.id.focus:
@@ -214,16 +247,14 @@ public class My_Fragment extends BaseFragment {
                 //农场入驻
                 IntentUtils.getIntents().Intent(getActivity(), Farm_inActivity.class, null);
                 break;
-            case R.id.integrals:
-                //积分
-                IntentUtils.getIntents().Intent(getActivity(), IntegralsActivity.class, null);
-                break;
+            //积分
+            // IntentUtils.getIntents().Intent(getActivity(), IntegralsActivity.class, null);
             case R.id.promotions:
                 //去升官PromotionsActivity
-                IntentUtils.getIntents().Intent(getActivity(), MainActivity.class, null);
+                IntentUtils.getIntents().Intent(getActivity(), PromotionsActivity.class, null);
                 break;
             case R.id.integral:
-                //积分商城
+                //我的积分
                 IntentUtils.getIntents().Intent(getActivity(), IntegralActivity.class, null);
                 break;
             case R.id.coupons:
@@ -258,7 +289,20 @@ public class My_Fragment extends BaseFragment {
                     ToastUtil.showShort(getActivity(), "功能暂未开放");
                 }
                 break;
+            case R.id.lin_address:
+                IntentUtils.getIntents().Intent(getActivity(), Management_addressActivity.class, null);
+                break;
+            case R.id.rl_join:
+                //加入我们
+                IntentUtils.getIntents().Intent(getActivity(), JoinUsActivity.class, null);
+                break;
         }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+
     }
 
     @Override
@@ -277,8 +321,25 @@ public class My_Fragment extends BaseFragment {
             String pic = SpzUtilUser.getString("pic");
             if (EmptyUtils.isNotEmpty(name) && EmptyUtils.isNotEmpty(zt) && EmptyUtils.isNotEmpty(pic)) {
                 names.setText(name);
-                Glide.with(this).load(Urls.BASEURL + pic).into(head);
+                Glide.with(this).load(pic).into(head);
             }
         }
+    }
+
+    /**
+     * 设置透明状态栏
+     */
+    private void setStatusBarTransparent(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            Window window =  getActivity().getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
+            getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
+
     }
 }

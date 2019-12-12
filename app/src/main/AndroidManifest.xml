@@ -1,24 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.bigpumpkin.app.ddng_android">
-
+    <!-- 用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:name=".app.App"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.HomeSearchActivity"></activity>
+        <activity android:name=".activity.ProducerVewActivity"></activity>
+        <activity android:name=".activity.MapDentifyActivity" />
+        <activity android:name=".activity.EndorseSmartFarmActivity" />
+        <activity android:name=".activity.BatchCusomerActivity" />
+        <activity android:name=".activity.CusomerActivity" />
+        <activity android:name=".activity.AfterSalesActivity" />
+        <activity android:name=".activity.InvoiceActivity" />
+        <activity android:name=".activity.OrdinaryActivity" />
+        <activity android:name=".activity.OrdinaryEvaluationDetailsActivity" />
+        <activity android:name=".activity.AdoptionEvaluationDetailsActivity" />
+        <activity android:name=".activity.EvaluationDetailsActivity" />
+        <activity android:name=".activity.AdoptLogisticsActivity" />
+        <activity android:name=".activity.GeneralLogisticsActivity" />
+        <activity android:name=".activity.HauntedActivity" />
+        <activity android:name=".activity.My_FarmActivity" />
+        <activity android:name=".activity.PoultryRulesActivity" />
+        <activity android:name=".activity.PoultryStrategyActivity" />
+        <activity android:name=".activity.AstitleActivity" />
+        <activity android:name=".activity.PointsForActivity" />
+        <activity android:name=".activity.IntegralRulesActivity" />
+        <activity android:name=".activity.EarnPointsActivity" />
+        <activity android:name=".activity.Up_RulesActivity" />
+        <activity android:name=".activity.PendingReceiptDetailssActivity" />
+        <activity android:name=".activity.ExternalActivity" />
+        <activity android:name=".activity.ShopBuyActivity" />
+        <activity android:name=".activity.MedicineClassificationActivity" />
+        <activity android:name=".activity.NewBuyNowActivity" />
+        <activity
+            android:name=".activity.JoinUsActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".activity.AboutActivity" />
+        <activity android:name=".activity.ForgotActivity" />
+        <activity android:name=".activity.ForgotPasswordctivity" />
+        <activity android:name=".activity.FarmTypeActivity" />
+        <activity android:name=".activity.GeneralMoreActivity" />
+        <activity android:name=".activity.FarmMoreActivity" />
+        <activity android:name=".activity.VideoActivity" />
+        <activity android:name=".activity.AdvertisingActivity" />
+        <activity android:name=".activity.PasswordActivity" />
+        <activity android:name=".activity.ParticipateDetailsActivity" />
+        <activity android:name=".activity.ParticipateSpellActivity" />
+        <activity android:name=".activity.AdoptActivity" />
+        <activity android:name=".activity.SpellAddressActivity" />
+        <activity android:name=".activity.SpellBuyActivity" />
+        <activity android:name=".activity.GrowerActivity" />
+        <activity android:name=".activity.CategoryActivity" />
+        <activity android:name=".activity.GeneralDetailsActivity" />
+        <activity android:name=".activity.ModifyAddressActivity" />
+        <activity android:name=".activity.GrowersActivity" />
+        <activity android:name=".activity.MapActivity" />
+        <activity android:name=".activity.BannerActivity" />
+        <activity android:name=".activity.DetailsSearchActivity" />
+        <activity android:name=".activity.Goods_DetailsActivity" />
+        <activity android:name=".activity.ImagePreviewActivity" />
+        <activity android:name=".activity.MoreActivity" />
+        <activity android:name=".activity.Spell_DetailsActivity" />
+        <activity android:name=".activity.FarmActivity" />
+        <activity android:name=".activity.Custom_SelectionActivity" />
+        <activity android:name=".activity.Custom_classificationActivity" />
+        <activity android:name=".activity.Wisdoms_Activity" />
+        <activity android:name=".activity.AdoptionActivity" />
+        <activity android:name=".activity.CustomsActivity" />
+        <activity android:name=".activity.GrowthInformationActivity" />
+        <activity android:name=".activity.PaySuccessActivity" />
+        <activity android:name=".activity.OrderDetailsActivity" />
+        <activity android:name=".activity.CommentsActivity" />
+        <activity android:name=".activity.ReceiptDetailsActivity" />
+        <activity android:name=".activity.DetailsOrderActivity" />
+        <activity android:name=".activity.All_EvaluationActivity" />
+        <activity android:name=".activity.HundredActivity" />
+        <activity
+            android:name=".activity.FarmHomeActivity"
+            android:label="@string/title_activity_farm_home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.CustomCategoryActivity" />
+        <activity android:name=".activity.CustomNearActivity" />
+        <activity android:name=".activity.CustomGardenActivity" />
+        <activity android:name=".activity.CustomMapActivity" />
+        <activity android:name=".activity.ConsultingActivity" />
+        <activity android:name=".activity.RuleActivity" />
+        <activity android:name=".activity.StrategyActivity" />
+        <activity android:name=".activity.DetailsActivity" />
+        <activity android:name=".activity.PayRankActivity" />
+        <activity android:name=".activity.SaveDietActivity" />
+        <activity android:name=".activity.SaveFoodActivity" />
+        <activity android:name=".activity.SaveMoreActivity" />
+        <activity android:name=".activity.ProducerActivity" />
+        <activity android:name=".activity.ProcessingActivity" />
+        <activity android:name=".activity.ReleaseActivity" />
+        <activity android:name=".activity.Wisdom_FarmActivity" />
+        <activity android:name=".activity.FruitActivity" />
+        <activity android:name=".activity.PoultryActivity" />
+        <activity android:name=".activity.CustomActivity" />
+        <activity android:name=".activity.HomeSearchActivity" />
         <activity android:name=".activity.Buy_OrdersActivity" />
         <activity android:name=".activity.Details_farmActivity" />
         <activity android:name=".activity.BuyActivity" />
@@ -86,7 +188,33 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" /> <!-- 显示数据 -->
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" /> <!-- 定义成浏览器类型，有URL需要处理时会过滤 -->
+
+                <data
+                    android:host="h5"
+                    android:path="/test1"
+                    android:scheme="myapp" />
+            </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="c89beb74370fda4e9d1fb12d8063a70e" />
+
+        <service android:name="com.amap.api.location.APSService" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.bigpumpkin.app.ddng_android"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

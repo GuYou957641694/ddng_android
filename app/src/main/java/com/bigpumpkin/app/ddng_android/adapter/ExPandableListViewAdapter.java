@@ -11,8 +11,8 @@ import android.widget.TextView;
 import com.bigpumpkin.app.ddng_android.R;
 import com.bigpumpkin.app.ddng_android.bean.Footprint_Bean;
 import com.bigpumpkin.app.ddng_android.config.Urls;
-import com.bigpumpkin.app.ddng_android.utils.ToastUtil;
-import com.bumptech.glide.Glide;
+import com.bigpumpkin.app.ddng_android.utils.GlideUtils;
+import com.bigpumpkin.app.ddng_android.utils.Tv_Price_Utils;
 import com.ditclear.swipelayout.SwipeDragLayout;
 
 import java.util.List;
@@ -125,7 +125,7 @@ public class ExPandableListViewAdapter extends BaseExpandableListAdapter {
             convertView = mInflater.inflate(R.layout.children, parent, false);
             childrenView.descView = (TextView) convertView.findViewById(R.id.text);
             childrenView.imageView = (ImageView) convertView.findViewById(R.id.img);
-            childrenView.trash = (ImageView) convertView.findViewById(R.id.trash);
+            childrenView.trash = (TextView) convertView.findViewById(R.id.trash);
             childrenView.price = (TextView) convertView.findViewById(R.id.price);
             childrenView.mSwipeLayout = convertView.findViewById(R.id.swip_layout);
             convertView.setTag(childrenView);
@@ -136,14 +136,17 @@ public class ExPandableListViewAdapter extends BaseExpandableListAdapter {
         /**
          * 设置相应控件的内容
          */
-        Glide.with(context).load(Urls.BASEURL + data_list.get(groupPosition).getDetails().get(childPosition).getPic()).into(childrenView.imageView);
+        GlideUtils.loadRoundCircleImagetwo(context,Urls.BASEURL + data_list.get(groupPosition).getDetails().get(childPosition).getPic(),childrenView.imageView);
         // 设置副标题上的文本信息
         childrenView.descView.setText(data_list.get(groupPosition).getDetails().get(childPosition).getCp_title());
-        childrenView.price.setText(data_list.get(groupPosition).getDetails().get(childPosition).getPrice());
+        Tv_Price_Utils.initPriceTv(context,data_list.get(groupPosition).getDetails().get(childPosition).getPrice(),childrenView.price);
         childrenView.trash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtil.showShort(context, data_list.get(groupPosition).getDetails().get(childPosition).getPrice());
+                if (listener!=null) {
+                    listener.OnListener(groupPosition,childPosition);
+                    childrenView.mSwipeLayout.close();
+                }
             }
         });
         childrenView.mSwipeLayout.addListener(new SwipeDragLayout.SwipeListener() {
@@ -162,13 +165,14 @@ public class ExPandableListViewAdapter extends BaseExpandableListAdapter {
 
             }
         });
+
         return convertView;
     }
 
     // 保存二级列表的视图类
     private class HolderView {
-        ImageView imageView, trash;
-        TextView descView, price;
+        ImageView imageView;
+        TextView descView, price, trash;
         SwipeDragLayout mSwipeLayout;
     }
 
@@ -178,5 +182,22 @@ public class ExPandableListViewAdapter extends BaseExpandableListAdapter {
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
+    }
+
+    /**
+     * 定义一个接口
+     */
+    public interface  onListener{
+        void OnListener(int groupPosition,int childPosition);
+    }
+    /**
+     *定义一个变量储存数据
+     */
+    private onListener listener;
+    /**
+     *提供公共的方法,并且初始化接口类型的数据
+     */
+    public void setListener( onListener listener){
+        this.listener = listener;
     }
 }

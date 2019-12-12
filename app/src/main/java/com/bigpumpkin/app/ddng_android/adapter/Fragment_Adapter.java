@@ -20,6 +20,7 @@ public class Fragment_Adapter extends RecyclerView.Adapter<Fragment_Adapter.MyVi
 
     private List<Fragment_Bean.DataBean.ShopBean> dataBean;
     private Context context;
+    private View view;
 
     public Fragment_Adapter(List<Fragment_Bean.DataBean.ShopBean> dataBean, Context context) {
         this.dataBean = dataBean;
@@ -30,7 +31,7 @@ public class Fragment_Adapter extends RecyclerView.Adapter<Fragment_Adapter.MyVi
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         //获取相应的布局
-        View view = LayoutInflater.from(context).inflate(R.layout.fragmentone_itme, viewGroup, false);
+        view = LayoutInflater.from(context).inflate(R.layout.fragmentone_itme, viewGroup, false);
         final Fragment_Adapter.MyViewHolder holder = new Fragment_Adapter.MyViewHolder(view);
         return holder;
     }
@@ -41,6 +42,14 @@ public class Fragment_Adapter extends RecyclerView.Adapter<Fragment_Adapter.MyVi
             Glide.with(context).load(Urls.BASEURL + dataBean.get(i).getPic()).into(myViewHolder.pic);
             myViewHolder.name.setText(dataBean.get(i).getTitle());
             myViewHolder.price.setText(dataBean.get(i).getPic() + "元");
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.OnListener(i);
+                    }
+                }
+            });
         }
     }
 
@@ -48,6 +57,7 @@ public class Fragment_Adapter extends RecyclerView.Adapter<Fragment_Adapter.MyVi
     public int getItemCount() {
         return dataBean.size();
     }
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -60,6 +70,25 @@ public class Fragment_Adapter extends RecyclerView.Adapter<Fragment_Adapter.MyVi
             name = itemView.findViewById(R.id.name);
             price = itemView.findViewById(R.id.price);
         }
+    }
+
+    /**
+     * 定义一个接口
+     */
+    public interface onListener {
+        void OnListener(int id);
+    }
+
+    /**
+     * 定义一个变量储存数据
+     */
+    private onListener listener;
+
+    /**
+     * 提供公共的方法,并且初始化接口类型的数据
+     */
+    public void setListener(onListener listener) {
+        this.listener = listener;
     }
 
 }

@@ -119,7 +119,6 @@ public class Modify_PhoneActivity extends BaseActivity implements MyView ,CountD
                 }
                 break;
             case R.id.btn_login_confirm:
-
                 String s = etChangePasswordCode.getText().toString();
                 mobile = etChangePasswordMobile.getText().toString();
                 // 提交验证码，其中的code表示验证码，如“1357”
@@ -172,6 +171,7 @@ public class Modify_PhoneActivity extends BaseActivity implements MyView ,CountD
                             map.put("timestamp", time);
                             map.put("sign", sha1);
                             map.put("tel", mobile);
+                            Log.d(TAG, "handleMessage: "+time);
                             presenter.getpost(Contacts.My_change, headmap, map, Change_Bean.class);
                         } else {
                             // TODO 处理错误的结果

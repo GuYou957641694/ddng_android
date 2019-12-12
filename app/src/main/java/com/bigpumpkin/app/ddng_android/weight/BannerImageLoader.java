@@ -18,11 +18,6 @@ import com.youth.banner.loader.ImageLoader;
 import java.util.List;
 
 
-/**
- * 作者：Zhout
- * 时间：2017/12/18 15:01
- * 描述：统一的加载banner图片(各种类型的， 热门banner，视频banner，直播间广告banner,商城banner.....)
- */
 
 public class BannerImageLoader extends ImageLoader {
     private Context context;

@@ -11,8 +11,9 @@ import android.widget.RelativeLayout;
 
 import com.bigpumpkin.app.ddng_android.R;
 import com.bigpumpkin.app.ddng_android.adapter.Order_Adapter;
-import com.bigpumpkin.app.ddng_android.base.BaseFragment;
+import com.bigpumpkin.app.ddng_android.base.LazyLoadFragment;
 import com.bigpumpkin.app.ddng_android.bean.Order_Bean;
+import com.bigpumpkin.app.ddng_android.net.Contacts;
 import com.bigpumpkin.app.ddng_android.persenter.MyPresenterImpl;
 import com.bigpumpkin.app.ddng_android.utils.EncryptUtils;
 import com.bigpumpkin.app.ddng_android.utils.SpzUtils;
@@ -25,7 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class MyOrderActivityFragment extends BaseFragment implements MyView {
+public class MyOrderActivityFragment extends LazyLoadFragment implements MyView {
 
 
     @BindView(R.id.rv_my_collections)
@@ -43,11 +44,11 @@ public class MyOrderActivityFragment extends BaseFragment implements MyView {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_my_collection_course_fragment;
+        return R.layout.myordersactivityfragment;
     }
 
     @Override
-    protected void init(View view) {
+    protected void initData() {
         collection_activity = view.findViewById(R.id.collection_activity);
         presenter = new MyPresenterImpl(this);
         long time = System.currentTimeMillis();
@@ -61,12 +62,11 @@ public class MyOrderActivityFragment extends BaseFragment implements MyView {
         map.put("appsecret", appsecret);
         map.put("timestamp", time);
         map.put("sign", sha1);
-        //presenter.getpost(Contacts.My_participate, headmap, map, Order_Bean.class);
     }
 
     @Override
     protected void loadData() {
-
+        presenter.getpost(Contacts.My_participate, headmap, map, Order_Bean.class);
     }
 
     @Override

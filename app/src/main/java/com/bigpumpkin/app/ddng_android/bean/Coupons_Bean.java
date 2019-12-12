@@ -1,14 +1,14 @@
 package com.bigpumpkin.app.ddng_android.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Coupons_Bean {
-
+public class Coupons_Bean  implements Serializable{
 
     /**
-     * msg : 成功
+     * msg : success
      * code : 200
-     * data : {"list":[{"id":"7","man":"200","jian":"3","ctime":"1548864000","etime":"1569859200","nc_id":"12","title":"北京海淀农场12","attr":"2","zt":"1","time":"2019:01:31-2019:10:01","lx":"1","yx":"2"},{"id":"6","man":"200","jian":"5","ctime":"1548864000","etime":"1569945600","nc_id":"12","title":"北京海淀农场12","attr":"2","zt":"1","time":"2019:01:31-2019:10:02","lx":"1","yx":"2"},{"id":"5","man":"200","jian":"10","ctime":"1548864000","etime":"1569945600","nc_id":"8","title":"北京海淀农场8","attr":"2","zt":"1","time":"2019:01:31-2019:10:02","lx":"1","yx":"2"},{"id":"4","man":"300","jian":"15","ctime":"1548259200","etime":"1572019200","nc_id":"2","title":"北京海淀农场2","attr":"2","zt":"1","time":"2019:01:24-2019:10:26","lx":"1","yx":"2"},{"id":"3","man":"5","jian":"5","ctime":"1550937600","etime":"1700086399","nc_id":"1","title":"北京海淀农场2","attr":"1","zt":"1","time":"2019:02:24-2023:11:16","lx":"1","yx":"1"},{"id":"2","man":"3","jian":"3","ctime":"1550937600","etime":"1700086399","nc_id":"1","title":"北京海淀农场2","attr":"1","zt":"1","time":"2019:02:24-2023:11:16","lx":"1","yx":"1"},{"id":"1","man":"500","jian":"5","ctime":"1550937600","etime":"1572019200","nc_id":"1","title":"北京海淀农场2","attr":"1","zt":"1","time":"2019:02:24-2019:10:26","lx":"1","yx":"1"}]}
+     * data : {"Overdue":[{"id":"21","zt":"1","man":"500","jian":"50","ctime":"1548864000","etime":"1575945214","title":"5元优惠","nc_id":"1"}],"Used":[{"id":"18","zt":"2","man":"100","jian":"3","ctime":"1548259200","etime":"1602345600","title":"惠","nc_id":"1"},{"id":"20","zt":"2","man":"500","jian":"40","ctime":"1548864000","etime":"1602345600","title":"5元优惠","nc_id":"1"},{"id":"36","zt":"2","man":"500","jian":"100","ctime":"1550937600","etime":"1602345600","title":"首页全场优惠卷","nc_id":"3"}],"Unused":[{"id":"19","zt":"1","man":"1000","jian":"1000","ctime":"1548864000","etime":"1602345600","title":"惠","nc_id":"1"}]}
      */
 
     private String msg;
@@ -39,45 +39,55 @@ public class Coupons_Bean {
         this.data = data;
     }
 
-    public static class DataBean {
-        private List<ListBean> list;
+    public static class DataBean implements Serializable{
+        private List<OverdueBean> Overdue;
+        private List<UsedBean> Used;
+        private List<UnusedBean> Unused;
 
-        public List<ListBean> getList() {
-            return list;
+        public List<OverdueBean> getOverdue() {
+            return Overdue;
         }
 
-        public void setList(List<ListBean> list) {
-            this.list = list;
+        public void setOverdue(List<OverdueBean> Overdue) {
+            this.Overdue = Overdue;
         }
 
-        public static class ListBean {
+        public List<UsedBean> getUsed() {
+            return Used;
+        }
+
+        public void setUsed(List<UsedBean> Used) {
+            this.Used = Used;
+        }
+
+        public List<UnusedBean> getUnused() {
+            return Unused;
+        }
+
+        public void setUnused(List<UnusedBean> Unused) {
+            this.Unused = Unused;
+        }
+
+        public static class OverdueBean implements Serializable {
             /**
-             * id : 7
-             * man : 200
-             * jian : 3
-             * ctime : 1548864000
-             * etime : 1569859200
-             * nc_id : 12
-             * title : 北京海淀农场12
-             * attr : 2
+             * id : 21
              * zt : 1
-             * time : 2019:01:31-2019:10:01
-             * lx : 1
-             * yx : 2
+             * man : 500
+             * jian : 50
+             * ctime : 1548864000
+             * etime : 1575945214
+             * title : 5元优惠
+             * nc_id : 1
              */
 
             private String id;
+            private String zt;
             private String man;
             private String jian;
-            private String ctime;
-            private String etime;
-            private String nc_id;
+            private long ctime;
+            private long etime;
             private String title;
-            private String attr;
-            private String zt;
-            private String time;
-            private String lx;
-            private String yx;
+            private String nc_id;
 
             public String getId() {
                 return id;
@@ -85,6 +95,14 @@ public class Coupons_Bean {
 
             public void setId(String id) {
                 this.id = id;
+            }
+
+            public String getZt() {
+                return zt;
+            }
+
+            public void setZt(String zt) {
+                this.zt = zt;
             }
 
             public String getMan() {
@@ -103,28 +121,20 @@ public class Coupons_Bean {
                 this.jian = jian;
             }
 
-            public String getCtime() {
+            public long getCtime() {
                 return ctime;
             }
 
-            public void setCtime(String ctime) {
+            public void setCtime(long ctime) {
                 this.ctime = ctime;
             }
 
-            public String getEtime() {
+            public long getEtime() {
                 return etime;
             }
 
-            public void setEtime(String etime) {
+            public void setEtime(long etime) {
                 this.etime = etime;
-            }
-
-            public String getNc_id() {
-                return nc_id;
-            }
-
-            public void setNc_id(String nc_id) {
-                this.nc_id = nc_id;
             }
 
             public String getTitle() {
@@ -135,12 +145,42 @@ public class Coupons_Bean {
                 this.title = title;
             }
 
-            public String getAttr() {
-                return attr;
+            public String getNc_id() {
+                return nc_id;
             }
 
-            public void setAttr(String attr) {
-                this.attr = attr;
+            public void setNc_id(String nc_id) {
+                this.nc_id = nc_id;
+            }
+        }
+
+        public static class UsedBean implements Serializable{
+            /**
+             * id : 18
+             * zt : 2
+             * man : 100
+             * jian : 3
+             * ctime : 1548259200
+             * etime : 1602345600
+             * title : 惠
+             * nc_id : 1
+             */
+
+            private String id;
+            private String zt;
+            private String man;
+            private String jian;
+            private long ctime;
+            private long etime;
+            private String title;
+            private String nc_id;
+
+            public String getId() {
+                return id;
+            }
+
+            public void setId(String id) {
+                this.id = id;
             }
 
             public String getZt() {
@@ -151,28 +191,138 @@ public class Coupons_Bean {
                 this.zt = zt;
             }
 
-            public String getTime() {
-                return time;
+            public String getMan() {
+                return man;
             }
 
-            public void setTime(String time) {
-                this.time = time;
+            public void setMan(String man) {
+                this.man = man;
             }
 
-            public String getLx() {
-                return lx;
+            public String getJian() {
+                return jian;
             }
 
-            public void setLx(String lx) {
-                this.lx = lx;
+            public void setJian(String jian) {
+                this.jian = jian;
             }
 
-            public String getYx() {
-                return yx;
+            public long getCtime() {
+                return ctime;
             }
 
-            public void setYx(String yx) {
-                this.yx = yx;
+            public void setCtime(long ctime) {
+                this.ctime = ctime;
+            }
+
+            public long getEtime() {
+                return etime;
+            }
+
+            public void setEtime(long etime) {
+                this.etime = etime;
+            }
+
+            public String getTitle() {
+                return title;
+            }
+
+            public void setTitle(String title) {
+                this.title = title;
+            }
+
+            public String getNc_id() {
+                return nc_id;
+            }
+
+            public void setNc_id(String nc_id) {
+                this.nc_id = nc_id;
+            }
+        }
+
+        public static class UnusedBean implements Serializable{
+            /**
+             * id : 19
+             * zt : 1
+             * man : 1000
+             * jian : 1000
+             * ctime : 1548864000
+             * etime : 1602345600
+             * title : 惠
+             * nc_id : 1
+             */
+
+            private String id;
+            private String zt;
+            private String man;
+            private String jian;
+            private long ctime;
+            private long etime;
+            private String title;
+            private String nc_id;
+
+            public String getId() {
+                return id;
+            }
+
+            public void setId(String id) {
+                this.id = id;
+            }
+
+            public String getZt() {
+                return zt;
+            }
+
+            public void setZt(String zt) {
+                this.zt = zt;
+            }
+
+            public String getMan() {
+                return man;
+            }
+
+            public void setMan(String man) {
+                this.man = man;
+            }
+
+            public String getJian() {
+                return jian;
+            }
+
+            public void setJian(String jian) {
+                this.jian = jian;
+            }
+
+            public long getCtime() {
+                return ctime;
+            }
+
+            public void setCtime(long ctime) {
+                this.ctime = ctime;
+            }
+
+            public long getEtime() {
+                return etime;
+            }
+
+            public void setEtime(long etime) {
+                this.etime = etime;
+            }
+
+            public String getTitle() {
+                return title;
+            }
+
+            public void setTitle(String title) {
+                this.title = title;
+            }
+
+            public String getNc_id() {
+                return nc_id;
+            }
+
+            public void setNc_id(String nc_id) {
+                this.nc_id = nc_id;
             }
         }
     }

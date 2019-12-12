@@ -23,17 +23,17 @@ import java.util.List;
 public class Buy_Adapter extends BaseExpandableListAdapter {
 
     private Context context;
-    private List<Settlement_Bean.DataBean.ListBean> data;
+    private Settlement_Bean.DataBean data2;
 
-    public Buy_Adapter(Context context, List<Settlement_Bean.DataBean.ListBean> data) {
+    public Buy_Adapter(Context context, Settlement_Bean.DataBean data2) {
         this.context = context;
-        this.data = data;
+        this.data2 = data2;
     }
 
     @Override
     public int getGroupCount() {
-        if (data != null && data.size() > 0) {
-            return data.size();
+        if (data2.getList() != null && data2.getList().size() > 0) {
+            return data2.getList().size();
         } else {
             return 0;
         }
@@ -41,8 +41,8 @@ public class Buy_Adapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        if (data.get(groupPosition).getDetails() != null && data.get(groupPosition).getDetails().size() > 0) {
-            return data.get(groupPosition).getDetails().size();
+        if (data2.getList().get(groupPosition).getDetails() != null && data2.getList().get(groupPosition).getDetails().size() > 0) {
+            return data2.getList().get(groupPosition).getDetails().size();
         } else {
             return 0;
         }
@@ -55,7 +55,7 @@ public class Buy_Adapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return data.get(groupPosition).getDetails().get(childPosition);
+        return data2.getList().get(groupPosition).getDetails().get(childPosition);
     }
 
     @Override
@@ -85,7 +85,7 @@ public class Buy_Adapter extends BaseExpandableListAdapter {
             groupViewHolder = (GroupViewHolder) convertView.getTag();
         }
 
-        final Settlement_Bean.DataBean.ListBean dataBean = data.get(groupPosition);
+        final Settlement_Bean.DataBean.ListBean dataBean = data2.getList().get(groupPosition);
         //农场名称
         String store_name = dataBean.getTitle();
         if (store_name != null) {
@@ -119,7 +119,7 @@ public class Buy_Adapter extends BaseExpandableListAdapter {
             childViewHolder = (ChildViewHolder) convertView.getTag();
         }
 
-        List<Settlement_Bean.DataBean.ListBean.DetailsBean> details = data.get(groupPosition).getDetails();
+        List<Settlement_Bean.DataBean.ListBean.DetailsBean> details = data2.getList().get(groupPosition).getDetails();
         //产品名
         String title = details.get(childPosition).getTitle();
         //品种名
@@ -132,9 +132,8 @@ public class Buy_Adapter extends BaseExpandableListAdapter {
         String num = details.get(childPosition).getNum();
         //图片
         String pic = details.get(childPosition).getPic();
-        Settlement_Bean.DataBean.ListBean listBean = data.get(groupPosition);
-        int total_price = listBean.getTotal_price();
-        childViewHolder.real_pay.setText("实付金额：" + total_price + "元");
+        Settlement_Bean.DataBean.ListBean listBean = data2.getList().get(groupPosition);
+
 
         Glide.with(context).load(Urls.BASEURL + pic).into(childViewHolder.img);
         if (title != null) {
@@ -152,6 +151,7 @@ public class Buy_Adapter extends BaseExpandableListAdapter {
         if (num != null) {
             childViewHolder.num.setText(num);
         }
+        childViewHolder.welfare.setText("+" + details.get(childPosition).getWelfare() + "元");
         childViewHolder.et_mess.addTextChangedListener(new TextWatcher() {
             private static final String TAG = "aaa";
 
@@ -172,7 +172,33 @@ public class Buy_Adapter extends BaseExpandableListAdapter {
                 }
             }
         });
+        childViewHolder.relativelayout.setVisibility(View.VISIBLE);
+        String total_price = data2.getList().get(groupPosition).getTotal_price();
+        if (total_price != null) {
+            childViewHolder.pay_price.setText("实付金额：¥" + total_price + "元");
+        }
+        //判断是植物认养、家禽认养还是其他类型
+        if (details.get(childPosition).getLanmu().equals("1")) {
+            //如果是植物认养或者家禽认养就显示认养协议、准收宝、定制选项
+            childViewHolder.customization_options.setVisibility(View.VISIBLE);
+            childViewHolder.must.setVisibility(View.VISIBLE);
+            childViewHolder.adopt.setVisibility(View.VISIBLE);
 
+        }
+        if (details.get(childPosition).getLanmu().equals("6")) {
+            //如果是植物认养或者家禽认养就显示认养协议、准收宝、定制选项
+            childViewHolder.customization_options.setVisibility(View.VISIBLE);
+            childViewHolder.must.setVisibility(View.VISIBLE);
+            childViewHolder.adopt.setVisibility(View.VISIBLE);
+
+        }
+        if (data2.getList().get(childPosition).getJian().equals("false")) {
+            childViewHolder.couponss.setVisibility(View.GONE);
+
+        } else {
+            childViewHolder.couponss.setVisibility(View.GONE);
+            childViewHolder.coupons.setText("-" + data2.getList().get(childPosition).getJian() + "元");
+        }
         return convertView;
     }
 
@@ -180,23 +206,27 @@ public class Buy_Adapter extends BaseExpandableListAdapter {
         ImageView img;
         TextView name;
         TextView zz_name;
+        TextView pay_price;
         TextView price;
-        TextView num, coupons, real_pay;
+        TextView num, coupons, real_pay, welfare;
         CheckBox defaults, defaultsss;
-        RelativeLayout product, must;
+        RelativeLayout product, must, customization_options, adopt, relativelayout, couponss;
         Switch switchs;
         EditText et_mess;
-
+        View view_two,view_one,view_there,view_fore,view_five;
         ChildViewHolder(View view) {
             img = view.findViewById(R.id.img);
             name = view.findViewById(R.id.name);
             zz_name = view.findViewById(R.id.zz_name);
             price = view.findViewById(R.id.price);
             num = view.findViewById(R.id.num);
+            view_one = view.findViewById(R.id.view_one);
+            view_two = view.findViewById(R.id.view_two);
+            view_there = view.findViewById(R.id.view_there);
+            view_fore = view.findViewById(R.id.view_fore);
+            view_five = view.findViewById(R.id.view_five);
             //包邮
-            defaults = view.findViewById(R.id.defaults);
             // 不包邮
-            defaultsss = view.findViewById(R.id.defaultsss);
             //产品服务
             product = view.findViewById(R.id.product);
             //优惠券
@@ -206,7 +236,15 @@ public class Buy_Adapter extends BaseExpandableListAdapter {
             //留言
             et_mess = view.findViewById(R.id.et_mess);
             must = view.findViewById(R.id.must);
-            real_pay = view.findViewById(R.id.real_pay);
+            //定制选项
+            customization_options = view.findViewById(R.id.customization_options);
+            //认养协议
+            adopt = view.findViewById(R.id.adopt);
+            pay_price = view.findViewById(R.id.pay_price);
+            relativelayout = view.findViewById(R.id.relativelayout);
+            welfare = view.findViewById(R.id.welfare);
+            couponss = view.findViewById(R.id.couponss);
+
         }
     }
 

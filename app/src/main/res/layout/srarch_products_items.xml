@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dp_10"
+    android:layout_marginLeft="@dimen/dp_10"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="6dp"
+        app:cardUseCompatPadding="false">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/pic"
+            android:layout_width="@dimen/dp_173"
+            android:layout_height="@dimen/dp_173"
+            android:scaleType="fitXY" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pic"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_5"
+            android:textColor="#323232"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/production"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_4"
+            android:background="@drawable/iv_gg_shape"
+            android:paddingLeft="@dimen/dp_6"
+            android:paddingTop="@dimen/dp_1"
+            android:paddingRight="@dimen/dp_6"
+            android:paddingBottom="@dimen/dp_1"
+            android:textSize="@dimen/sp_10" />
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/production"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_9"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:text="12312"
+            android:textColor="#E81A12"
+            android:textSize="@dimen/sp_10"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/number"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/dp_18"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/production"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:layout_toRightOf="@+id/price"
+            android:text="1231"
+            android:textSize="@dimen/sp_10" />
+
+        <TextView
+            android:id="@+id/onfo_farm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/production"
+            android:layout_marginTop="@dimen/dp_18"
+            android:layout_marginRight="@dimen/dp_3"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:text="进店"
+            android:textColor="#FF323232"
+            android:layout_toLeftOf="@+id/iv"
+            android:textSize="@dimen/sp_10" />
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="@dimen/dp_7"
+            android:layout_height="@dimen/dp_7"
+            android:layout_below="@+id/production"
+            android:layout_alignRight="@+id/pic"
+            android:layout_marginTop="@dimen/dp_21"
+            android:layout_marginRight="@dimen/dp_10"
+            android:src="@mipmap/good_icon" />
+    </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

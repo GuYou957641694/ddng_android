@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/dp_10"
+    android:paddingTop="@dimen/dp_10"
+    android:paddingRight="@dimen/dp_10">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_pic"
+            android:layout_width="@dimen/dp_90"
+            android:layout_height="@dimen/dp_90"
+            android:scaleType="fitXY" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_90"
+            android:layout_marginLeft="@dimen/dp_10">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="271dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="爱傻傻的煎熬是打算接电话阿克苏爱傻傻的煎熬是打算接电话阿克苏打卡时间大胜靠德奥斯卡的喀斯柯达就打卡时间大胜靠德奥斯卡的喀斯柯达就"
+                android:textColor="#FF1C1C1C"
+                android:textSize="@dimen/sp_12" />
+
+            <TextView
+                android:id="@+id/production"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_name"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@drawable/iv_gg_shape"
+                android:paddingLeft="@dimen/dp_6"
+                android:paddingTop="@dimen/dp_1"
+                android:paddingRight="@dimen/dp_6"
+                android:paddingBottom="@dimen/dp_1"
+                android:textColor="#FF949494"
+                android:textSize="@dimen/sp_10" />
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:text="69"
+                android:textColor="#FFF72323"
+                android:textSize="@dimen/sp_10" />
+
+            <ImageView
+                android:id="@+id/iv_add"
+                android:layout_width="@dimen/dp_15"
+                android:layout_height="@dimen/dp_15"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:src="@mipmap/add_shop" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginLeft="@dimen/dp_90"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="#FFF6F6F6"></View>
+</LinearLayout>

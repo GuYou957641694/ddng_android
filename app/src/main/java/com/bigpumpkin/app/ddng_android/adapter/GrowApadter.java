@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bigpumpkin.app.ddng_android.R;
-import com.bigpumpkin.app.ddng_android.bean.Coupons_Bean;
 import com.bigpumpkin.app.ddng_android.bean.Grow_Bean;
 import com.bigpumpkin.app.ddng_android.config.Urls;
 import com.bumptech.glide.Glide;
@@ -41,12 +40,12 @@ public class GrowApadter extends RecyclerView.Adapter<GrowApadter.MyViewHolder> 
     public void onBindViewHolder(@NonNull GrowApadter.MyViewHolder myViewHolder, final int i) {
         if (dataBean != null) {
             Glide.with(context).load(Urls.BASEURL + dataBean.get(i).getPic()).into(myViewHolder.pic);
-            myViewHolder.name.setText(dataBean.get(i).getFidname());
-            myViewHolder.varieties.setText(dataBean.get(i).getPz_title());
-            myViewHolder.price.setText(dataBean.get(i).getPrice());
-            myViewHolder.ctime.setText(dataBean.get(i).getCtime());
-            myViewHolder.etime.setText(dataBean.get(i).getFidname());
-            myViewHolder.type.setText(dataBean.get(i).getType());
+            myViewHolder.name.setText("农场名称："+dataBean.get(i).getFidname());
+            myViewHolder.varieties.setText("果树品种："+dataBean.get(i).getPz_title());
+            myViewHolder.price.setText("果树价格：¥"+dataBean.get(i).getPrice());
+            myViewHolder.ctime.setText("采摘倒计时："+dataBean.get(i).getCtime());
+            myViewHolder.etime.setText("结束倒计时："+dataBean.get(i).getEtime());
+            myViewHolder.type.setText(""+dataBean.get(i).getType());
             //订单详情
             myViewHolder.details.setOnClickListener(new View.OnClickListener() {
                 @Override

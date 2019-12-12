@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/dp_10"
-    android:background="#ffffff">
+    android:padding="@dimen/dp_5"
+   android:background="@drawable/shape">
 
     <RelativeLayout
         android:id="@+id/rela"
@@ -28,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="大南瓜" />
+                />
 
             <TextView
                 android:id="@+id/varieties"
@@ -94,10 +95,4 @@
         android:background="@drawable/spell_shape"
         android:text="查看信息" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@+id/information"
-        android:layout_marginTop="@dimen/dp_5"
-        android:background="#F0F0F0"></View>
 </RelativeLayout>

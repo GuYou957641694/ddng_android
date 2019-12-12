@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/rl"
+    android:paddingRight="@dimen/dp_10">
+
+    <ImageView
+        android:id="@+id/iv_pic"
+        android:layout_width="@dimen/dp_120"
+        android:layout_height="@dimen/dp_120"
+        android:scaleType="fitXY" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_gg"
+        android:layout_marginLeft="@dimen/dp_8"
+        android:layout_marginBottom="@dimen/dp_3"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_16" />
+
+    <TextView
+        android:id="@+id/tv_gg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/iv_pic"
+        android:layout_marginLeft="@dimen/dp_8"
+        android:layout_marginBottom="@dimen/dp_8"
+        android:background="@drawable/tv_gg_shape"
+        android:paddingLeft="@dimen/dp_6"
+        android:paddingRight="@dimen/dp_6"
+        android:textColor="#FF949494"
+        android:textSize="@dimen/sp_10" />
+
+    <TextView
+        android:id="@+id/tv_spell"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_pic"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@drawable/tv_spell_single_shape"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_8"
+        android:paddingRight="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_8"
+        android:text="发起拼单"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_10" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_pic"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_toRightOf="@+id/tv_spell"
+        android:background="@drawable/tv_participate_spell_shape"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_8"
+        android:paddingRight="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_8"
+        android:text="参与拼单"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_10" />
+
+
+</RelativeLayout>

@@ -2,25 +2,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dp_10">
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10">
 
         <ImageView
             android:id="@+id/img"
-            android:layout_width="@dimen/dp_100"
-            android:layout_height="@dimen/dp_100"
-            android:scaleType="centerCrop" />
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="@dimen/dp_80"
+            android:scaleType="fitXY"
+        />
 
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_5"
-            android:layout_toRightOf="@+id/img" />
+            android:layout_toRightOf="@+id/img"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="#FF323232"
+            android:textSize="@dimen/sp_12"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/zz_name"
@@ -28,7 +37,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/name"
             android:layout_marginLeft="@dimen/dp_5"
-            android:layout_toRightOf="@+id/img" />
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_toRightOf="@+id/img"
+            android:textColor="#FF9A9A9A"
+            android:textSize="@dimen/sp_12" />
 
         <TextView
             android:id="@+id/price"
@@ -36,248 +48,504 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/img"
             android:layout_marginLeft="@dimen/dp_5"
-            android:layout_toRightOf="@+id/img" />
+            android:layout_toRightOf="@+id/img"
+            android:textSize="@dimen/sp_9"
+            android:textColor="#F72323" />
 
         <TextView
-            android:id="@+id/num"
+            android:id="@+id/tv_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/img"
             android:layout_alignParentRight="true"
-            android:text="2" />
+            android:text="数量：x1"
+            android:textColor="#FF9C9C9C"
+            android:textSize="@dimen/sp_12" />
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="@dimen/dp_5"
-        android:background="@color/color_f5f5f5" />
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:background="#FFF6F6F6" />
 
     <RelativeLayout
+        android:id="@+id/rl_num"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_40"
-        android:layout_margin="@dimen/dp_10">
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="配送服务"
-            android:textSize="@dimen/sp_15" />
+            android:text="购买数量"
+            android:textColor="#FF323232"
+            android:textSize="@dimen/sp_14" />
 
-        <CheckBox
-            android:id="@+id/defaults"
-            android:layout_width="@dimen/dp_20"
-            android:layout_height="@dimen/dp_20"
+        <RelativeLayout
+            android:id="@+id/num_jian"
+            android:layout_width="@dimen/dp_22"
+            android:layout_height="@dimen/dp_22"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/textview1"
-            android:background="@drawable/checkbox"
-            android:button="@null"
-            android:clickable="false"
-            android:focusable="false" />
+            android:layout_toLeftOf="@+id/rl_nums"
+            android:background="@drawable/num_add_shape">
+
+            <ImageView
+                android:layout_width="@dimen/dp_8"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_height="@dimen/dp_1"
+                android:src="@mipmap/icon_shopping_reduction" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_nums"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_22"
+            android:background="@drawable/rl_nums_shape"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/jia">
+
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:id="@+id/num"
+                android:textSize="@dimen/sp_12"
+                android:layout_width="wrap_content"
+                android:textColor="#FF323232"
+                android:layout_height="wrap_content"
+              />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/jia"
+            android:layout_width="@dimen/dp_22"
+            android:layout_height="@dimen/dp_22"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/num_add_shape">
+
+            <ImageView
+                android:layout_width="@dimen/dp_8"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_height="@dimen/dp_8"
+                android:src="@mipmap/icon_shopping_add" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:background="#FFF6F6F6" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10">
 
         <TextView
             android:id="@+id/textview1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/defaultsss"
-            android:text="不包邮" />
-
-        <CheckBox
-            android:id="@+id/defaultsss"
-            android:layout_width="@dimen/dp_20"
-            android:layout_height="@dimen/dp_20"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/textview"
-            android:background="@drawable/checkbox"
-            android:button="@null"
-            android:checked="true"
-            android:clickable="false"
-            android:focusable="false" />
+            android:text="配送方式"
+            android:textColor="#FF323232"
+            android:textSize="@dimen/sp_14" />
 
         <TextView
-            android:id="@+id/textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_18"
+            android:layout_toRightOf="@+id/textview1"
+            android:text="普通快递"
+            android:textColor="#FF9A9A9A"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="不包邮" />
+            android:layout_marginLeft="@dimen/dp_18"
+            android:text="快递 免邮"
+            android:textColor="#FF323232"
+            android:textSize="@dimen/sp_12" />
+
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="@dimen/dp_5"
-        android:background="@color/color_f5f5f5" />
+        android:layout_height="10dp"
+        android:background="#FFF6F6F6" />
 
     <RelativeLayout
         android:id="@+id/product"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_40"
-        android:layout_margin="@dimen/dp_10">
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:text="产品服务"
-            android:textSize="@dimen/sp_15" />
+            android:textColor="#FF323232"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_toLeftOf="@+id/iv1"
+            android:text="支持七天无理由退单"
+            android:textColor="#FF9A9A9A"
+            android:textSize="@dimen/sp_14" />
+
+        <ImageView
+            android:id="@+id/iv1"
+            android:layout_width="@dimen/dp_6"
+            android:layout_height="@dimen/dp_10"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/good_icon" />
 
     </RelativeLayout>
 
-    <RelativeLayout
+    <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_40"
-        android:layout_margin="@dimen/dp_10">
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:background="#FFF6F6F6" />
+
+    <RelativeLayout
+        android:id="@+id/couponss"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10"
+        android:visibility="gone">
+
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:text="优惠券"
-            android:textSize="@dimen/sp_15" />
+            android:textColor="#FF323232"
+            android:textSize="@dimen/sp_14" />
 
         <TextView
             android:id="@+id/coupons"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_40"
-        android:layout_margin="@dimen/dp_10">
-
-        <TextView
-            android:id="@+id/text3"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_2"
-            android:text="认领协议"
-            android:textSize="@dimen/sp_15" />
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_toLeftOf="@+id/iv2"
+            android:textColor="#FFF86161"
+            android:textSize="@dimen/sp_12" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/text3"
-            android:text="植物认养家禽领养协议果树认养协议"
-            android:textSize="@dimen/sp_9" />
 
-        <CheckBox
-            android:layout_width="@dimen/dp_20"
-            android:layout_height="@dimen/dp_20"
+        <ImageView
+            android:id="@+id/iv2"
+            android:layout_width="@dimen/dp_6"
+            android:layout_height="@dimen/dp_10"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/checkbox"
-            android:button="@null"
-            android:checked="true"
-            android:clickable="false"
-            android:focusable="false" />
+            android:src="@mipmap/good_icon" />
     </RelativeLayout>
+
+    <View
+        android:id="@+id/view_one"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:background="#FFF6F6F6" />
 
     <RelativeLayout
+        android:id="@+id/adopt"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_40"
-        android:layout_margin="@dimen/dp_10">
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:id="@+id/relativelayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/text3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_2"
+                android:text="认领协议"
+                android:textColor="#FF323232"
+                android:textSize="@dimen/sp_14" />
+
+            <ImageView
+                android:layout_width="@dimen/dp_16"
+                android:layout_height="@dimen/dp_16"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/default_ddress_icon" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relativelayout1"
+            android:layout_marginTop="@dimen/dp_10">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/dp_2"
+                android:text="果树认养协议"
+                android:textColor="#FF9A9A9A"
+                android:textSize="@dimen/sp_12" />
+
+            <ImageView
+                android:layout_width="@dimen/dp_6"
+                android:layout_height="@dimen/dp_10"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/good_icon" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/view_two"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:background="#FFF6F6F6" />
+
+    <RelativeLayout
+        android:id="@+id/rl_welfare"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10">
 
         <TextView
+            android:id="@+id/texe1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:text="植物放生公益"
-            android:textSize="@dimen/sp_15" />
+            android:textColor="#FF323232"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/welfare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textColor="#FFF73636"
+            android:textSize="@dimen/sp_12" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/texe1"
+            android:layout_marginTop="@dimen/dp_10">
+
+            <TextView
+                android:id="@+id/welfares"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/dp_12" />
+
+            <ImageView
+                android:layout_width="@dimen/dp_6"
+                android:layout_height="@dimen/dp_10"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/good_icon" />
+        </RelativeLayout>
 
     </RelativeLayout>
+
+    <View
+        android:id="@+id/view_there"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:background="#FFF6F6F6" />
 
     <RelativeLayout
         android:id="@+id/must"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_40"
-        android:layout_margin="@dimen/dp_10">
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10"
+        android:visibility="gone">
 
         <TextView
+            android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:text="准收宝"
-            android:textSize="@dimen/sp_15" />
+            android:textColor="#FF323232"
+            android:textSize="@dimen/sp_14" />
 
         <Switch
             android:id="@+id/switchs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
+            android:checked="true"
             android:thumb="@drawable/switch_ios_thumb"
             android:track="@drawable/switch_ios_track_selector" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text"
+            android:layout_marginTop="@dimen/dp_10">
+
+            <TextView
+                android:id="@+id/texts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FF9A9A9A"
+                android:textSize="@dimen/sp_12" />
+
+
+            <TextView
+                android:id="@+id/accept"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp_13"
+                android:layout_toLeftOf="@+id/iv6"
+                android:textColor="#FFF74848"
+                android:textSize="@dimen/sp_12"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/iv6"
+                android:layout_width="@dimen/dp_6"
+                android:layout_height="@dimen/dp_10"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/good_icon" />
+        </RelativeLayout>
     </RelativeLayout>
 
-    <RelativeLayout
+    <View
+        android:id="@+id/view_fore"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_40"
-        android:layout_margin="@dimen/dp_10">
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:background="#FFF6F6F6" />
+
+    <RelativeLayout
+        android:id="@+id/customization_options"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10"
+        android:visibility="gone">
 
         <TextView
+            android:id="@+id/ding"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:text="定制选项"
-            android:textSize="@dimen/sp_15" />
+            android:textColor="#FF323232"
+            android:textSize="@dimen/sp_14" />
 
-        <CheckBox
-            android:layout_width="@dimen/dp_20"
-            android:layout_height="@dimen/dp_20"
+        <TextView
+            android:id="@+id/customization"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:layout_marginRight="@dimen/dp_13"
+            android:layout_toLeftOf="@+id/iv7"
+            android:text="qweqwe"
+            android:textColor="#FF9A9A9A"
+            android:textSize="@dimen/sp_12" />
+
+        <ImageView
+            android:id="@+id/iv7"
+            android:layout_width="@dimen/dp_6"
+            android:layout_height="@dimen/dp_10"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/checkbox"
-            android:button="@null"
-            android:checked="true"
-            android:clickable="false"
-            android:focusable="false" />
+            android:src="@mipmap/good_icon" />
     </RelativeLayout>
+
+    <View
+        android:id="@+id/view_five"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:background="#FFF6F6F6" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_40"
-        android:layout_margin="@dimen/dp_10">
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10">
 
         <TextView
             android:id="@+id/textview2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:text="东家留言:"
-            android:textSize="@dimen/sp_15" />
+            android:textColor="#FF323232"
+            android:textSize="@dimen/sp_14" />
 
-        <EditText
-            android:id="@+id/et_mess"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_40"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:layout_toRightOf="@+id/textview2"
-            android:background="@null"
-            android:gravity="start|center_vertical"
-            android:hint="少放化肥(产量会降低)"
-            android:inputType="number"
-            android:maxLength="11"
-            android:maxLines="1"
-            android:textColorHint="@color/gray_h"
-            android:textSize="16sp" />
+            android:layout_height="@dimen/dp_100"
+            android:layout_below="@+id/textview2"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="#FFEBEBEB"
+            android:padding="@dimen/dp_10">
+
+            <EditText
+                android:id="@+id/et_mess"
+                android:layout_width="match_parent"
+                android:singleLine="true"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="如果您对生产者者有其它要求，请在此留言！"
+                android:maxLength="20"
+                android:maxLines="1"
+                android:textColor="#FF9A9A9A"
+                android:textSize="14sp" />
+        </RelativeLayout>
     </RelativeLayout>
 
+
     <RelativeLayout
+        android:id="@+id/relativelayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_40">
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10"
+        android:visibility="gone">
 
         <TextView
-            android:id="@+id/real_pay"
+            android:id="@+id/pay_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="实付金额：131元"
-            android:textSize="@dimen/sp_15" />
+            android:textSize="@dimen/sp_14" />
+
+
     </RelativeLayout>
 
 </LinearLayout>

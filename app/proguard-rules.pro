@@ -33,4 +33,6 @@
 -keepclasseswithmembernames class * {
     @butterknife.* <methods>;
 }
+-keep class Android.support.design.widget.TabLayout{*;}
+-keep class com.hjq.toast.** {*;}
 

@@ -1,13 +1,11 @@
 package com.bigpumpkin.app.ddng_android.wxapi;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import com.bigpumpkin.app.ddng_android.R;
-import com.bigpumpkin.app.ddng_android.activity.AllActivity;
+import com.bigpumpkin.app.ddng_android.activity.PaySuccessActivity;
 import com.bigpumpkin.app.ddng_android.app.App;
 import com.bigpumpkin.app.ddng_android.config.WXConFig;
 import com.bigpumpkin.app.ddng_android.utils.IntentUtils;
@@ -48,11 +46,11 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
                 ToastUtil.showShort(WXPayEntryActivity.this, "支付成功");
                 if (App.WXPAY_TYPE_CLASS.equals(payType)) {
                     IntentUtils.getIntents().Intent(WXPayEntryActivity.this,
-                            AllActivity.class, null);
+                            PaySuccessActivity.class, null);
                     finish();
                 }
             } else {
-                ToastUtil.showShort(WXPayEntryActivity.this, baseResp.errCode + "");
+                ToastUtil.showShort(WXPayEntryActivity.this, "订单取消");
                 finish();
             }
         }

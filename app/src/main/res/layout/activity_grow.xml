@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
+    android:background="#DDDBDB"
     android:orientation="vertical">
 
     <include layout="@layout/title_xml"></include>
@@ -13,10 +13,12 @@
         android:id="@+id/grow"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:fadingEdge="none"
         android:visibility="gone" />
 
     <include
         android:id="@+id/no_grow"
         layout="@layout/no_grow_activity_layout"
-        android:visibility="gone"></include>
+       ></include>
 </LinearLayout>

@@ -2,46 +2,52 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff">
+    android:background="#FFEFEFEF">
 
     <RelativeLayout
         android:id="@+id/relativelayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
-        android:background="@color/theme_orange"
-        android:minHeight="@dimen/dp_50">
+        android:layout_height="wrap_content"
+        android:background="@color/theme_orange">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="购物车"
-            android:textColor="#fff"
-            android:textSize="18sp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_44"
+            android:layout_marginTop="@dimen/dp_22">
 
-        <TextView
-            android:id="@+id/editor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dp_15"
-            android:text="编辑"
-            android:textColor="#fff"
-            android:textSize="18sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:text="购物车"
+                android:textColor="#FFFFFFFF"
+                android:textSize="@dimen/sp_17" />
 
-        <TextView
-            android:id="@+id/cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dp_15"
-            android:text="取消"
-            android:textColor="#fff"
-            android:textSize="18sp"
-            android:visibility="gone" />
+            <TextView
+                android:id="@+id/editor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp_15"
+                android:text="编辑"
+                android:textColor="#fff"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp_15"
+                android:text="取消"
+                android:textColor="#fff"
+                android:textSize="18sp"
+                android:visibility="gone" />
+        </RelativeLayout>
     </RelativeLayout>
 
     <include
@@ -58,16 +64,12 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/rela"
         android:layout_below="@+id/relativelayout"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
         android:divider="@null"
         android:groupIndicator="@null"
-        android:scrollbars="none"
-        android:visibility="gone" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_1"
-        android:layout_above="@+id/rela"
-        android:background="@color/gray_h"></View>
+        android:overScrollMode="never"
+        android:scrollbars="none" />
 
     <RelativeLayout
         android:id="@+id/rela"
@@ -78,8 +80,8 @@
 
         <ImageView
             android:id="@+id/all"
-            android:layout_width="@dimen/dp_20"
-            android:layout_height="@dimen/dp_20"
+            android:layout_width="@dimen/dp_18"
+            android:layout_height="@dimen/dp_18"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dp_10"
             android:background="@mipmap/check_false" />
@@ -91,36 +93,38 @@
             android:layout_marginLeft="@dimen/dp_8"
             android:layout_toRightOf="@+id/all"
             android:text="全选"
-            android:textSize="@dimen/sp_15" />
+            android:textColor="#FF313131"
+            android:textSize="@dimen/sp_12" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginRight="@dimen/dp_10"
-            android:layout_toLeftOf="@+id/settlement"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/text"
-                android:text="合计"
-                android:textSize="@dimen/sp_14" />
+            android:layout_toLeftOf="@+id/settlement">
 
             <TextView
                 android:id="@+id/text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/price"
-                android:text="包邮(包含运费)"
-                android:textSize="@dimen/sp_10" />
+                android:layout_centerVertical="true"
+                android:text="不含运费"
+                android:textColor="#FF9A9A9A"
+                android:textSize="@dimen/sp_12" />
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/text"
+                android:text="合计"
+                android:textSize="@dimen/sp_14" />
         </RelativeLayout>
 
         <Button
             android:id="@+id/settlement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="110dp"
+            android:layout_height="38dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginTop="@dimen/dp_5"
@@ -129,7 +133,8 @@
             android:background="@drawable/shopping_shape"
             android:stateListAnimator="@null"
             android:text="结算"
-            android:textColor="#fff" />
+            android:textColor="#fff"
+            android:textSize="@dimen/sp_16" />
 
         <Button
             android:id="@+id/del"

@@ -11,17 +11,16 @@ import com.bigpumpkin.app.ddng_android.R;
 import com.bigpumpkin.app.ddng_android.adapter.Address_Adapter;
 import com.bigpumpkin.app.ddng_android.base.BaseActivity;
 import com.bigpumpkin.app.ddng_android.bean.Address_Bean;
-import com.bigpumpkin.app.ddng_android.bean.Del_Address_Bean;
+import com.bigpumpkin.app.ddng_android.bean.Zfb_Bean;
 import com.bigpumpkin.app.ddng_android.net.Contacts;
 import com.bigpumpkin.app.ddng_android.persenter.MyPresenterImpl;
 import com.bigpumpkin.app.ddng_android.utils.EncryptUtils;
 import com.bigpumpkin.app.ddng_android.utils.IntentUtils;
 import com.bigpumpkin.app.ddng_android.utils.SpzUtils;
 import com.bigpumpkin.app.ddng_android.view.MyView;
+import com.bigpumpkin.app.ddng_android.weight.LoadingDialog;
 import com.bigpumpkin.app.ddng_android.weight.TitleXML;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,6 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+//收货地址
 public class Management_addressActivity extends BaseActivity implements MyView {
 
     @BindView(R.id.recyclerview)
@@ -50,6 +50,7 @@ public class Management_addressActivity extends BaseActivity implements MyView {
     private String sha1;
     private long time;
     private int i;
+    private LoadingDialog dialog;
 
     @Override
     public int intiLayout() {
@@ -58,7 +59,7 @@ public class Management_addressActivity extends BaseActivity implements MyView {
 
     @Override
     public void initView() {
-        new TitleXML(this, "管理收货地址", true, "").init().setListener(new TitleXML.TitleXMLClick() {
+        new TitleXML(this, "收货地址", true, "").init().setListener(new TitleXML.TitleXMLClick() {
             @Override
             public void onImage() {
                 finish();
@@ -77,13 +78,13 @@ public class Management_addressActivity extends BaseActivity implements MyView {
         map.put("appsecret", appsecret);
         map.put("timestamp", time);
         map.put("sign", sha1);
-        presenter.getpost(Contacts.My_address, headmap, map, Address_Bean.class);
-
     }
 
     @Override
     public void initData() {
-
+        dialog = new LoadingDialog(this, "玩命加载中...");
+        dialog.show();
+        presenter.getpost(Contacts.My_address, headmap, map, Address_Bean.class);
     }
 
     @OnClick(R.id.add)
@@ -99,71 +100,56 @@ public class Management_addressActivity extends BaseActivity implements MyView {
     @Override
     public void success(Object data) {
         if (data instanceof Address_Bean) {
+            dialog.close();
             Address_Bean address_bean = (Address_Bean) data;
-            String code = address_bean.getCode();
-            if (code.equals("200")) {
-                int size = address_bean.getData().size();
-                if (size > 0) {
-                    data1 = address_bean.getData();
-                    recyclerview.setVisibility(View.VISIBLE);
-                    relativeLayout.setVisibility(View.GONE);
-                    //进行筛选默认地址
-                    Collections.sort(data1, new Comparator<Address_Bean.DataBean>() {
-                        @Override
-                        public int compare(Address_Bean.DataBean o1, Address_Bean.DataBean o2) {
-                            return (int) (o1.getIsindex() - o2.getIsindex());
-                        }
-                    });
-                    for (Address_Bean.DataBean dataBean : data1) {
-                        address_adapter = new Address_Adapter(data1, Management_addressActivity.this);
-                        //添加布局管理器
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-                        recyclerview.setLayoutManager(linearLayoutManager);
-                        recyclerview.setAdapter(address_adapter);
+            if (address_bean.getData() != null) {
+                data1 = address_bean.getData();
+                recyclerview.setVisibility(View.VISIBLE);
+                relativeLayout.setVisibility(View.GONE);
+                address_adapter = new Address_Adapter(data1, Management_addressActivity.this);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+                recyclerview.setLayoutManager(linearLayoutManager);
+                address_adapter.setOnItemClickListener(new Address_Adapter.OnItemClickListener() {
+                    @Override
+                    public void onClick(int position) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("name", data1.get(position).getName());
+                        bundle.putString("phone", data1.get(position).getTel());
+                        bundle.putString("sheng", data1.get(position).getSheng());
+                        bundle.putString("shi", data1.get(position).getShi());
+                        bundle.putString("qu", data1.get(position).getQu());
+                        bundle.putString("diqu", data1.get(position).getAddress());
+                        bundle.putString("id", data1.get(position).getId());
+                        bundle.putString("sheng_code", data1.get(position).getSheng_code());
+                        bundle.putString("shi_code", data1.get(position).getShi_code());
+                        bundle.putString("qu_code", data1.get(position).getQu_code());
+                        bundle.putInt("is", data1.get(position).getIsindex());
+                        IntentUtils.getIntents().Intent(Management_addressActivity.this, ModifyAddressActivity.class, bundle);
                     }
-                } else {
-                    recyclerview.setVisibility(View.GONE);
-                    relativeLayout.setVisibility(View.VISIBLE);
-                }
+                });
+                address_adapter.setOnItemdefaultClickListener(new Address_Adapter.OnItemdefaultClickListener() {
+                    @Override
+                    public void ondefaultClick(int position) {
+                        i = position;
+                        map.clear();
+                        map.put("appid", appid);
+                        map.put("appsecret", appsecret);
+                        map.put("timestamp", time);
+                        map.put("sign", sha1);
+                        map.put("id", data1.get(position).getId());
+                        presenter.getpost(Contacts.My_del_address, headmap, map, Zfb_Bean.class);
+                    }
+                });
+                recyclerview.setAdapter(address_adapter);
+            } else {
+                recyclerview.setVisibility(View.GONE);
+                relativeLayout.setVisibility(View.VISIBLE);
             }
-            //删除
-            address_adapter.setOnItemClickListener(new Address_Adapter.OnItemClickListener() {
-
-                @Override
-                public void onClick(int position) {
-                    String uid = data1.get(position).getId();
-                    del = new HashMap<>();
-                    dels = new HashMap<>();
-                    dels.put("appid", appid);
-                    dels.put("appsecret", appsecret);
-                    dels.put("timestamp", time);
-                    dels.put("sign", sha1);
-                    dels.put("id", uid);
-                    presenter.getpost(Contacts.My_del_address, del, dels, Del_Address_Bean.class);
-                    i = position;
-                }
-            });
-            //设置默认
-            address_adapter.setOnItemdefaultClickListener(new Address_Adapter.OnItemdefaultClickListener() {
-                @Override
-                public void ondefaultClick(int position) {
-                    defaults = new HashMap<>();
-                    defaultss = new HashMap<>();
-                    defaultss.put("appid", appid);
-                    defaultss.put("appsecret", appsecret);
-                    defaultss.put("timestamp", time);
-                    defaultss.put("sign", sha1);
-                    defaultss.put("id", data1.get(position).getId());
-                    presenter.getpost(Contacts.My_default_address, defaults, defaultss, Address_Bean.class);
-                }
-            });
-        } else if (data instanceof Del_Address_Bean) {
-            Del_Address_Bean del_address_bean = (Del_Address_Bean) data;
-            String code = del_address_bean.getCode();
-            if (code.equals("200")) {
+        } else if (data instanceof Zfb_Bean) {
+            Zfb_Bean zfb_bean = (Zfb_Bean) data;
+            if (zfb_bean.getCode().equals("200")) {
                 data1.remove(i);
-                address_adapter.notifyItemRemoved(i);
-                address_adapter.notifyAll();
+                address_adapter.notifyDataSetChanged();
             }
         }
     }
@@ -176,6 +162,18 @@ public class Management_addressActivity extends BaseActivity implements MyView {
     @Override
     protected void onRestart() {
         super.onRestart();
+        map.clear();
+        time = System.currentTimeMillis();
+        appid = SpzUtils.getString("appid");
+        appsecret = SpzUtils.getString("appsecret");
+        String sha = "appid=" + appid + "&" + "appsecret=" + appsecret + "&" + "timestamp=" + time;
+        sha1 = EncryptUtils.getSHA(sha);
+        headmap = new HashMap<>();
+        map = new HashMap<>();
+        map.put("appid", appid);
+        map.put("appsecret", appsecret);
+        map.put("timestamp", time);
+        map.put("sign", sha1);
         presenter.getpost(Contacts.My_address, headmap, map, Address_Bean.class);
     }
 

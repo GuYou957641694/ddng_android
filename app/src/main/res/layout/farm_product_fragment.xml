@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_85"
+        android:background="@drawable/farm_gradient_shape" />
+
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioGroup
+            android:id="@+id/radio"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_height="30dp"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_8"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/niu1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/gragment_bg"
+                android:button="@null"
+                android:checked="true"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dp_17"
+                android:paddingTop="@dimen/dp_2"
+                android:paddingRight="@dimen/dp_17"
+                android:textStyle="bold"
+                android:paddingBottom="@dimen/dp_2"
+                android:text="综合"
+                android:textColor="@drawable/farm_product_tv_sele"
+                android:textSize="@dimen/sp_14" />
+
+            <RadioButton
+                android:id="@+id/niu2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:background="@drawable/gragment_bg"
+                android:button="@null"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dp_17"
+                android:paddingTop="@dimen/dp_2"
+                android:paddingRight="@dimen/dp_17"
+                android:paddingBottom="@dimen/dp_2"
+                android:text="认养"
+                android:textColor="@drawable/farm_product_tv_sele"
+                android:textSize="@dimen/sp_14" />
+
+            <RadioButton
+                android:id="@+id/niu3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/gragment_bg"
+                android:button="@null"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dp_17"
+                android:paddingTop="@dimen/dp_2"
+                android:textStyle="bold"
+                android:paddingRight="@dimen/dp_17"
+                android:paddingBottom="@dimen/dp_2"
+                android:text="销量"
+                android:textColor="@drawable/farm_product_tv_sele"
+                android:textSize="@dimen/sp_14" />
+
+            <RadioButton
+                android:id="@+id/niu4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/gragment_bg"
+                android:button="@null"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dp_17"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/dp_2"
+                android:paddingRight="@dimen/dp_17"
+                android:paddingBottom="@dimen/dp_2"
+                android:text="价格"
+                android:textColor="@drawable/farm_product_tv_sele"
+                android:textSize="@dimen/sp_14" />
+
+        </RadioGroup>
+
+        <ImageView
+            android:id="@+id/tv_switch"
+            android:layout_width="@dimen/dp_18"
+            android:layout_height="@dimen/dp_18"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_10"
+            android:src="@mipmap/icon_classification" />
+
+    </RelativeLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </RelativeLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</RelativeLayout>

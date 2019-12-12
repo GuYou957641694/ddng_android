@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".activity.ShopBuyActivity">
+
+    <include
+        android:id="@+id/relativelayout"
+        layout="@layout/title_xml"></include>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/tz"
+        android:layout_below="@+id/relativelayout"
+        android:fadingEdge="none"
+        android:fillViewport="true"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:id="@+id/father_lin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_address_fales"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:background="#FFF8F8F8"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="+添加新地址"
+                    android:textColor="#FF323232"
+                    android:textSize="@dimen/sp_14" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_dz"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_margin="@dimen/dp_10"
+                android:background="@drawable/shape">
+
+                <ImageView
+                    android:id="@+id/transition_position"
+                    android:layout_width="@dimen/dp_14"
+                    android:layout_height="@dimen/dp_16"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/icon_location_spell" />
+
+                <RelativeLayout
+                    android:id="@+id/switch_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_toRightOf="@+id/transition_position">
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#FF323232"
+                        android:textSize="@dimen/sp_14"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_5"
+                        android:layout_toRightOf="@+id/name"
+                        android:textColor="#FF323232"
+                        android:textSize="@dimen/sp_14"
+                        android:textStyle="bold" />
+
+                    <RelativeLayout
+                        android:id="@+id/rl_default"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/name"
+                        android:layout_marginLeft="@dimen/dp_2"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:layout_marginRight="3dp"
+                        android:background="@drawable/default_shape"
+                        android:paddingLeft="@dimen/dp_5"
+                        android:paddingTop="@dimen/dp_1"
+                        android:paddingRight="@dimen/dp_5"
+                        android:paddingBottom="@dimen/dp_1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="默认"
+                            android:textColor="#FFFD5E3E"
+                            android:textSize="@dimen/sp_10" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/name"
+                        android:layout_marginTop="@dimen/dp_3"
+                        android:layout_toRightOf="@+id/rl_default" />
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_6"
+                        android:layout_height="@dimen/dp_10"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/good_icon" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_5"
+                android:scaleType="fitXY"
+                android:src="@drawable/ddbg" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relativelayout"
+                android:background="#FFF8F8F8">
+
+                <com.bigpumpkin.app.ddng_android.weight.MyExpandableListView
+                    android:id="@+id/el_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/rela"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:divider="@null"
+                    android:groupIndicator="@null"
+                    android:overScrollMode="never"
+                    android:scrollbars="none" />
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+
+        android:id="@+id/tz"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_alignParentBottom="true"
+        android:background="#fff">
+
+        <TextView
+            android:id="@+id/tv_all_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/tv_id"
+            android:text="共1件，"
+            android:textColor="#FF9A9A9A"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:id="@+id/tv_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/tv_all_price"
+            android:text="实付款："
+            android:textColor="#FF000000"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/tv_all_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_toLeftOf="@+id/bt_submit"
+            android:textColor="#FFF72323"
+            android:textSize="@dimen/sp_14" />
+
+        <Button
+            android:id="@+id/bt_submit"
+            android:layout_width="@dimen/dp_110"
+            android:layout_height="@dimen/dp_35"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginRight="@dimen/dp_5"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:background="@drawable/bgbutton_shape"
+            android:stateListAnimator="@null"
+            android:text="提交订单"
+            android:textColor="#FFFFFFFF" />
+    </RelativeLayout>
+</RelativeLayout>

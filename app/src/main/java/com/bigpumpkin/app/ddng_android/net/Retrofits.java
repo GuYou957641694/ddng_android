@@ -2,14 +2,10 @@ package com.bigpumpkin.app.ddng_android.net;
 
 import com.bigpumpkin.app.ddng_android.config.Urls;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -17,17 +13,11 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.HeaderMap;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-/**
- * <p>文件描述：<p>
- * <p>作者：${adai}<p>
- * <p>创建时间：2019/1/23 9:00<p>
- * <p>更改时间：2019/1/23 9:00<p>
- * <p>版本号：1<p>
- */
 public class Retrofits {
 
     private MyApiServices myApiService;
@@ -61,9 +51,7 @@ public class Retrofits {
     }
 
 
-    //封装Get方式  这里面采用构造者模式  就是调用这个方法有返回自己本身这个对象
     public Retrofits get(String url, Map<String, Object> headmap, Map<String, Object> map) {
-        //这个订阅事件（处理网络请求）放生那个线程
         //Schedulers 线程调度器
         myApiService.get(url, headmap, map).subscribeOn(Schedulers.io())//io就是子线程
                 //在主线程调用
@@ -84,20 +72,15 @@ public class Retrofits {
 
 
     // 上传头像
-    public Retrofits image(String url, Map<String, Object> headmap, Map<String, Object> map, List<Object> list) {
-        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
-        if (list.size() == 1) {
-            for (int i = 0; i < list.size(); i++) {
-                File file = new File((String) list.get(i));
-                builder.addFormDataPart("image", file.getName(), RequestBody.create(MediaType.parse("multipart/octet-stream"), file));
-            }
-        }
-        myApiService.img(url, headmap, builder.build())
-                .subscribeOn(Schedulers.io())
+    public Retrofits image(String url, @HeaderMap Map<String, RequestBody> headmap) {
+
+        myApiService.img(url, headmap).subscribeOn(Schedulers.io())//io就是子线程
+                //在主线程调用
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
         return Retrofits.getInstance();
     }
+
 
     private Observer<ResponseBody> observer = new Observer<ResponseBody>() {
         @Override

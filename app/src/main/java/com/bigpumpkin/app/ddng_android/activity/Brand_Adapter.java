@@ -38,7 +38,7 @@ public class Brand_Adapter extends RecyclerView.Adapter<Brand_Adapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull Brand_Adapter.MyViewHolder myViewHolder, int i) {
         myViewHolder.title.setText(data1.get(i).getTitle());
-        Glide.with(context).load(Urls.BASEURL + data1.get(i).getPic3()).into(myViewHolder.pic);
+        Glide.with(context).load(Urls.BASEURL + data1.get(i).getPic()).into(myViewHolder.pic);
 
     }
 

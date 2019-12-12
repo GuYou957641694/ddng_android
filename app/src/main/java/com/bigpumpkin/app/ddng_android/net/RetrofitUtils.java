@@ -1,13 +1,9 @@
 package com.bigpumpkin.app.ddng_android.net;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
-import android.os.Build;
 import android.util.ArrayMap;
 import android.util.Log;
 
-
-import com.bigpumpkin.app.ddng_android.config.Urls;
 import com.bigpumpkin.app.ddng_android.utils.LogInterceptor;
 
 import java.io.File;
@@ -37,7 +33,7 @@ import static com.bigpumpkin.app.ddng_android.config.Urls.BASEURL;
 public class RetrofitUtils {
 
     private MyApiService myApiService;
-    private static final int DEFAULT_TIME_OUT = 60;//超时时间 5s
+    private static final int DEFAULT_TIME_OUT = 60;//超时时间
     private static final int DEFAULT_READ_TIME_OUT = 60;
 
 
@@ -170,14 +166,13 @@ public class RetrofitUtils {
         }
         MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
         if (map.isEmpty()) {
-            if (list.size() < 2) {
+            if (list.size() < 1) {
                 for (int i = 0; i < list.size(); i++) {
                     File file = new File((String) list.get(i));
                     builder.addFormDataPart("image", file.getName(),
                             RequestBody.create(MediaType.parse("multipart/octet-stream"), file));
                 }
             } else {
-
             }
         } else {
             if (!String.valueOf(map.get("content")).equals("")) {

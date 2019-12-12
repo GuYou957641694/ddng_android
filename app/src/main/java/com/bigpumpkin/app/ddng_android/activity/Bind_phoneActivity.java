@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.bigpumpkin.app.ddng_android.R;
 import com.bigpumpkin.app.ddng_android.app.App;
 import com.bigpumpkin.app.ddng_android.base.BaseActivity;
-import com.bigpumpkin.app.ddng_android.bean.Log_Bean;
+import com.bigpumpkin.app.ddng_android.bean.Logs_Bean;
 import com.bigpumpkin.app.ddng_android.bean.User_Bean;
 import com.bigpumpkin.app.ddng_android.net.Contacts;
 import com.bigpumpkin.app.ddng_android.persenter.MyPresenterImpl;
@@ -59,8 +59,6 @@ public class Bind_phoneActivity extends BaseActivity implements MyView, CountDow
     private CountDownTextUtils mCountDownTextUtils;
     private HashMap<String, Object> map;
     private HashMap<String, Object> headmap;
-    private HashMap<String, Object> user;
-    private HashMap<String, Object> users;
     private String mobile;
     private MyPresenterImpl presenter;
 
@@ -83,7 +81,8 @@ public class Bind_phoneActivity extends BaseActivity implements MyView, CountDow
         sex = getIntent().getStringExtra("sex");
         type = getIntent().getStringExtra("type");
         presenter = new MyPresenterImpl(this);
-
+        headmap = new HashMap<>();
+        map = new HashMap<>();
     }
 
     @OnClick({R.id.btn_login_confirm, R.id.btn_change_password_get_code})
@@ -123,27 +122,24 @@ public class Bind_phoneActivity extends BaseActivity implements MyView, CountDow
 
     @Override
     public void success(Object data) {
-        if (data instanceof Log_Bean) {
-            Log_Bean log_bean = (Log_Bean) data;
+        if (data instanceof Logs_Bean) {
+            Logs_Bean log_bean = (Logs_Bean) data;
             if (log_bean.getCode().equals("200")) {
                 String appid = log_bean.getData().getAppid();
                 String appsecret = log_bean.getData().getAppsecret();
                 SpzUtils.putString("appid", appid);
                 SpzUtils.putString("appsecret", appsecret);
-
                 //获得当前时间戳
                 long time = System.currentTimeMillis();
                 String sha = "appid=" + appid + "&" + "appsecret=" + appsecret + "&" + "timestamp=" + time;
                 String sha1 = EncryptUtils.getSHA(sha);
                 //获得用户的信息
-                user = new HashMap<>();
-                users = new HashMap<>();
-                user.put("appid", appid);
-                user.put("appsecret", appsecret);
-                user.put("timestamp", time);
-                user.put("sign", sha1);
-                MyPresenterImpl presenters = new MyPresenterImpl(this);
-                presenters.getpost(Contacts.User, users, user, User_Bean.class);
+                map.clear();
+                map.put("appid", appid);
+                map.put("appsecret", appsecret);
+                map.put("timestamp", time);
+                map.put("sign", sha1);
+                presenter.getpost(Contacts.User, headmap, map, User_Bean.class);
             }
         } else if (data instanceof User_Bean) {
             User_Bean user_bean = (User_Bean) data;
@@ -197,21 +193,21 @@ public class Bind_phoneActivity extends BaseActivity implements MyView, CountDow
                     } else if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
                         if (result == SMSSDK.RESULT_COMPLETE) {
                             // TODO 处理验证码验证通过的结果
-                            headmap = new HashMap<>();
-                            map = new HashMap<>();
+                            map.clear();
                             map.put("type", type);
                             map.put("tel", mobile);
                             map.put("id", id);
                             map.put("pic", pic);
                             map.put("name", name);
-                            map.put("sex", sex);
-                            presenter.getpost(Contacts.Bing_Phone, headmap, map, Log_Bean.class);
+                            if (sex!=null){
+                                map.put("sex", sex);
+                            }
+                            presenter.getpost(Contacts.Bing_Phone, headmap, map, Logs_Bean.class);
                         } else {
                             // TODO 处理错误的结果
                             ToastUtil.showShort(Bind_phoneActivity.this, "请重新输入验证码");
                         }
                     }
-                    // TODO 其他接口的返回结果也类似，根据event判断当前数据属于哪个接口
                     return false;
                 }
             }).sendMessage(msg);
@@ -254,4 +250,9 @@ public class Bind_phoneActivity extends BaseActivity implements MyView, CountDow
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SMSSDK.unregisterEventHandler(eventHandler);
+    }
 }

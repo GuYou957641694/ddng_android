@@ -6,9 +6,9 @@ public class Focus_Bean {
 
 
     /**
-     * msg : 成功
+     * msg : success
      * code : 200
-     * data : [{"title":"北京海淀农场3","dizhi":"大兴区广顺路58号（大兴农场）","id":"3","pic":"/data/img/1810/5bbc61824d0e2.png","vaid":"2"}]
+     * data : [{"id":"2","pic3":"/data/img/1901/5c330ff1c9804.png","title":"北京海淀农场2","dizhi":"大兴区广顺路58号（大兴农场）"}]
      */
 
     private String msg;
@@ -41,18 +41,32 @@ public class Focus_Bean {
 
     public static class DataBean {
         /**
-         * title : 北京海淀农场3
+         * id : 2
+         * pic3 : /data/img/1901/5c330ff1c9804.png
+         * title : 北京海淀农场2
          * dizhi : 大兴区广顺路58号（大兴农场）
-         * id : 3
-         * pic : /data/img/1810/5bbc61824d0e2.png
-         * vaid : 2
          */
 
+        private String id;
+        private String pic3;
         private String title;
         private String dizhi;
-        private String id;
-        private String pic;
-        private String vaid;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getPic3() {
+            return pic3;
+        }
+
+        public void setPic3(String pic3) {
+            this.pic3 = pic3;
+        }
 
         public String getTitle() {
             return title;
@@ -68,30 +82,6 @@ public class Focus_Bean {
 
         public void setDizhi(String dizhi) {
             this.dizhi = dizhi;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public String getPic() {
-            return pic;
-        }
-
-        public void setPic(String pic) {
-            this.pic = pic;
-        }
-
-        public String getVaid() {
-            return vaid;
-        }
-
-        public void setVaid(String vaid) {
-            this.vaid = vaid;
         }
     }
 }

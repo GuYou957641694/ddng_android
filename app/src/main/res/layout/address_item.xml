@@ -1,88 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.ditclear.swipelayout.SwipeDragLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/dp_12"
-    android:background="#fff"
-    android:orientation="vertical"
-    android:padding="@dimen/dp_6">
+    android:id="@+id/swipeLayout"
+    app:ios="true"
+    app:swipe_direction="left"
+    app:swipe_enable="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_5">
-
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_8" />
-
-            <TextView
-                android:id="@+id/phone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/name" />
-
-            <TextView
-                android:id="@+id/address"
-                android:layout_width="330dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/name"
-                android:layout_margin="@dimen/dp_8"
-                android:inputType="textMultiLine" />
+            android:orientation="horizontal">
 
             <RelativeLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/address"
-                android:layout_marginLeft="@dimen/dp_5">
-
-                <CheckBox
-                    android:id="@+id/defaultsss"
-                    android:layout_width="@dimen/dp_20"
-                    android:layout_height="@dimen/dp_20"
-                    android:background="@drawable/checkbox"
-                    android:button="@null"
-                    android:clickable="false"
-                    android:focusable="false" />
+                android:layout_weight="1">
 
                 <TextView
-                    android:id="@+id/default_address"
+                    android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/dp_8"
-                    android:layout_toRightOf="@+id/defaultsss"
-                    android:text="默认地址" />
+                    android:textColor="#FF323232"
+                    android:textSize="@dimen/sp_14"
+                    android:textStyle="bold" />
 
-                <ImageView
-                    android:id="@+id/dele"
-                    android:layout_width="@dimen/dp_20"
-                    android:layout_height="@dimen/dp_20"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/dp_8"
-                    android:src="@drawable/delete" />
+                <TextView
+                    android:id="@+id/phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:layout_toRightOf="@+id/name"
+                    android:textColor="#FF323232"
+                    android:textSize="@dimen/sp_14"
+                    android:textStyle="bold" />
 
-                <ImageView
-                    android:id="@+id/manuscripts"
-                    android:layout_width="@dimen/dp_20"
-                    android:layout_height="@dimen/dp_20"
-                    android:layout_marginRight="@dimen/dp_8"
-                    android:layout_toLeftOf="@+id/dele"
-                    android:src="@drawable/manuscripts" />
+                <RelativeLayout
+                    android:id="@+id/rv_default"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_2"
+                    android:layout_marginTop="@dimen/dp_2"
+                    android:layout_toRightOf="@+id/phone"
+                    android:background="@drawable/default_shape"
+                    android:paddingLeft="@dimen/dp_5"
+                    android:paddingTop="@dimen/dp_1"
+                    android:paddingRight="@dimen/dp_5"
+                    android:paddingBottom="@dimen/dp_1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="默认"
+                        android:textColor="#FFFD5E3E"
+                        android:textSize="@dimen/sp_10" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/name"
+                    android:layout_marginTop="@dimen/dp_2"
+                    android:inputType="textMultiLine"
+                    android:textColor="#FF9A9A9A"
+                    android:textSize="@dimen/sp_10" />
+
             </RelativeLayout>
-        </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/tv_modify"
+                android:layout_width="@dimen/dp_14"
+                android:layout_height="@dimen/dp_14"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/dp_10"
+                android:src="@mipmap/editor_icon" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="#FFF6F6F6"></View>
+
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="@dimen/dp_5"
-        android:background="@color/gray_h"></View>
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/menu_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#FFF72323"
+        android:orientation="horizontal"
+        android:tag="menu">
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="@dimen/dp_53"
+            android:textColor="#FFFFFFFF"
+            android:textSize="@dimen/sp_14"
+            android:gravity="center"
+            android:text="删除" />
+
+    </LinearLayout>
+</com.ditclear.swipelayout.SwipeDragLayout>

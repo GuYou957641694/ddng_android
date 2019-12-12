@@ -2,30 +2,34 @@ package com.bigpumpkin.app.ddng_android.activity;
 
 import android.os.Handler;
 import android.os.Message;
-import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.alipay.sdk.app.PayTask;
 import com.bigpumpkin.app.ddng_android.R;
 import com.bigpumpkin.app.ddng_android.app.App;
 import com.bigpumpkin.app.ddng_android.base.BaseActivity;
+import com.bigpumpkin.app.ddng_android.bean.Ngz_Bean;
 import com.bigpumpkin.app.ddng_android.bean.PayResult;
+import com.bigpumpkin.app.ddng_android.bean.WxPayBean;
 import com.bigpumpkin.app.ddng_android.bean.Zfb_Alipay_Bean;
+import com.bigpumpkin.app.ddng_android.config.WXConFig;
 import com.bigpumpkin.app.ddng_android.net.Contacts;
 import com.bigpumpkin.app.ddng_android.persenter.MyPresenterImpl;
-import com.bigpumpkin.app.ddng_android.utils.EmptyUtils;
 import com.bigpumpkin.app.ddng_android.utils.EncryptUtils;
+import com.bigpumpkin.app.ddng_android.utils.IntentUtils;
 import com.bigpumpkin.app.ddng_android.utils.SpzUtils;
 import com.bigpumpkin.app.ddng_android.utils.ToastUtil;
 import com.bigpumpkin.app.ddng_android.view.MyView;
+import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -46,9 +50,18 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
     private String html6;
     ImageView back;
     private Button accout;
-    private EditText editText;
     private int chargetypeid;
     private static final int SDK_PAY_FLAG = 1;
+    private MyPresenterImpl presenter;
+    private TextView yu;
+    private LinearLayout pay_rank, lin_up_rules;
+    private HashMap<String, Object> headmap;
+    private HashMap<String, Object> map;
+    private long time;
+    private String appid;
+    private String appsecret;
+    private String sha;
+    private String sha1;
 
     @Override
     public int intiLayout() {
@@ -57,6 +70,16 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void initView() {
+        headmap = new HashMap<>();
+        map = new HashMap<>();
+        time = System.currentTimeMillis();
+        appid = SpzUtils.getString("appid");
+        appsecret = SpzUtils.getString("appsecret");
+        sha = "appid=" + appid + "&" + "appsecret=" + appsecret + "&" + "timestamp=" + time;
+        sha1 = EncryptUtils.getSHA(sha);
+        presenter = new MyPresenterImpl(this);
+        yu = findViewById(R.id.yu);
+        pay_rank = findViewById(R.id.pay_rank);
         mCheckbox1 = (CheckBox) findViewById(R.id.checkbox1);
         mCheckbox1.setOnClickListener(this);
         mCheckbox2 = (CheckBox) findViewById(R.id.checkbox2);
@@ -75,7 +98,8 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
         mCheckbox6.setOnClickListener(this);
         accout = findViewById(R.id.account_btn);
         accout.setOnClickListener(this);
-        editText = findViewById(R.id.amount);
+        lin_up_rules = findViewById(R.id.lin_up_rules);
+        lin_up_rules.setOnClickListener(this);
 
         htmlzfb = "<font color=\"#85D253\" >" + "支付宝" + "</font>";
         htmlwx = "<font color=\"#85D253\" >" + "微信" + "</font>";
@@ -92,69 +116,18 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
         mCheckbox5.setChecked(false);
         mCheckbox6.setChecked(false);
         chargetypeid = 1;
-        editText.addTextChangedListener(new TextWatcher() {
+        pay_rank.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // 输入的内容变化的监听
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // 输入前的监听
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                // 输入后的监听
-                if (EmptyUtils.isNotEmpty(editText.getText().toString())) {
-                    mCheckbox1.setClickable(false);
-                    mCheckbox2.setClickable(false);
-                    mCheckbox3.setClickable(false);
-                    mCheckbox4.setClickable(false);
-                    mCheckbox5.setClickable(false);
-                    mCheckbox6.setClickable(false);
-                    mCheckbox1.setChecked(false);
-                    mCheckbox2.setChecked(false);
-                    mCheckbox3.setChecked(false);
-                    mCheckbox4.setChecked(false);
-                    mCheckbox5.setChecked(false);
-                    mCheckbox6.setChecked(false);
-                    mCheckbox1.setText(Html.fromHtml(html));
-                    mCheckbox2.setText(Html.fromHtml(html2));
-                    mCheckbox3.setText(Html.fromHtml(html3));
-                    mCheckbox4.setText(Html.fromHtml(html4));
-                    mCheckbox5.setText(Html.fromHtml(html5));
-                    mCheckbox6.setText(Html.fromHtml(html6));
-                    chargetypeid = 0;
-                } else {
-                    mCheckbox1.setClickable(true);
-                    mCheckbox2.setClickable(true);
-                    mCheckbox3.setClickable(true);
-                    mCheckbox4.setClickable(true);
-                    mCheckbox5.setClickable(true);
-                    mCheckbox6.setClickable(true);
-                    mCheckbox1.setChecked(true);
-                    mCheckbox2.setChecked(false);
-                    mCheckbox3.setChecked(false);
-                    mCheckbox4.setChecked(false);
-                    mCheckbox5.setChecked(false);
-                    mCheckbox6.setChecked(false);
-                    if (mCheckbox1.isChecked() == true) {
-                        String htmlb = "<font color=\"#ffffff\" >" + "100元" + "</font>";
-                        htmlb = htmlb.replace("\r\n", "<br />");
-                        mCheckbox1.setText(Html.fromHtml(htmlb));
-                        mCheckbox2.setText(Html.fromHtml(html2));
-                        mCheckbox3.setText(Html.fromHtml(html3));
-                        mCheckbox4.setText(Html.fromHtml(html4));
-                        mCheckbox5.setText(Html.fromHtml(html5));
-                        mCheckbox6.setText(Html.fromHtml(html6));
-                    } else if (mCheckbox1.isChecked() == false) {
-                        mCheckbox1.setText(Html.fromHtml(html));
-                    }
-                    chargetypeid = 1;
-                }
+            public void onClick(View v) {
+                IntentUtils.getIntents().Intent(RechargeActivity.this, PayRankActivity.class, null);
             }
         });
+        map.put("appid", appid);
+        map.put("appsecret", appsecret);
+        map.put("timestamp", time);
+        map.put("sign", sha1);
+        //查询余额
+        presenter.getpost(Contacts.ngz, headmap, map, Ngz_Bean.class);
     }
 
     @Override
@@ -274,11 +247,8 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
                     mCheckbox3.setText(Html.fromHtml(html3));
                     mCheckbox4.setText(Html.fromHtml(html4));
                     mCheckbox6.setText(Html.fromHtml(html6));
-
-
                 } else if (mCheckbox5.isChecked() == false) {
                     mCheckbox5.setText(Html.fromHtml(html5));
-
                 }
                 chargetypeid = 5;
                 break;
@@ -293,13 +263,11 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
                     String html6b = "<font color=\"#ffffff\" >" + "10000元" + "</font>";
                     html6b = html6b.replace("\r\n", "<br />");
                     mCheckbox6.setText(Html.fromHtml(html6b));
-
                     mCheckbox1.setText(Html.fromHtml(html));
                     mCheckbox2.setText(Html.fromHtml(html2));
                     mCheckbox3.setText(Html.fromHtml(html3));
                     mCheckbox5.setText(Html.fromHtml(html5));
                     mCheckbox4.setText(Html.fromHtml(html4));
-
                 } else if (mCheckbox6.isChecked() == false) {
                     mCheckbox6.setText(Html.fromHtml(html6));
                 }
@@ -330,81 +298,67 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
                 }
                 break;
             case R.id.account_btn:
-                if (mCheckbox1.isChecked() == false && mCheckbox2.isChecked() == false && mCheckbox3.isChecked() == false && mCheckbox4.isChecked() == false && mCheckbox5.isChecked() == false && mCheckbox6.isChecked() == false && EmptyUtils.isEmpty(editText.getText().toString())) {
-                    Toast.makeText(RechargeActivity.this, "请选择要充值的南瓜籽", Toast.LENGTH_SHORT).show();
-                } else {
-                    if (wx.isChecked() == false && zfb.isChecked() == false) {
-                        ToastUtil.showShort(this, "请选择支付方式");
-                    } else if (wx.isChecked() == true) {
-                        //微信支付
-                        if (chargetypeid == 0) {
-                            String s = editText.getText().toString();
-                            ToastUtil.showShort(this, "微信支付" + s + "");
-                        } else {
-                            ToastUtil.showShort(this, "微信支付" + chargetypeid + "");
-                        }
-                         /*final IWXAPI msgApi = WXAPIFactory.createWXAPI(App.appContext, null);
-                // 将该app注册到微信
-                msgApi.registerApp(WXConFig.APP_ID);
-                api = WXAPIFactory.createWXAPI(App.appContext, WXConFig.APP_ID, false);
-                PayReq request = new PayReq();
-                request.appId = "wx0f147d4225f8491a";
-                request.partnerId = "1532379221";
-                request.prepayId = "wx1016244323732827ab32f0141991325100";
-                request.nonceStr = "trRUkOs9PuKOX6sfbHOisUvihON7AZn4";
-                request.timeStamp = "1565425483";
-                request.packageValue = "Sign=WXPay";
-                request.sign = "A9342F0DD371F4DF4AF583476140A7BF";
-                request.extData = App.WXPAY_TYPE_COIN;
-                api.sendReq(request);
-                finish();*/
-                    } else if (zfb.isChecked() == true) {
-                        MyPresenterImpl presenter = new MyPresenterImpl(this);
-                        long time = System.currentTimeMillis();
-                        String appid = SpzUtils.getString("appid");
-                        String appsecret = SpzUtils.getString("appsecret");
-                        String sha = "appid=" + appid + "&" + "appsecret=" + appsecret + "&" + "timestamp=" + time;
-                        String sha1 = EncryptUtils.getSHA(sha);
-                        HashMap<String, Object> headmap = new HashMap<>();
-                        HashMap<String, Object> map = new HashMap<>();
-                        map.put("appid", appid);
-                        map.put("appsecret", appsecret);
-                        map.put("timestamp", time);
-                        map.put("sign", sha1);
-                        map.put("body", "南瓜籽充值");
-                        //支付宝支付
-                        if (chargetypeid == 0) {
-                            String s = editText.getText().toString();
-                            if (s.equals("0")) {
-                                ToastUtil.showShort(this, "充值金额不能为0");
-                            } else {
-                                map.put("amount", s);
-                                ToastUtil.showShort(this, "支付寶" + s + "");
-                                presenter.getpost(Contacts.zfb_alipay, headmap, map, Zfb_Alipay_Bean.class);
-                            }
-                        } else {
-                            if (chargetypeid == 1) {
-                                map.put("amount", "100");
-                                presenter.getpost(Contacts.zfb_alipay, headmap, map, Zfb_Alipay_Bean.class);
-                            } else if (chargetypeid == 2) {
-                                map.put("amount", "500");
-                                presenter.getpost(Contacts.zfb_alipay, headmap, map, Zfb_Alipay_Bean.class);
-                            } else if (chargetypeid == 3) {
-                                map.put("amount", "1000");
-                                presenter.getpost(Contacts.zfb_alipay, headmap, map, Zfb_Alipay_Bean.class);
-                            } else if (chargetypeid == 4) {
-                                map.put("amount", "2000");
-                                presenter.getpost(Contacts.zfb_alipay, headmap, map, Zfb_Alipay_Bean.class);
-                            } else if (chargetypeid == 5) {
-                                map.put("amount", "5000");
-                                presenter.getpost(Contacts.zfb_alipay, headmap, map, Zfb_Alipay_Bean.class);
-                            } else if (chargetypeid == 6) {
-                                map.put("amount", "10000");
-                                presenter.getpost(Contacts.zfb_alipay, headmap, map, Zfb_Alipay_Bean.class);
-                            }
-                        }
+                if (wx.isChecked() == false && zfb.isChecked() == false) {
+                    ToastUtil.showShort(this, "请选择支付方式");
+                } else if (wx.isChecked() == true) {
+                    map.clear();
+                    map.put("appid", appid);
+                    map.put("appsecret", appsecret);
+                    map.put("timestamp", time);
+                    map.put("sign", sha1);
+                    map.put("body", "Android");
+                    //微信支付
+                    if (chargetypeid == 1) {
+                        map.put("amount", "100");
+                        presenter.getpost(Contacts.WeChat_charges, headmap, map, WxPayBean.class);
+                    } else if (chargetypeid == 2) {
+                        map.put("amount", "500");
+                        presenter.getpost(Contacts.WeChat_charges, headmap, map, WxPayBean.class);
+                    } else if (chargetypeid == 3) {
+                        map.put("amount", "1000");
+                        presenter.getpost(Contacts.WeChat_charges, headmap, map, WxPayBean.class);
+                    } else if (chargetypeid == 4) {
+                        map.put("amount", "2000");
+                        presenter.getpost(Contacts.WeChat_charges, headmap, map, WxPayBean.class);
+                    } else if (chargetypeid == 5) {
+                        map.put("amount", "5000");
+                        presenter.getpost(Contacts.WeChat_charges, headmap, map, WxPayBean.class);
+                    } else if (chargetypeid == 6) {
+                        map.put("amount", "10000");
+                        presenter.getpost(Contacts.WeChat_charges, headmap, map, WxPayBean.class);
+                    }
+                } else if (zfb.isChecked() == true) {
+                    map.clear();
+                    map.put("appid", appid);
+                    map.put("appsecret", appsecret);
+                    map.put("timestamp", time);
+                    map.put("sign", sha1);
+                    map.put("body", "Android");
+                    //支付宝支付
+
+                    if (chargetypeid == 1) {
+                        map.put("amount", "100");
+                        presenter.getpost(Contacts.zfb_alipay, headmap, map, Zfb_Alipay_Bean.class);
+                    } else if (chargetypeid == 2) {
+                        map.put("amount", "500");
+                        presenter.getpost(Contacts.zfb_alipay, headmap, map, Zfb_Alipay_Bean.class);
+                    } else if (chargetypeid == 3) {
+                        map.put("amount", "1000");
+                        presenter.getpost(Contacts.zfb_alipay, headmap, map, Zfb_Alipay_Bean.class);
+                    } else if (chargetypeid == 4) {
+                        map.put("amount", "2000");
+                        presenter.getpost(Contacts.zfb_alipay, headmap, map, Zfb_Alipay_Bean.class);
+                    } else if (chargetypeid == 5) {
+                        map.put("amount", "5000");
+                        presenter.getpost(Contacts.zfb_alipay, headmap, map, Zfb_Alipay_Bean.class);
+                    } else if (chargetypeid == 6) {
+                        map.put("amount", "10000");
+                        presenter.getpost(Contacts.zfb_alipay, headmap, map, Zfb_Alipay_Bean.class);
                     }
                 }
+                break;
+            case R.id.lin_up_rules:
+                IntentUtils.getIntents().Intent(this, Up_RulesActivity.class, null);
                 break;
         }
     }
@@ -432,6 +386,33 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
                     Thread payThread = new Thread(payRunnable);
                     payThread.start();
                 }
+            }
+        } else if (data instanceof Ngz_Bean) {
+            Ngz_Bean ngz_bean = (Ngz_Bean) data;
+            if (ngz_bean.getCode().equals("200")) {
+                String balance = ngz_bean.getData().getBalance();
+                yu.setText(balance);
+            } else {
+                yu.setVisibility(View.GONE);
+            }
+        } else if (data instanceof WxPayBean) {
+            WxPayBean wxPayBean = (WxPayBean) data;
+            if (wxPayBean.getData() != null) {
+                WxPayBean.DataBean data1 = wxPayBean.getData();
+                final IWXAPI msgApi = WXAPIFactory.createWXAPI(App.appContext, null);
+                // 将该app注册到微信
+                msgApi.registerApp(WXConFig.APP_ID);
+                IWXAPI api = WXAPIFactory.createWXAPI(App.appContext, WXConFig.APP_ID, false);
+                PayReq request = new PayReq();
+                request.appId = wxPayBean.getData().getAppid();
+                request.partnerId = wxPayBean.getData().getPartnerid();
+                request.prepayId = wxPayBean.getData().getPrepayid();
+                request.nonceStr = wxPayBean.getData().getNoncestr();
+                request.timeStamp = wxPayBean.getData().getTimestamp();
+                request.packageValue = "Sign=WXPay";
+                request.sign = wxPayBean.getData().getSign();
+                api.sendReq(request);
+                finish();
             }
         }
     }

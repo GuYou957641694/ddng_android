@@ -7,12 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bigpumpkin.app.ddng_android.R;
 import com.bigpumpkin.app.ddng_android.bean.GoodsBean;
 import com.bigpumpkin.app.ddng_android.config.Urls;
-import com.bumptech.glide.Glide;
+import com.bigpumpkin.app.ddng_android.utils.GlideUtils;
 
 import java.util.List;
 
@@ -39,10 +38,7 @@ public class Plant_Adapter extends RecyclerView.Adapter<Plant_Adapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int i) {
         if (dataBean != null) {
-            Glide.with(context).load(Urls.BASEURL + dataBean.get(i).getPic()).into(myViewHolder.img);
-            myViewHolder.type.setText(dataBean.get(i).getTitle());
-
-
+            GlideUtils.loadRoundCircleImagetwo(context,Urls.BASEURL + dataBean.get(i).getPic(),myViewHolder.img);
         }
     }
 
@@ -54,12 +50,10 @@ public class Plant_Adapter extends RecyclerView.Adapter<Plant_Adapter.MyViewHold
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         ImageView img;
-        TextView type;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             img = itemView.findViewById(R.id.home_newcourse_rv_img);
-            type = itemView.findViewById(R.id.home_newcourse_rv_coursetype);
         }
     }
 

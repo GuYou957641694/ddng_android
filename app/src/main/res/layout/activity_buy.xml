@@ -4,102 +4,185 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".activity.BuyActivity">
 
     <include
         android:id="@+id/relativelayout"
         layout="@layout/title_xml"></include>
 
-
-    <RelativeLayout
-        android:id="@+id/dz"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
-        android:layout_below="@+id/relativelayout"
-        android:layout_margin="@dimen/dp_10">
-
-        <ImageView
-            android:id="@+id/transition_position"
-            android:layout_width="@dimen/dp_20"
-            android:layout_height="@dimen/dp_20"
-            android:layout_centerVertical="true"
-            android:src="@drawable/positioning" />
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/transition_position">
-
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/phone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:layout_toRightOf="@+id/name" />
-
-            <TextView
-                android:id="@+id/text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/name"
-                android:layout_centerVertical="true"
-                android:layout_marginTop="@dimen/dp_5" />
-
-            <TextView
-                android:id="@+id/address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/name"
-                android:layout_centerVertical="true"
-                android:layout_marginTop="@dimen/dp_5"
-                android:layout_toRightOf="@+id/text" />
-        </RelativeLayout>
-    </RelativeLayout>
-
-    <ExpandableListView
-        android:id="@+id/confirm"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/tz"
-        android:layout_below="@+id/dz"
-        android:divider="@null"
-        android:groupIndicator="@null"
-        android:scrollbars="none" />
+        android:layout_below="@+id/relativelayout"
+        android:fadingEdge="none"
+        android:fillViewport="true"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:id="@+id/father_lin"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/dz"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50"
+                android:layout_margin="@dimen/dp_10"
+                android:background="@drawable/shape">
+
+                <ImageView
+                    android:id="@+id/transition_position"
+                    android:layout_width="@dimen/dp_14"
+                    android:layout_height="@dimen/dp_16"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/icon_location_spell" />
+
+                <RelativeLayout
+                    android:id="@+id/switch_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_toRightOf="@+id/transition_position">
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#FF323232"
+                        android:textSize="@dimen/sp_14"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_5"
+                        android:layout_toRightOf="@+id/name"
+                        android:textColor="#FF323232"
+                        android:textSize="@dimen/sp_14"
+                        android:textStyle="bold" />
+
+                    <RelativeLayout
+                        android:id="@+id/rv_default"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/name"
+                        android:layout_marginLeft="@dimen/dp_2"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:background="@drawable/default_shape"
+                        android:paddingLeft="@dimen/dp_5"
+                        android:paddingTop="@dimen/dp_1"
+                        android:paddingRight="@dimen/dp_5"
+                        android:paddingBottom="@dimen/dp_1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="默认"
+                            android:textColor="#FFFD5E3E"
+                            android:textSize="@dimen/sp_10" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/name"
+                        android:layout_marginLeft="@dimen/dp_3"
+                        android:layout_marginTop="@dimen/dp_4"
+                        android:layout_toRightOf="@+id/rv_default" />
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_6"
+                        android:layout_height="@dimen/dp_10"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/good_icon" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_5"
+                android:scaleType="fitXY"
+                android:src="@drawable/ddbg" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_10"
+                android:background="#FFF8F8F8"></View>
+
+            <com.bigpumpkin.app.ddng_android.weight.MyExpandableListView
+                android:id="@+id/confirm"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/dz"
+                android:background="@color/white"
+                android:divider="@null"
+                android:groupIndicator="@null"
+                android:overScrollMode="never"
+                android:scrollbars="none" />
+        </LinearLayout>
+
+    </ScrollView>
+
 
     <RelativeLayout
         android:id="@+id/tz"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
+        android:visibility="gone"
         android:layout_alignParentBottom="true"
         android:background="#fff">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/tv_id"
+            android:text="共1件，"
+            android:textColor="#FF9A9A9A"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:id="@+id/tv_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/price"
+            android:text="实付款："
+            android:textColor="#FF000000"
+            android:textSize="@dimen/sp_14" />
 
         <TextView
             android:id="@+id/price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/submit" />
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_toLeftOf="@+id/submit"
+            android:text="123442"
+            android:textColor="#FFF72323"
+            android:textSize="@dimen/sp_14" />
 
         <Button
             android:id="@+id/submit"
-            android:layout_width="@dimen/dp_90"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dp_110"
+            android:layout_height="@dimen/dp_35"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginTop="@dimen/dp_5"
             android:layout_marginRight="@dimen/dp_5"
             android:layout_marginBottom="@dimen/dp_5"
-            android:background="@drawable/shopping_shape"
+            android:background="@drawable/bgbutton_shape"
             android:stateListAnimator="@null"
             android:text="提交订单"
-            android:textColor="#fff" />
+            android:textColor="#FFFFFFFF" />
     </RelativeLayout>
 
 </RelativeLayout>

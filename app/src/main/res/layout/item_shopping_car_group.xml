@@ -2,28 +2,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
     android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_10"
+        android:background="#00ffffff"></RelativeLayout>
 
     <LinearLayout
         android:id="@+id/ll"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:orientation="horizontal">
+        android:background="@drawable/pop_top_shape"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_10">
 
         <ImageView
             android:id="@+id/iv_select"
-            android:layout_width="@dimen/dp_20"
-            android:layout_height="@dimen/dp_20"
+            android:layout_width="@dimen/dp_18"
+            android:layout_height="@dimen/dp_18"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
             android:src="@mipmap/check_false" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp" />
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/head_farm" />
 
         <TextView
             android:id="@+id/tv_store_name"
@@ -34,13 +40,13 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="店铺名称"
-            android:textColor="#333333"
-            android:textSize="14dp" />
+            android:textStyle="bold"
+            android:textColor="#FF323232"
+            android:textSize="@dimen/sp_14" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginLeft="10dp"
-        android:background="#cccccc" />
+        android:layout_height="1dp"
+        android:background="#FFF6F6F6" />
 </LinearLayout>

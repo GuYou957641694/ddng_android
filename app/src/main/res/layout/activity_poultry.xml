@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFFFF"
+    tools:context=".activity.PoultryActivity">
+
+    <RelativeLayout
+        android:id="@+id/re"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFE39510">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_44"
+            android:layout_marginTop="@dimen/dp_22">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="@dimen/dp_40"
+                android:layout_height="@dimen/dp_24"
+                android:layout_centerVertical="true"
+                android:background="@drawable/back_shape"
+                android:paddingLeft="@dimen/dp_14"
+                android:paddingTop="@dimen/dp_3"
+                android:paddingRight="@dimen/dp_10"
+                android:paddingBottom="@dimen/dp_3"
+                android:src="@mipmap/ic_back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="家禽领养"
+                android:textColor="#FFFFFFFF"
+                android:textSize="@dimen/sp_16" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/re">
+
+        <com.bigpumpkin.app.ddng_android.weight.FlingNestedScrollView
+            android:id="@+id/scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:id="@+id/lins"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#FFE39510">
+
+                        <LinearLayout
+                            android:id="@+id/lin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dp_21"
+                            android:layout_marginTop="@dimen/dp_3">
+
+                            <TextView
+                                android:id="@+id/tv_strategy"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="攻略"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/sp_12" />
+
+                            <Button
+                                android:layout_width="@dimen/dp_4"
+                                android:layout_height="@dimen/dp_4"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="@dimen/dp_8"
+                                android:background="@drawable/v_garden_shape"
+                                android:stateListAnimator="@null" />
+
+                            <TextView
+                                android:id="@+id/tv_rules"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dp_8"
+                                android:text="规则"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/sp_12" />
+
+                            <Button
+                                android:layout_width="@dimen/dp_4"
+                                android:layout_height="@dimen/dp_4"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="@dimen/dp_8"
+                                android:background="@drawable/v_garden_shape"
+                                android:stateListAnimator="@null" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_100"
+                            android:background="#FFE39510"></View>
+
+                        <com.youth.banner.Banner
+                            android:id="@+id/banner"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_150"
+                            android:layout_margin="@dimen/dp_10" />
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:id="@+id/iv1"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_20"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:background="#FF9393" />
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/cv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/iv1"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:layout_marginBottom="@dimen/dp_10"
+                        app:cardBackgroundColor="#FFE39510"
+                        app:cardUseCompatPadding="false">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#FFE39510">
+
+                            <TextView
+                                android:id="@+id/tv3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dp_10"
+                                android:layout_marginTop="@dimen/dp_15"
+                                android:text="我要领养"
+                                android:textColor="#FF323232"
+                                android:textSize="@dimen/sp_16"
+                                android:textStyle="bold" />
+
+
+                            <com.yhy.gvp.widget.GridViewPager
+                                android:id="@+id/gridviewpager"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/dp_80"
+                                android:layout_below="@+id/tv3"
+                                android:layout_marginTop="@dimen/dp_10"
+                                android:background="#FFE39510"
+                                android:overScrollMode="never"
+                                app:num_columns="6"
+                                app:page_size="6" />
+
+                            <net.lucode.hackware.magicindicator.MagicIndicator
+                                android:id="@+id/indicator_container"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/gridviewpager"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginBottom="@dimen/dp_12" />
+
+                        </RelativeLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="特色养殖"
+                            android:textColor="#FF323232"
+                            android:textSize="@dimen/sp_16"
+                            android:textStyle="bold" />
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/rv_features"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/advertising"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_100"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:layout_marginBottom="@dimen/dp_10"
+                        android:scaleType="center" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_marginRight="@dimen/dp_10">
+
+                        <RelativeLayout
+                            android:id="@+id/rl4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="养殖者说"
+                                android:textColor="#FF323232"
+                                android:textSize="@dimen/sp_16"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/iv_farming_more"
+                                android:layout_width="@dimen/dp_12"
+                                android:layout_height="@dimen/dp_12"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:src="@mipmap/doption_more" />
+                        </RelativeLayout>
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/rv_farming"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/rl4"
+                            android:layout_marginTop="@dimen/dp_10" />
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:layout_marginRight="@dimen/dp_10">
+
+                        <RelativeLayout
+                            android:id="@+id/tv7"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="奶制品"
+                                android:textColor="#FF323232"
+                                android:textSize="@dimen/sp_16"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/iv_milk"
+                                android:layout_width="@dimen/dp_12"
+                                android:layout_height="@dimen/dp_12"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:src="@mipmap/doption_more" />
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_egg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_marginRight="@dimen/dp_10" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_5">
+
+                    <net.lucode.hackware.magicindicator.MagicIndicator
+                        android:id="@+id/magic_indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_44" />
+
+                </LinearLayout>
+
+                <com.bigpumpkin.app.ddng_android.weight.MyViewPager
+                    android:id="@+id/viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/poultry_bgs" />
+
+            </LinearLayout>
+
+        </com.bigpumpkin.app.ddng_android.weight.FlingNestedScrollView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_44"></RelativeLayout>
+
+</RelativeLayout>

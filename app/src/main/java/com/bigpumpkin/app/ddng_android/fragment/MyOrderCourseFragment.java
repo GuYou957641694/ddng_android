@@ -1,18 +1,16 @@
 package com.bigpumpkin.app.ddng_android.fragment;
 
-import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.bigpumpkin.app.ddng_android.R;
-import com.bigpumpkin.app.ddng_android.adapter.Order_Adapter;
+import com.bigpumpkin.app.ddng_android.adapter.MyOrderCourseAdapter;
 import com.bigpumpkin.app.ddng_android.base.BaseFragment;
-import com.bigpumpkin.app.ddng_android.bean.Order_Bean;
+import com.bigpumpkin.app.ddng_android.base.LazyLoadFragment;
+import com.bigpumpkin.app.ddng_android.bean.Orders_Bean;
 import com.bigpumpkin.app.ddng_android.net.Contacts;
 import com.bigpumpkin.app.ddng_android.persenter.MyPresenterImpl;
 import com.bigpumpkin.app.ddng_android.utils.EncryptUtils;
@@ -22,24 +20,17 @@ import com.bigpumpkin.app.ddng_android.view.MyView;
 import java.util.HashMap;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
+public class MyOrderCourseFragment extends LazyLoadFragment implements MyView {
 
-public class MyOrderCourseFragment extends BaseFragment implements MyView {
-
-    @BindView(R.id.rv_my_collections)
     RecyclerView rvMyCollections;
-    @BindView(R.id.sfl_my_collections)
     SwipeRefreshLayout mSflMyCollections;
-    Unbinder unbinder;
     private String appid;
     private String appsecret;
     private HashMap<String, Object> map;
     private HashMap<String, Object> headmap;
     private MyPresenterImpl presenter;
     private RelativeLayout relativeLayout;
-    private Order_Adapter order_adapter;
+    private MyOrderCourseAdapter order_adapter;
 
     @Override
     protected int getLayoutId() {
@@ -47,8 +38,10 @@ public class MyOrderCourseFragment extends BaseFragment implements MyView {
     }
 
     @Override
-    protected void init(View view) {
+    protected void initData() {
         relativeLayout = view.findViewById(R.id.collection_course);
+        rvMyCollections = view.findViewById(R.id.rv_my_collections);
+        mSflMyCollections = view.findViewById(R.id.sfl_my_collections);
         presenter = new MyPresenterImpl(this);
         long time = System.currentTimeMillis();
         appid = SpzUtils.getString("appid");
@@ -61,30 +54,31 @@ public class MyOrderCourseFragment extends BaseFragment implements MyView {
         map.put("appsecret", appsecret);
         map.put("timestamp", time);
         map.put("sign", sha1);
-        presenter.getpost(Contacts.My_order, headmap, map, Order_Bean.class);
+
         //刷新
         mSflMyCollections.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                presenter.getpost(Contacts.My_order, headmap, map, Order_Bean.class);
+                presenter.getpost(Contacts.My_order, headmap, map, Orders_Bean.class);
                 mSflMyCollections.setRefreshing(false);
             }
         });
     }
 
+
     @Override
     protected void loadData() {
-
+        presenter.getpost(Contacts.My_order, headmap, map, Orders_Bean.class);
     }
 
     @Override
     public void success(Object data) {
-        if (data instanceof Order_Bean) {
-            Order_Bean order_bean = (Order_Bean) data;
+        if (data instanceof Orders_Bean) {
+            Orders_Bean order_bean = (Orders_Bean) data;
             if (order_bean.getData().getList().size() > 0 && order_bean.getData() != null) {
                 if (order_bean.getCode().equals("200")) {
-                    List<Order_Bean.DataBean.ListBean> list = order_bean.getData().getList();
-                    order_adapter = new Order_Adapter(list, getActivity());
+                    List<Orders_Bean.DataBean.ListBean> list = order_bean.getData().getList();
+                    order_adapter = new MyOrderCourseAdapter(list, getActivity());
                     //添加布局管理器
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                     rvMyCollections.setLayoutManager(linearLayoutManager);
@@ -105,21 +99,4 @@ public class MyOrderCourseFragment extends BaseFragment implements MyView {
     public void error(String error) {
 
     }
-
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
-
 }

@@ -4,11 +4,353 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFF8F8F8"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
     tools:context=".activity.Farm_inActivity">
 
-    <com.bigpumpkin.app.ddng_android.weight.CustomPopWindow
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></com.bigpumpkin.app.ddng_android.weight.CustomPopWindow>
+        android:layout_height="@dimen/dp_44">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:src="@mipmap/icon_general_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="农场入驻"
+            android:textColor="#FF000000"
+            android:textSize="@dimen/sp_17" />
+    </RelativeLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_10"
+                android:background="@drawable/all_shape"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_10">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="姓名"
+                            android:textColor="#FF323232"
+                            android:textSize="@dimen/sp_14" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="*"
+                            android:textColor="#FFFE5D1D" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/et_farm_name"
+                        android:layout_width="@dimen/dp_208"
+                        android:layout_height="@dimen/dp_20"
+                        android:singleLine="true"
+                        android:layout_below="@+id/view"
+                        android:layout_marginTop="10dp"
+                        android:background="@null"
+                        android:gravity="start|center_vertical"
+                        android:hint="请填写您的姓名"
+                        android:maxLength="6"
+                        android:maxLines="1"
+                        android:textColor="#FF323232"
+                        android:textColorHint="#FF9A9A9A"
+                        android:textSize="12sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:background="#FFF8F8F8"></View>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="性别"
+                            android:textColor="#FF323232"
+                            android:textSize="@dimen/sp_14" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="*"
+                            android:textColor="#FFFE5D1D" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/et_farm_sex"
+                        android:layout_width="@dimen/dp_208"
+                        android:layout_height="@dimen/dp_20"
+                        android:layout_marginTop="10dp"
+                        android:text="请填写您的性别"
+                        android:textColor="#FF9A9A9A"
+                        android:textSize="12sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:background="#FFF8F8F8"></View>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="电话"
+                            android:textColor="#FF323232"
+                            android:textSize="@dimen/sp_14" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="*"
+                            android:textColor="#FFFE5D1D" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/et_farm_phone"
+                        android:layout_width="@dimen/dp_208"
+                        android:layout_height="@dimen/dp_20"
+                        android:layout_below="@+id/view"
+                        android:layout_marginTop="10dp"
+                        android:singleLine="true"
+                        android:background="@null"
+                        android:gravity="start|center_vertical"
+                        android:hint="请填写您的联系方式"
+                        android:inputType="number"
+                        android:maxLength="11"
+                        android:maxLines="1"
+                        android:textColor="#FF323232"
+                        android:textColorHint="#FF9A9A9A"
+                        android:textSize="12sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:background="#FFF8F8F8"></View>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="所在地区"
+                            android:textColor="#FF323232"
+                            android:textSize="@dimen/sp_14" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="*"
+                            android:textColor="#FFFE5D1D" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/et_farm_region"
+                        android:layout_width="@dimen/dp_208"
+                        android:layout_height="@dimen/dp_20"
+                        android:layout_below="@+id/view"
+                        android:layout_marginTop="10dp"
+                        android:text="请填写您的地区"
+                        android:textColor="#FF9A9A9A"
+                        android:textSize="12sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:background="#FFF8F8F8"></View>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="详细地址"
+                            android:textColor="#FF323232"
+                            android:textSize="@dimen/sp_14" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="*"
+                            android:textColor="#FFFE5D1D" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/et_farm_address"
+                        android:layout_width="@dimen/dp_208"
+                        android:layout_height="@dimen/dp_20"
+                        android:layout_below="@+id/view"
+                        android:layout_marginTop="10dp"
+                        android:background="@null"
+                        android:singleLine="true"
+                        android:gravity="start|center_vertical"
+                        android:hint="如道路、门牌号、小区、单元室等"
+                        android:maxLength="20"
+                        android:maxLines="1"
+                        android:textColor="#FF323232"
+                        android:textColorHint="#FF9A9A9A"
+                        android:textSize="12sp" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:background="@drawable/all_shape"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_10">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="类型"
+                        android:textColor="#FF323232"
+                        android:textSize="@dimen/sp_14" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/dp_3"
+                        android:layout_marginRight="@dimen/dp_3"
+                        android:text="(可多选)"
+                        android:textSize="@dimen/sp_9" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:textColor="#FFFE5D1D" />
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:background="#FFF8F8F8"></View>
+
+                <EditText
+                    android:id="@+id/et_introduce"
+                    android:layout_width="match_parent"
+                    android:layout_height="155dp"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:background="@null"
+                    android:gravity="left|top"
+                    android:hint="请描述下您的产品介绍，下方可上传商品图片，以便让我们更好的了解"
+                    android:maxLength="200"
+                    android:textColor="#FF323232"
+                    android:textColorHint="#FF9A9A9A"
+                    android:textSize="12sp" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_picture"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/bt_apply"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_margin="@dimen/dp_10"
+                android:background="@drawable/sure_shape"
+                android:gravity="center"
+                android:text="立即申请"
+                android:textColor="#fff"
+                android:textSize="@dimen/sp_14" />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

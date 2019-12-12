@@ -8,6 +8,11 @@
 
     <include layout="@layout/title_xml"></include>
 
+    <View
+        android:background="#FFF6F6F6"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"></View>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"

@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 //短信
 apply plugin: 'com.mob.sdk'
-
 android {
     signingConfigs {
         debug {
@@ -14,11 +13,22 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.bigpumpkin.app.ddng_android"
-        minSdkVersion 17
-        targetSdkVersion 28
+        minSdkVersion 19
+        targetSdkVersion 27
         versionCode 1
+        multiDexEnabled true
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    packagingOptions {
+        //解决编译时com.android.builder.merge.DuplicateRelativeFileException: More than one file was found with OS independent
+        exclude 'META-INF/rxjava.properties'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     buildTypes {
         debug {
@@ -55,6 +65,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation 'com.android.support:cardview-v7:28.0.0'
     //防止崩溃
     implementation 'com.tonystark.android:defense_crash:2.0.0'
     //butterknife
@@ -75,6 +86,7 @@ dependencies {
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
     implementation 'com.github.bumptech.glide:glide:4.7.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
+    implementation 'jp.wasabeef:glide-transformations:3.3.0'
     implementation 'com.githang:group-recycler-adapter:0.1'
     //日期选择
     implementation 'com.contrarywind:Android-PickerView:4.1.6'
@@ -90,4 +102,38 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.1.1'
     //侧滑删除
     implementation 'com.ditclear:swipedraglayout:1.1.0'
+    //高德
+    implementation 'com.amap.api:location:latest.integration'
+    //沉浸式
+    implementation 'com.github.niorgai:StatusBarCompat:2.1.4'
+
+    //刷新框架
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-14'
+    //视频
+    implementation 'cn.jzvd:jiaozivideoplayer:6.2.7'
+
+    implementation 'com.github.donkingliang:LabelsView:1.5.0'
+    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.4'
+    implementation 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+
+    implementation 'com.bm.photoview:library:1.4.1'
+    //地图
+    implementation 'com.amap.api:location:latest.integration'
+    implementation 'com.amap.api:map2d:latest.integration'
+
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'liji.library.dev:citypickerview:0.7.0'
+    implementation 'com.wkp:EditListView:1.0.2'
+    //吐司
+    implementation 'com.hjq:toast:8.0'
+    //图片压缩
+    implementation 'top.zibin:Luban:1.1.7'
+    implementation 'org.greenrobot:eventbus:3.0.0'
+    //recyclerview万能适配器
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
+    //流式布局
+    implementation 'com.nex3z:flow-layout:1.2.4'
+
+    implementation 'com.zhihu.android:matisse:0.5.1'
 }
